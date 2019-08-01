@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:enterFadeDuration="@android:integer/config_shortAnimTime"
+    android:exitFadeDuration="@android:integer/config_shortAnimTime">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="22dp" />
+
+            <gradient android:angle="-90"
+                android:endColor="@color/btnActiveVioletTo"
+                android:startColor="@color/btnActiveVioletFrom"
+                android:type="linear" />
+
+            <size android:width="270dp"
+                  android:height="60dp" />
+        </shape>
+
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="22dp" />
+
+            <gradient android:angle="-90"
+                android:endColor="@color/btnNormalVioletTo"
+                android:startColor="@color/btnNormalVioletFrom"
+                android:type="linear" />
+
+            <size android:width="270dp"
+                android:height="60dp" />
+
+        </shape>
+
+    </item>
+
+</selector>
