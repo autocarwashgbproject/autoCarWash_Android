@@ -3,4 +3,22 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!--Custom style colors-->
+    <color name="primaryDarkBlue">#2A496E</color>
+    <color name="primaryBlue">#2E97A9</color>
+    <color name="secondaryViolet">#A5A0C6</color>
+    <color name="secondaryWhite">#F3FAFB</color>
+    <!--<color name="secondaryWhit">#F3FAFB</color>-->
+
+    <!--Button colors-->
+
+    <!--Normal button gradient colors-->
+    <color name="btnNormalVioletFrom">#a39fc6</color>
+    <color name="btnNormalVioletTo">#5f559c</color>
+
+    <!--Active button gradient colors-->
+    <color name="btnActiveVioletFrom">#bcb8e6</color>
+    <color name="btnActiveVioletTo">#7063c8</color>
+
 </resources>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">autoCarWash</string>
+    <string name="about_app">О приложении</string>
+    <string name="economy">Экономия времени</string>
+    <string name="auto_payments">Автоматическая безналичная оплата</string>
+    <string name="full_text_about_app">Приложение позволяет...</string>
 </resources>
