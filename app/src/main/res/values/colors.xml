@@ -10,7 +10,7 @@
     <color name="colorDefaultText">#424242</color>
     <color name="colorWhite">#FFFF</color>
     <color name="colorGreyText">#b1b1b1</color>
-
+    <color name="colorGreyEdit">#b1b1b1</color>
 
     <!--Button colors-->
     <!--Normal button gradient colors-->
