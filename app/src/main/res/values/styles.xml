@@ -9,8 +9,30 @@
     </style>
 
     <style name="MainButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/btn_background</item>
+        <item name="android:background">@drawable/btn</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
+    <style name="InputTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/text_input_margin</item>
+        <item name="android:layout_marginRight">@dimen/text_input_margin</item>
+        <item name="android:layout_marginLeft">@dimen/text_input_margin</item>
+        <item name="android:layout_marginStart">@dimen/text_input_margin</item>
+    </style>
+
+    <style name="RegisterEditTextStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/text_edit_padding</item>
+        <item name="android:paddingStart">@dimen/text_edit_padding</item>
+        <item name="android:paddingRight">@dimen/text_edit_padding</item>
+        <item name="android:paddingEnd">@dimen/text_edit_padding</item>
+        <item name="android:textColor">@color/editTextColorHint</item>
+        <item name="android:textColorHint">@color/editTextColorHint</item>
+        <item name="android:drawableEnd">@android:drawable/ic_menu_edit</item>
+        <item name="android:drawableRight">@android:drawable/ic_menu_edit</item>
     </style>
 
 </resources>

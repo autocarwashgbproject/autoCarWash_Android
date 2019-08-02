@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/vd_vector"
+    android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".AboutApp">
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:background="@color/primaryDarkBlue"
             android:gravity="center_horizontal|center_vertical"
+            android:minHeight="?attr/actionBarSize"
             app:layout_constraintBottom_toTopOf="@id/abc_img_id"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/about_app"
-                android:textColor="@color/secondaryWhite"
+                android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
         </androidx.appcompat.widget.Toolbar>
@@ -42,10 +43,9 @@
 
     <ImageView
         android:id="@+id/abc_img_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="31dp"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="86dp"
         android:src="@drawable/abc_img"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,16 +55,20 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="287dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginLeft="26dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -81,7 +85,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/economy" />
+                android:text="@string/economy"
+                android:textColor="@color/textColor1"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -105,12 +111,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:minLines="3"
-                android:text="@string/auto_payments" />
+                android:text="@string/auto_payments"
+                android:textColor="@color/textColor1"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical">
@@ -127,7 +137,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Бонусы" />
+                android:text="@string/bonus"
+                android:textColor="@color/textColor1"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -135,10 +147,14 @@
         android:id="@+id/about_app_txt_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginStart="26dp"
         android:text="@string/full_text_about_app"
+        android:textColor="@color/textColor1"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        android:layout_marginLeft="26dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
