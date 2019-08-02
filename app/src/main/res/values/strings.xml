@@ -5,9 +5,15 @@
     <string name="auto_payments">Автоматическая безналичная оплата</string>
     <string name="full_text_about_app">Приложение позволяет...</string>
     <string name="register">Зарегистрироваться</string>
+    <string name="registerLink"><u>Зарегистрироваться</u></string>
     <string name="registration">Регистрация</string>
     <string name="bonus">Бонусы</string>
     <string name="car_wash">Car Wash</string>
     <string name="user_agreement_checkbox_txt">Я согласен(-на) с условиями пользования</string>
     <string name="privacy_policy">Я ознакомился с политикой конфиденциальности</string>
+    <string name="enter">Вход</string>
+    <string name="enter_phone_nr">Введите номер телефона</string>
+    <string name="enter_account">Войдите в аккаунт</string>
+    <string name="code">Код подтверждения</string>
+    <string name="no_account">Нет аккаунта?</string>
 </resources>
