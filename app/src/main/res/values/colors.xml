@@ -21,4 +21,7 @@
     <color name="btnActiveVioletFrom">#bcb8e6</color>
     <color name="btnActiveVioletTo">#7063c8</color>
 
+    <color name="textColor1">#424242</color>
+    <color name="editTextColorHint">#B1B1B1</color>
+
 </resources>

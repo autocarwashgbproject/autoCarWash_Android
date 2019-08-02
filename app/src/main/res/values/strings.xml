@@ -7,4 +7,7 @@
     <string name="register">Зарегистрироваться</string>
     <string name="registration">Регистрация</string>
     <string name="bonus">Бонусы</string>
+    <string name="car_wash">Car Wash</string>
+    <string name="user_agreement_checkbox_txt">Я согласен(-на) с условиями пользования</string>
+    <string name="privacy_policy">Я ознакомился с политикой конфиденциальности</string>
 </resources>

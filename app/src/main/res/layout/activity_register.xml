@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primaryDarkBlue"
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintBottom_toTopOf="@id/abc_img_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/toolbar_title_txt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/car_wash"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBarLayout"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/registration_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:textStyle="bold"
+            android:layout_gravity="top|center"
+            android:text="@string/registration"
+            android:textColor="@color/textColor1"
+            android:textSize="24sp" />
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/InputTextStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/enter_fio_edit_txt_id"
+                style="@style/RegisterEditTextStyle"
+                android:hint="ФИО"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/InputTextStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/enter_phone_edit_txt_id"
+                style="@style/RegisterEditTextStyle"
+                android:hint="Номер Телефона"
+                android:inputType="phone"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/InputTextStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/enter_email_edit_txt_id"
+                style="@style/RegisterEditTextStyle"
+                android:hint="Е-mail"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/InputTextStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/enter_password_edit_txt_id"
+                style="@style/RegisterEditTextStyle"
+                android:hint="Введите пароль"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/InputTextStyle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/repeat_password_edit_txt_id"
+                style="@style/RegisterEditTextStyle"
+                android:hint="Повторите пароль"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/user_agreement_checkbox_id"
+                android:layout_marginLeft="26dp"
+                android:layout_marginStart="26dp"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/user_agreement_txt_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor1"
+                android:textSize="10sp"
+                android:text="@string/user_agreement_checkbox_txt"
+                 />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="26dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/privacy_policy_checkbox_id"
+                android:layout_marginLeft="26dp"
+                android:layout_marginStart="26dp"
+                android:checked="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/privacy_policy_txt_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textColor1"
+                android:textSize="10sp"
+                android:text="@string/privacy_policy"
+                 />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/save_profile_btn_id"
+            style="@style/MainButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+            android:text="@string/register"
+            android:textColor="#F3FAFB"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

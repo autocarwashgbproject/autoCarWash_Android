@@ -9,7 +9,7 @@
     </style>
 
     <style name="MainButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@drawable/btn</item>
+        <item name="android:background">@drawable/btn_background</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
@@ -23,6 +23,9 @@
     </style>
 
     <style name="RegisterEditTextStyle">
+        <!--<item name="android:padding">8dp</item>-->
+        <item name="android:textSize">14sp</item>
+        <item name="android:singleLine">true</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">@dimen/text_edit_padding</item>
@@ -31,8 +34,8 @@
         <item name="android:paddingEnd">@dimen/text_edit_padding</item>
         <item name="android:textColor">@color/editTextColorHint</item>
         <item name="android:textColorHint">@color/editTextColorHint</item>
-        <item name="android:drawableEnd">@android:drawable/ic_menu_edit</item>
-        <item name="android:drawableRight">@android:drawable/ic_menu_edit</item>
+        <!--<item name="android:drawableEnd">@android:drawable/ic_menu_edit</item>-->
+        <!--<item name="android:drawableRight">@android:drawable/ic_menu_edit</item>-->
     </style>
 
 </resources>
