@@ -1,27 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
 
-    <!--Custom style colors-->
-    <color name="primaryDarkBlue">#2A496E</color>
-    <color name="primaryBlue">#2E97A9</color>
-    <color name="secondaryViolet">#A5A0C6</color>
-    <color name="secondaryWhite">#F3FAFB</color>
-    <!--<color name="secondaryWhit">#F3FAFB</color>-->
+    <!--Main colors-->
+
+    <color name="colorPrimary">#2A496E</color>
+    <color name="colorPrimaryDark">#002243</color>
+    <color name="colorLight">#a4a0c6</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorDefaultText">#424242</color>
+    <color name="colorWhite">#FFFF</color>
+    <color name="colorGreyText">#b1b1b1</color>
+    <color name="colorGreyEdit">#b1b1b1</color>
 
     <!--Button colors-->
-
     <!--Normal button gradient colors-->
-    <color name="btnNormalVioletFrom">#a39fc6</color>
-    <color name="btnNormalVioletTo">#5f559c</color>
-
+    <color name="btnNormalVioletFrom">#A4A0C6</color>
+    <color name="btnNormalVioletTo">#0F006D</color>
     <!--Active button gradient colors-->
-    <color name="btnActiveVioletFrom">#bcb8e6</color>
-    <color name="btnActiveVioletTo">#7063c8</color>
-
-    <color name="textColor1">#424242</color>
-    <color name="editTextColorHint">#B1B1B1</color>
+    <color name="btnActiveVioletFrom">#BEB9E6</color>
+    <color name="btnActiveVioletTo">#1700A4</color>
 
 </resources>

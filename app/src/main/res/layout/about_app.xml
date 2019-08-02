@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".AboutApp">
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -21,7 +19,7 @@
             android:id="@+id/toolbar_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primaryDarkBlue"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center_horizontal|center_vertical"
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintBottom_toTopOf="@id/abc_img_id"
@@ -86,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/economy"
-                android:textColor="@color/textColor1"
+                android:textColor="@color/colorDefaultText"
                 android:textSize="14sp" />
 
         </LinearLayout>
@@ -112,7 +110,7 @@
                 android:gravity="center"
                 android:minLines="3"
                 android:text="@string/auto_payments"
-                android:textColor="@color/textColor1"
+                android:textColor="@color/colorDefaultText"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -138,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/bonus"
-                android:textColor="@color/textColor1"
+                android:textColor="@color/colorDefaultText"
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
@@ -150,7 +148,7 @@
         android:layout_marginTop="48dp"
         android:layout_marginStart="26dp"
         android:text="@string/full_text_about_app"
-        android:textColor="@color/textColor1"
+        android:textColor="@color/colorDefaultText"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

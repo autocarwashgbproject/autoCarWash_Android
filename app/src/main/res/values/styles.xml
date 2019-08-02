@@ -1,41 +1,68 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <!--Buttons-->
     <style name="MainButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/btn_background</item>
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
-    <style name="InputTextStyle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginEnd">@dimen/text_input_margin</item>
-        <item name="android:layout_marginRight">@dimen/text_input_margin</item>
-        <item name="android:layout_marginLeft">@dimen/text_input_margin</item>
-        <item name="android:layout_marginStart">@dimen/text_input_margin</item>
+    <!--Text views-->
+    <style name="DefaultText">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorDefaultText</item>
     </style>
 
-    <style name="RegisterEditTextStyle">
-        <!--<item name="android:padding">8dp</item>-->
-        <item name="android:textSize">14sp</item>
+    <style name="DefaultGreyText">
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorGreyText</item>
+    </style>
+
+    <style name="SmallText">
+        <item name="android:textColor">@color/colorDefaultText</item>
+        <item name="android:textSize">@dimen/small_text_size</item>
+    </style>
+
+    <style name="SmallGreyText">
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textColor">@color/colorGreyText</item>
+    </style>
+
+    <style name="SmallestGreyText">
+        <item name="android:textSize">@dimen/smallest_text_size</item>
+        <item name="android:textColor">@color/colorGreyText</item>
+    </style>
+
+    <!--Edit Text-->
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableEnd">@drawable/ic_edit</item>
+        <item name="android:drawableRight">@drawable/ic_edit</item>
+        <item name="android:paddingStart">@dimen/default_margin</item>
+        <item name="android:paddingLeft">@dimen/default_margin</item>
+        <item name="android:paddingEnd">@dimen/default_margin</item>
+        <item name="android:paddingRight">@dimen/default_margin</item>
         <item name="android:singleLine">true</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingLeft">@dimen/text_edit_padding</item>
-        <item name="android:paddingStart">@dimen/text_edit_padding</item>
-        <item name="android:paddingRight">@dimen/text_edit_padding</item>
-        <item name="android:paddingEnd">@dimen/text_edit_padding</item>
-        <item name="android:textColor">@color/editTextColorHint</item>
-        <item name="android:textColorHint">@color/editTextColorHint</item>
-        <!--<item name="android:drawableEnd">@android:drawable/ic_menu_edit</item>-->
-        <!--<item name="android:drawableRight">@android:drawable/ic_menu_edit</item>-->
+        <item name="android:textSize">@dimen/default_text_size</item>
+        <item name="android:textColor">@color/colorGreyText</item>
+        <item name="android:textColorHint">@color/colorGreyEdit</item>
     </style>
 
+    <style name="TextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_marginStart">@dimen/default_margin</item>
+        <item name="android:layout_marginLeft">@dimen/default_margin</item>
+        <item name="android:layout_marginTop">@dimen/default_margin</item>
+        <item name="android:layout_marginEnd">@dimen/default_margin</item>
+        <item name="android:layout_marginRight">@dimen/default_margin</item>
+    </style>
 </resources>
