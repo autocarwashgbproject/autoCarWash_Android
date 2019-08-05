@@ -8,7 +8,9 @@
                 android:gradientRadius="80dp"
                 android:startColor="#f1f0f6"
                 android:type="linear" />
-            <size android:height="80dp" android:width="80dp"/>
+            <size
+                android:width="80dp"
+                android:height="80dp" />
         </shape>
 
     </item>
