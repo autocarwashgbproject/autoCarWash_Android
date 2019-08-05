@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MainActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background"
+            tools:context=".MainActivity">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/registration_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:minHeight="?attr/actionBarSize"
+                    app:layout_constraintBottom_toTopOf="@id/abc_img_id"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/toolbar_title_txt_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:src="@drawable/ic_title"
+                        android:text="@string/car_wash"
+                        android:textSize="18sp" />
+
+                </androidx.appcompat.widget.Toolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+            <TextView
+                android:id="@+id/registration_txt_id"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_gravity="top|center"
+                android:layout_marginTop="24dp"
+                android:gravity="center"
+                android:text="@string/registration"
+                android:textColor="@color/colorDefaultText"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/enter_lastname_edit_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+            <EditText
+                android:id="@+id/enter_lastname_edit_txt_id"
+                style="@style/EditText"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="Фамилия"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/enter_firstname_edit_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/registration_txt_id" />
+
+
+            <EditText
+                android:id="@+id/enter_firstname_edit_txt_id"
+                style="@style/EditText"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="Имя"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/enter_fathername_edit_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_lastname_edit_txt_id" />
+
+
+            <EditText
+                android:id="@+id/enter_fathername_edit_txt_id"
+                style="@style/EditText"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="Отчество"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/enter_phone_edit_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_firstname_edit_txt_id" />
+
+
+            <EditText
+                android:id="@+id/enter_phone_edit_txt_id"
+                style="@style/EditText"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="Номер Телефона"
+                android:inputType="phone"
+                app:layout_constraintBottom_toTopOf="@+id/enter_email_edit_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_fathername_edit_txt_id" />
+
+
+            <EditText
+                android:id="@+id/enter_email_edit_txt_id"
+                style="@style/EditText"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="Е-mail"
+                android:inputType="textEmailAddress"
+                app:layout_constraintBottom_toTopOf="@+id/enter_password_edit_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_phone_edit_txt_id" />
+
+
+            <EditText
+                android:id="@+id/enter_password_edit_txt_id"
+                style="@style/EditText"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="Введите пароль"
+                android:inputType="textPassword"
+                app:layout_constraintBottom_toTopOf="@+id/repeat_password_edit_txt_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_email_edit_txt_id" />
+
+
+            <EditText
+                android:id="@+id/repeat_password_edit_txt_id"
+                style="@style/EditText"
+                android:layout_marginStart="24dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginRight="24dp"
+                android:hint="Повторите пароль"
+                android:inputType="textPassword"
+                app:layout_constraintBottom_toTopOf="@+id/user_agreement_checkbox_id"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/enter_password_edit_txt_id" />
+
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/user_agreement_checkbox_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:checked="false"
+                app:layout_constraintBottom_toBottomOf="@+id/user_agreement_txt_id"
+                app:layout_constraintStart_toStartOf="@+id/repeat_password_edit_txt_id"
+                app:layout_constraintTop_toTopOf="@+id/user_agreement_txt_id" />
+
+            <TextView
+                android:id="@+id/user_agreement_txt_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/user_agreement_checkbox_txt"
+                android:textColor="@color/colorDefaultText"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline"
+                app:layout_constraintStart_toEndOf="@+id/user_agreement_checkbox_id" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/privacy_policy_checkbox_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                app:layout_constraintBottom_toBottomOf="@+id/privacy_policy_txt_id"
+                app:layout_constraintStart_toStartOf="@+id/user_agreement_checkbox_id"
+                app:layout_constraintTop_toTopOf="@+id/privacy_policy_txt_id" />
+
+            <TextView
+                android:id="@+id/privacy_policy_txt_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/privacy_policy"
+                android:textColor="@color/colorDefaultText"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/privacy_policy_checkbox_id"
+                app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+
+            <Button
+                android:id="@+id/save_profile_btn_id"
+                style="@style/MainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginLeft="120dp"
+                android:layout_marginEnd="120dp"
+                android:layout_marginRight="120dp"
+                android:text="@string/register"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+                android:textColor="#F3FAFB"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/privacy_policy_txt_id" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="484dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
