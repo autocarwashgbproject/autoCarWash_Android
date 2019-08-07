@@ -16,4 +16,5 @@
     <string name="enter_account">Войдите в аккаунт</string>
     <string name="code">Код подтверждения</string>
     <string name="no_account">Нет аккаунта?</string>
+    <string name="send_code_to_email"><u>Отправить код на почту</u></string>
 </resources>
