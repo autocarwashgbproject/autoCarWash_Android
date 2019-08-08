@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -27,7 +28,6 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
 
         bottomNavigationView = findViewById(R.id.bottom_menu_id);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-        bottomNavigationView.setSelectedItemId(R.id.profile);
 
         if (isLoggedIn()) {
             // Загрузить фрагмент главного экрана
@@ -43,7 +43,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     // проверяем в SharedPreferences, если есть данные о логине,
     // возвращяем true, если нет false.
     public boolean isLoggedIn() {
-        return getSharedPreferences("login_data", MODE_PRIVATE).getBoolean("isAuthorized", true); // izmenit' na false
+        return getSharedPreferences("login_data", MODE_PRIVATE).getBoolean("isAuthorized", false); // izmenit' na false
     }
 
     public boolean loadFragment(Fragment fragment) {

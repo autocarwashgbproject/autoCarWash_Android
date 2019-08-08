@@ -52,6 +52,8 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ((MainActivity)getActivity()).getBottomNavigationView().setVisibility(View.GONE);
     }
 
     @Override
