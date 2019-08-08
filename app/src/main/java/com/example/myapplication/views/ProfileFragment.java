@@ -13,15 +13,14 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 
-public class WashFragment extends MvpAppCompatFragment implements WashIF {
-    // TODO: 2019-08-06 WashPresenter
+public class ProfileFragment extends MvpAppCompatFragment {
 
-    public WashFragment() {
+    public ProfileFragment() {
         // Required empty public constructor
     }
 
-    public static WashFragment newInstance() {
-        return new WashFragment();
+    public static ProfileFragment newInstance() {
+        return new ProfileFragment();
     }
 
     @Override
@@ -32,12 +31,9 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.wash_layout_fragment, container, false);
+        View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
-        MainActivity activity = ((MainActivity) getActivity());
-        if (activity != null) {
-            activity.getBottomNavigationView().setVisibility(View.VISIBLE);
-        }
+        ((MainActivity)getActivity()).getBottomNavigationView().setVisibility(View.VISIBLE);
 
         return view;
     }

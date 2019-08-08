@@ -17,4 +17,7 @@
     <string name="code">Код подтверждения</string>
     <string name="no_account">Нет аккаунта?</string>
     <string name="send_code_to_email"><u>Отправить код на почту</u></string>
+    <string name="about_txt">Приложение предназначено для комфортного и удобного пользования туннельной автомойкой.</string>
+    <string name="service_agreement"><u>Условия оказания услуг</u></string>
+    <string name="privacy_policy_about"><u>Политика конфиденциальности</u></string>
 </resources>

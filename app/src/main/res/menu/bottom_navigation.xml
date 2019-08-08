@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/wash"
+        android:icon="@drawable/bottom_menu_star_item"
+        android:title="Мойка" />
+
+    <item
+        android:id="@+id/history"
+        android:icon="@drawable/bottom_menu_history_item"
+        android:title="История " />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/bottom_menu_profile_item"
+        android:title="Профиль" />
+    <item
+        android:id="@+id/menu"
+        android:icon="@drawable/bottom_menu_bars_item"
+        android:title="Меню" />
+</menu>
