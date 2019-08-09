@@ -2,7 +2,6 @@ package com.example.myapplication.views;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.preferences.ParametersFragment;
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.BottomMenuItemsAdapter;
 import com.example.myapplication.adapters.Menu;
@@ -61,6 +60,9 @@ public class MenuFragment extends ListFragment {
         switch (img) {
             case R.drawable.menu_about_item:
                 ((MainActivity) getActivity()).loadFragment(AboutFragment.newInstance());
+                break;
+                case R.drawable.menu_settings_item:
+                ((MainActivity) getActivity()).loadFragment(new ParametersFragment());
                 break;
         }
     }
