@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -10,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.example.myapplication.utils.OnBackPressedListener;
 import com.example.myapplication.views.HistoryFragment;
 import com.example.myapplication.views.MenuFragment;
 import com.example.myapplication.views.ProfileFragment;
@@ -82,6 +82,18 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
             return MainActivity.this.loadFragment(fragment);
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.fragment_container_id);
+        if (!(fragment instanceof OnBackPressedListener)
+                || !((OnBackPressedListener) fragment).onBackPressed()) {
+            super.onBackPressed();
+        } else {
+            ((OnBackPressedListener) fragment).onBackPressed();
+        }
+    }
 
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;

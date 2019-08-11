@@ -19,9 +19,10 @@ import androidx.preference.PreferenceManager;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.utils.OnBackPressedListener;
 import com.example.myapplication.views.MenuFragment;
 
-public class ParametersFragment extends PreferenceFragmentCompat {
+public class ParametersFragment extends PreferenceFragmentCompat implements OnBackPressedListener {
 
     private SharedPreferences preferences;
     private AppLangPreference lang;
@@ -31,7 +32,6 @@ public class ParametersFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.parameters, rootKey);
-        setViews();
 
         lang = findPreference("language");
 
@@ -101,8 +101,8 @@ public class ParametersFragment extends PreferenceFragmentCompat {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).loadFragment(MenuFragment.newInstance());
                 toolbar.setVisibility(View.GONE);
+                ((MainActivity) getActivity()).loadFragment(MenuFragment.newInstance());
             }
         });
 
@@ -119,5 +119,18 @@ public class ParametersFragment extends PreferenceFragmentCompat {
         }
         return v;
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setViews();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        final Toolbar toolbar = getActivity().findViewById(R.id.include);
+        toolbar.setVisibility(View.GONE);
+        return false;
     }
 }
