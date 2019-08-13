@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.myapplication.preferences.AppGeolocationPreference
+        android:icon="@drawable/ic_geo"
+        android:layout="@layout/geolocation"
+        app:enabled="true"
+        app:key="geolocation"
+        app:selectable="true"
+        app:title="Геолокация" />
+
+    <com.example.myapplication.preferences.AppRegionsPreference
+        android:entries="@array/regions"
+        android:entryValues="@array/regions"
+        android:icon="@drawable/ic_worldwide"
+        android:key="regions"
+        android:layout="@layout/regions"
+        android:title="Регион" />
+
+    <com.example.myapplication.preferences.AppLangPreference
+        android:entries="@array/language"
+        android:entryValues="@array/language"
+        android:icon="@drawable/ic_customer_service"
+        android:key="language"
+        android:layout="@layout/language"
+        android:title="Язык"
+        app:useSimpleSummaryProvider="true"/>
+</PreferenceScreen>

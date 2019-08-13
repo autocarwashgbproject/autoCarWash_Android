@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="0dp"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_id"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:gravity="center_horizontal|center_vertical"
-            android:minHeight="?attr/actionBarSize"
-            app:layout_constraintBottom_toTopOf="@id/abc_img_id"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal|center_vertical"
+        android:minHeight="?attr/actionBarSize">
 
             <TextView
                 android:id="@+id/toolbar_title_txt_id"
@@ -36,123 +23,74 @@
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:id="@+id/abc_img_id"
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginTop="86dp"
-        android:src="@drawable/abc"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBarLayout" />
+        android:src="@drawable/abc"/>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="287dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBarLayout">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:gravity="start">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/car_wash_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
-            android:layout_marginLeft="26dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_margin="8dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="CarWash"
+            android:textColor="@color/colorDefaultText"/>
 
-            <ImageView
-                android:id="@+id/economy_img_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/about_layout_round_img_bck"
-                android:scaleType="center"
-                app:srcCompat="@drawable/time" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/economy"
-                android:textColor="@color/colorDefaultText"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/version_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_margin="8dp"
+            android:textSize="14sp"
+            android:text="Версия 1.0.0 от 2019.08.06"
+            android:textColor="@color/colorDefaultText"/>
 
-            <ImageView
-                android:id="@+id/auto_payments_img_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/about_layout_round_img_bck"
-                android:scaleType="center"
-                app:srcCompat="@drawable/credit_card" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:minLines="3"
-                android:text="@string/auto_payments"
-                android:textColor="@color/colorDefaultText"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/about_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="26dp"
-            android:layout_marginRight="26dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_margin="8dp"
+            android:textSize="14sp"
+            android:text="@string/about_txt"
+            android:textColor="@color/colorDefaultText"/>
 
-            <ImageView
-                android:id="@+id/bonuses_img_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/about_layout_round_img_bck"
-                android:scaleType="center"
-                app:srcCompat="@drawable/coin" />
+        <TextView
+            android:id="@+id/service_agreement_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/service_agreement"
+            android:textColor="@color/colorDefaultText" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/bonus"
-                android:textColor="@color/colorDefaultText"
-                android:textSize="14sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/privacy_policy_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textSize="14sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/privacy_policy_about"
+            android:textColor="@color/colorDefaultText"/>
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/about_app_txt_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="48dp"
-        android:text="@string/full_text_about_app"
-        android:textColor="@color/colorDefaultText"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
