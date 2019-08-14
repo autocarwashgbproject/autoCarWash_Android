@@ -48,8 +48,8 @@
             android:id="@+id/cloud_payment_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="Cloudpayment"
             android:textColor="#939393"
@@ -61,8 +61,8 @@
             android:id="@+id/choose_payment_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="Способ оплаты:"
             android:textColor="#939393"
@@ -74,8 +74,8 @@
             android:id="@+id/payment_amount_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
             android:text="Сумма платежа:"
             android:textColor="#939393"
@@ -85,26 +85,26 @@
 
         <Spinner
             android:id="@+id/choose_card_spinner_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/choose_payment_txt_id"
             app:layout_constraintTop_toBottomOf="@+id/cloud_payment_txt_id" />
 
         <Spinner
             android:id="@+id/choose_payment_amount_spinner_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toEndOf="@+id/payment_amount_txt_id"
@@ -114,11 +114,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="79dp"
-            android:layout_marginLeft="79dp"
             android:layout_marginTop="24dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginRight="80dp"
             android:background="@drawable/card_background"
             android:orientation="vertical"
             android:padding="16dp"
@@ -128,7 +124,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/card_number_text_txt_id"
@@ -142,9 +138,12 @@
 
                 <EditText
                     android:id="@+id/card_number_txt_id"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="9999 9999 9999 9999"
+                    android:hint="0000 0000 0000 0000"
+                    android:inputType="number"
+                    android:maxLength="16"
+                    android:singleLine="true"
                     android:textColor="@color/colorWhite"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@+id/card_number_text_txt_id"
@@ -168,15 +167,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/card_number_txt_id" />
 
-                <EditText
-                    android:id="@+id/card_date_txt_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9/19"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="9sp"
-                    app:layout_constraintStart_toStartOf="@+id/card_valid_to_txt_id"
-                    app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id" />
+                <!--<EditText-->
+                <!--android:id="@+id/card_date_txt_id"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:inputType="date"-->
+                <!--android:maxLength="5"-->
+                <!--android:singleLine="true"-->
+                <!--android:hint="9/19"-->
+                <!--android:textColor="@color/colorWhite"-->
+                <!--android:textSize="9sp"-->
+                <!--app:layout_constraintStart_toStartOf="@+id/card_valid_to_txt_id"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id" />-->
 
                 <ImageView
                     android:id="@+id/card_logo_img_id"
@@ -199,18 +201,31 @@
                     app:layout_constraintEnd_toEndOf="@+id/cvc_edit_id"
                     app:layout_constraintStart_toStartOf="@+id/cvc_edit_id" />
 
+                <Spinner
+                    android:id="@+id/card_valid_month_spinner_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                </Spinner>
+
                 <EditText
                     android:id="@+id/cvc_edit_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:text="***"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginLeft="64dp"
+                    android:hint="***"
+                    android:inputType="numberPassword"
+                    android:maxLength="3"
+                    android:singleLine="true"
                     android:textColor="@color/colorWhite"
                     android:textSize="9sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/card_valid_to_txt_id"
-                    app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id" />
+                    app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
