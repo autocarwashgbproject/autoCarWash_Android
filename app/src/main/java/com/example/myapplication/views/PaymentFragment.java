@@ -2,11 +2,14 @@ package com.example.myapplication.views;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -54,12 +57,8 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
             }
         });
 
-        Spinner cardDate = view.findViewById(R.id.card_valid_month_spinner_id);
-        ArrayAdapter<CharSequence> dateAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.dates, R.layout.spinner_item);
-        dateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cardDate.setAdapter(dateAdapter);
-        cardDate.setOnItemSelectedListener(new CardDateSpinnerListener());
+        EditText cardDate = view.findViewById(R.id.card_date_etxt_id);
+        cardDate.addTextChangedListener(cardDateWatcher);
 
         Spinner cardTypes = view.findViewById(R.id.choose_card_spinner_id);
         ArrayAdapter<CharSequence> cardAdapter = ArrayAdapter.createFromResource(getContext(),
@@ -78,17 +77,24 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
         return view;
     }
 
-    private class CardDateSpinnerListener implements AdapterView.OnItemSelectedListener {
+    private TextWatcher cardDateWatcher = new TextWatcher() {
         @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
         }
 
         @Override
-        public void onNothingSelected(AdapterView<?> parent) {
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
 
         }
-    }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (s.length() == 2) {
+                s.append("/");
+            }
+        }
+    };
 
     private class CardTypeSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override

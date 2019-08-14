@@ -167,18 +167,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/card_number_txt_id" />
 
-                <!--<EditText-->
-                <!--android:id="@+id/card_date_txt_id"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:inputType="date"-->
-                <!--android:maxLength="5"-->
-                <!--android:singleLine="true"-->
-                <!--android:hint="9/19"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:textSize="9sp"-->
-                <!--app:layout_constraintStart_toStartOf="@+id/card_valid_to_txt_id"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id" />-->
+                <EditText
+                    android:id="@+id/card_date_etxt_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="MM/YY"
+                    android:inputType="date"
+                    android:maxLength="5"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9sp"
+                    app:layout_constraintStart_toStartOf="@+id/card_valid_to_txt_id"
+                    app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id" />
 
                 <ImageView
                     android:id="@+id/card_logo_img_id"
@@ -200,15 +200,6 @@
                     app:layout_constraintBottom_toTopOf="@+id/cvc_edit_id"
                     app:layout_constraintEnd_toEndOf="@+id/cvc_edit_id"
                     app:layout_constraintStart_toStartOf="@+id/cvc_edit_id" />
-
-                <Spinner
-                    android:id="@+id/card_valid_month_spinner_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                </Spinner>
 
                 <EditText
                     android:id="@+id/cvc_edit_id"
