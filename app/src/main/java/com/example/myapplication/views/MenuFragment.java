@@ -61,8 +61,11 @@ public class MenuFragment extends ListFragment {
             case R.drawable.menu_about_item:
                 ((MainActivity) getActivity()).loadFragment(AboutFragment.newInstance());
                 break;
-                case R.drawable.menu_settings_item:
+            case R.drawable.menu_settings_item:
                 ((MainActivity) getActivity()).loadFragment(new ParametersFragment());
+                break;
+            case R.drawable.ic_payment:
+                ((MainActivity) getActivity()).loadFragment(PaymentFragment.newInstance());
                 break;
         }
     }
