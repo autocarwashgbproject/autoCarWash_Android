@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,7 +54,63 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
             }
         });
 
+        Spinner cardDate = view.findViewById(R.id.card_valid_month_spinner_id);
+        ArrayAdapter<CharSequence> dateAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.dates, R.layout.spinner_item);
+        dateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cardDate.setAdapter(dateAdapter);
+        cardDate.setOnItemSelectedListener(new CardDateSpinnerListener());
+
+        Spinner cardTypes = view.findViewById(R.id.choose_card_spinner_id);
+        ArrayAdapter<CharSequence> cardAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.card_types, R.layout.spinner_item);
+        cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cardTypes.setAdapter(cardAdapter);
+        cardTypes.setOnItemSelectedListener(new CardTypeSpinnerListener());
+
+        Spinner payment = view.findViewById(R.id.choose_payment_amount_spinner_id);
+        ArrayAdapter<CharSequence> paymentAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.payment_amount, R.layout.spinner_item);
+        paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        payment.setAdapter(paymentAdapter);
+        payment.setOnItemSelectedListener(new PaymentSpinnerListener());
+
         return view;
     }
 
+    private class CardDateSpinnerListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    private class CardTypeSpinnerListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
+
+    private class PaymentSpinnerListener implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    }
 }
