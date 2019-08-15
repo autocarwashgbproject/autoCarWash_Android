@@ -8,4 +8,16 @@
     <string-array name="regions">
         <item>Россия, Великие Луки</item>
     </string-array>
+
+    <string-array name="card_types">
+        <item>Mastercard</item>
+        <item>Visa</item>
+    </string-array>
+
+    <string-array name="payment_amount">
+        <item>2000р/мес.</item>
+        <item>5000р/3мес.</item>
+        <item>15000р/год.</item>
+    </string-array>
+
 </resources>
