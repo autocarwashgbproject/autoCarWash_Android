@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/history_item_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="22dp"
+        android:src="@drawable/menu_bubbles_item" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="22dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/history_fragment_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/txt_history_item_background"
+            android:text="О 999 ОK 60 RUS"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/history_fragment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сб. 3 июл. 9:44"
+            android:textColor="@color/colorGreyText"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/history_fragment_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:layout_marginTop="22dp"
+        android:text="2000 Р"
+        android:textColor="@color/colorDefaultText"
+        android:textSize="18sp" />
+
+</LinearLayout>

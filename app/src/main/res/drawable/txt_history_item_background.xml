@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+
+    <item>
+        <shape android:shape="rectangle">
+
+            <aapt:attr name="android:fillColor"/>
+
+            <gradient
+                android:rotation="-180"
+                android:type="linear"
+                android:fillAlpha="0.1"
+                android:startX="32.5"
+                android:startY="9.5"
+                android:endX="97.5"
+                android:endY="9.5"
+                android:endColor="#ffff"
+                android:startColor="#2d96aa"
+                />
+
+            <size
+                android:width="130dp"
+                android:height="19dp" />
+
+        </shape>
+
+    </item>
+
+</selector>
