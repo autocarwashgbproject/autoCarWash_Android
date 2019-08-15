@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/toolbar_title_txt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/ic_title"
+                android:text="@string/car_wash"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:id="@+id/user_img_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/custom_user"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_id" />
+
+        <TextView
+            android:id="@+id/cloud_payment_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Cloudpayment"
+            android:textColor="#939393"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/user_img_id"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_id" />
+
+        <TextView
+            android:id="@+id/choose_payment_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Способ оплаты:"
+            android:textColor="#939393"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/user_img_id"
+            app:layout_constraintTop_toBottomOf="@+id/cloud_payment_txt_id" />
+
+        <TextView
+            android:id="@+id/payment_amount_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Сумма платежа:"
+            android:textColor="#939393"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/user_img_id"
+            app:layout_constraintTop_toBottomOf="@+id/choose_payment_txt_id" />
+
+        <Spinner
+            android:id="@+id/choose_card_spinner_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/choose_payment_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/cloud_payment_txt_id" />
+
+        <Spinner
+            android:id="@+id/choose_payment_amount_spinner_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toEndOf="@+id/payment_amount_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/choose_payment_txt_id" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/card_background"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_img_id">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/card_number_text_txt_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Номер карты"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/card_number_txt_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="0000 0000 0000 0000"
+                    android:inputType="number"
+                    android:maxLength="16"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/card_number_text_txt_id"
+                    app:layout_constraintTop_toBottomOf="@+id/card_number_text_txt_id" />
+
+                <ImageView
+                    android:id="@+id/delete_icon_img_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_delete_card"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/card_valid_to_txt_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Срок действия"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="7sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/card_number_txt_id" />
+
+                <EditText
+                    android:id="@+id/card_date_etxt_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="MM/YY"
+                    android:inputType="date"
+                    android:maxLength="5"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9sp"
+                    app:layout_constraintStart_toStartOf="@+id/card_valid_to_txt_id"
+                    app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id" />
+
+                <ImageView
+                    android:id="@+id/card_logo_img_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_card_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/cvc_txt_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CVC"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="7sp"
+                    app:layout_constraintBottom_toTopOf="@+id/cvc_edit_id"
+                    app:layout_constraintEnd_toEndOf="@+id/cvc_edit_id"
+                    app:layout_constraintStart_toStartOf="@+id/cvc_edit_id" />
+
+                <EditText
+                    android:id="@+id/cvc_edit_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginLeft="64dp"
+                    android:hint="***"
+                    android:inputType="numberPassword"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="9sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/card_valid_to_txt_id"
+                    app:layout_constraintTop_toBottomOf="@+id/card_valid_to_txt_id"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/auto_payment_checkbox_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:checked="false"
+            app:layout_constraintEnd_toStartOf="@+id/auto_payment_txt_id"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+        <TextView
+            android:id="@+id/auto_payment_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:layout_marginRight="25dp"
+            android:text="Продлевать автоматически"
+            android:textColor="#939393"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/auto_payment_checkbox_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/auto_payment_checkbox_id"
+            app:layout_constraintTop_toTopOf="@+id/auto_payment_checkbox_id" />
+
+        <ImageView
+            android:id="@+id/add_payment_card_btn_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_add"
+            app:layout_constraintStart_toStartOf="@+id/auto_payment_checkbox_id"
+            app:layout_constraintTop_toBottomOf="@+id/auto_payment_checkbox_id" />
+
+        <TextView
+            android:id="@+id/add_payment_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:text="Добавить другую карту"
+            android:textColor="#939393"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/add_payment_card_btn_id"
+            app:layout_constraintStart_toEndOf="@+id/add_payment_card_btn_id"
+            app:layout_constraintTop_toTopOf="@+id/add_payment_card_btn_id" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_payment_txt_id">
+
+            <View
+                android:id="@+id/payment_screen_divider_id"
+                android:layout_width="136dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_weight="1"
+                android:background="@color/colorGreyText" />
+
+            <TextView
+                android:id="@+id/card_details_title_txt_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Детали карты"
+                android:textColor="@color/colorGreyText"
+                android:textSize="9sp" />
+
+
+            <View
+                android:id="@+id/payment_screen_divider2_id"
+                android:layout_width="136dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginRight="14dp"
+                android:layout_weight="1"
+                android:background="@color/colorGreyText" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/payment_system_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="6dp"
+            android:text="Платежная система"
+            android:textColor="@color/colorGreyText"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/number_txt_id"
+            app:layout_constraintStart_toStartOf="@+id/card_number2_txt_id" />
+
+        <TextView
+            android:id="@+id/payment_system_name_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="25dp"
+            android:padding="0dp"
+            android:text="mastercard"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/number_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+        <TextView
+            android:id="@+id/card_number2_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="6dp"
+            android:text="Номер "
+            android:textColor="@color/colorGreyText"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/card_validation_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/payment_system_txt_id" />
+
+        <TextView
+            android:id="@+id/number_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="0dp"
+            android:text="0000 0000 0000 0000"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/card_validation_date_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/payment_system_name_txt_id" />
+
+        <TextView
+            android:id="@+id/card_validation_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="6dp"
+            android:text="Срок действия"
+            android:textColor="@color/colorGreyText"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/phone_number_title_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/card_number2_txt_id" />
+
+        <TextView
+            android:id="@+id/card_validation_date_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="0dp"
+            android:text="9/19"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/phone_number_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/number_txt_id" />
+
+
+        <TextView
+            android:id="@+id/phone_number_title_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Телефон"
+            android:textColor="@color/colorGreyText"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/phone_number_txt_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_validation_txt_id" />
+
+        <TextView
+            android:id="@+id/phone_number_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:padding="0dp"
+            android:text="8(800)-000-00-00 "
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/phone_number_title_txt_id"
+            app:layout_constraintTop_toBottomOf="@+id/card_validation_date_txt_id" />
+
+        <Button
+            android:id="@+id/register_btn_id"
+            style="@style/MainButton"
+            android:layout_width="171dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="120dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="120dp"
+            android:layout_marginRight="120dp"
+            android:text="Привязать карту"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+            android:textColor="#F3FAFB"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number_txt_id" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

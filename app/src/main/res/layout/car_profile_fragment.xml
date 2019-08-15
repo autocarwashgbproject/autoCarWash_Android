@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal|center_vertical"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/toolbar_title_txt_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Автомобиль"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/auto_profile_img_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:srcCompat="@drawable/car_profile" />
+
+    <TextView
+        android:id="@+id/change_auto_profile_txt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Изменить фото"
+        android:textColor="@color/colorDefaultText"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/delete_img_txt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Удалить фото"
+        android:textColor="@color/colorDefaultText"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/car_data_txt_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Данные автомобиля"
+        android:textColor="@color/colorGreyText"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/car_number_etxt_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        style="@style/EditText"
+        android:hint="Гос. номер"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/add_auto_btn_id"
+        style="@style/MainButton"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
+        android:layout_margin="32dp"
+        android:text="Добавить авто"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+        android:textColor="#F3FAFB"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/delete_data_txt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="Удалить данные"
+        android:textColor="@color/colorGreyText"
+        android:textSize="12sp" />
+
+</LinearLayout>
