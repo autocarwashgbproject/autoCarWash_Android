@@ -16,6 +16,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="22dp"
         android:orientation="vertical">
@@ -27,15 +28,14 @@
             android:background="@drawable/txt_history_item_background"
             android:text="О 999 ОK 60 RUS"
             android:textColor="@color/colorDefaultText"
-            android:textSize="18sp" />
+            android:textSize="@dimen/heading_text_size" />
 
         <TextView
             android:id="@+id/history_item_date"
+            style="@style/SmallestGreyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сб. 3 июл. 9:44"
-            android:textColor="@color/colorGreyText"
-            android:textSize="10sp" />
+            android:text="Сб. 3 июл. 9:44" />
 
     </LinearLayout>
 
@@ -48,6 +48,6 @@
         android:layout_marginTop="22dp"
         android:text="2000 Р"
         android:textColor="@color/colorDefaultText"
-        android:textSize="18sp" />
+        android:textSize="@dimen/heading_text_size" />
 
 </LinearLayout>

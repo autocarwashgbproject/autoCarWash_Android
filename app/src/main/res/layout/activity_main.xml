@@ -8,8 +8,8 @@
 
     <include
         android:id="@+id/include"
-        android:visibility="gone"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        android:visibility="gone" />
 
     <FrameLayout
         android:id="@+id/fragment_container_id"
@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottom_menu_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/include" >
+        app:layout_constraintTop_toBottomOf="@id/include">
 
 
     </FrameLayout>
@@ -29,13 +29,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/colorPrimary"
+        app:labelVisibilityMode="labeled"
         app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_container_id"
-        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

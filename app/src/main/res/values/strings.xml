@@ -20,4 +20,27 @@
     <string name="about_txt">Приложение предназначено для комфортного и удобного пользования туннельной автомойкой.</string>
     <string name="service_agreement"><u>Условия оказания услуг</u></string>
     <string name="privacy_policy_about"><u>Политика конфиденциальности</u></string>
+    <string name="add_car">Добавить авто</string>
+    <string name="car">Автомобиль</string>
+    <string name="edit_photo">Изменить фото</string>
+    <string name="delete_photo">Удалить фото</string>
+    <string name="delete_data">Удалить данные</string>
+    <string name="plate_number">Гос. номер</string>
+    <string name="car_data">Данные автомобиля</string>
+    <string name="carwash">CarWash</string>
+    <string name="geolocation">Геолокация</string>
+    <string name="language">Язык</string>
+    <string name="russian">Русский</string>
+    <string name="cloudpayment">Cloudpayment</string>
+    <string name="card_number">Номер карты</string>
+    <string name="validity">Срок действия</string>
+    <string name="renew_automatically">Продлевать автоматически</string>
+    <string name="add_another_card">Добавить другую карту</string>
+    <string name="card_details">Детали карты</string>
+    <string name="payment_system">Платежная система</string>
+    <string name="mastercard">mastercard</string>
+    <string name="phone_number">Телефон</string>
+    <string name="bind_card">Привязать карту</string>
+    <string name="region">Регион</string>
+    <string name="rus">RUS</string>
 </resources>

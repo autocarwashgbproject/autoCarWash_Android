@@ -23,7 +23,7 @@
             android:gravity="center"
             android:src="@drawable/ic_title"
             android:text="@string/car_wash"
-            android:textSize="18sp" />
+            android:textSize="@dimen/heading_text_size" />
 
     </androidx.appcompat.widget.Toolbar>
 
