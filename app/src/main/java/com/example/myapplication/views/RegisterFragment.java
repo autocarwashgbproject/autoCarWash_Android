@@ -53,7 +53,10 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((MainActivity)getActivity()).getBottomNavigationView().setVisibility(View.GONE);
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -125,7 +128,11 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            TextView text = (TextView) getActivity().getCurrentFocus();
+            MainActivity activity = ((MainActivity) getActivity());
+            TextView text = null;
+            if (activity != null) {
+                text = (TextView) getActivity().getCurrentFocus();
+            }
 
             if (text != null && text.length() > 0) {
                 View next = text.focusSearch(View.FOCUS_RIGHT);
@@ -150,6 +157,9 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
 
     @Override
     public void loadMain() {
-        ((MainActivity) getActivity()).loadFragment(WashFragment.newInstance());
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.loadFragment(WashFragment.newInstance());
+        }
     }
 }

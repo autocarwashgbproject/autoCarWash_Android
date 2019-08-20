@@ -34,7 +34,10 @@ public class MenuFragment extends ListFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        adapter = new BottomMenuItemsAdapter(getActivity(), Menu.menuList);
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            adapter = new BottomMenuItemsAdapter(activity, Menu.menuList);
+        }
         setListAdapter(adapter);
 
         getListView().setDivider(null);
@@ -46,27 +49,31 @@ public class MenuFragment extends ListFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_fragment, container, false);
 
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.VISIBLE);
-
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
         int img = ((Menu) l.getAdapter().getItem(position)).getImg();
-
-        switch (img) {
-            case R.drawable.menu_about_item:
-                ((MainActivity) getActivity()).loadFragment(AboutFragment.newInstance());
-                break;
-            case R.drawable.menu_settings_item:
-                ((MainActivity) getActivity()).loadFragment(new ParametersFragment());
-                break;
-            case R.drawable.ic_payment:
-                ((MainActivity) getActivity()).loadFragment(PaymentFragment.newInstance());
-                break;
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            switch (img) {
+                case R.drawable.menu_about_item:
+                    activity.loadFragment(AboutFragment.newInstance());
+                    break;
+                case R.drawable.menu_settings_item:
+                    activity.loadFragment(new ParametersFragment());
+                    break;
+                case R.drawable.ic_payment:
+                    activity.loadFragment(PaymentFragment.newInstance());
+                    break;
+            }
         }
     }
 }
