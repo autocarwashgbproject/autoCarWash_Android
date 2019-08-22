@@ -7,6 +7,25 @@
     android:gravity="top|center"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal|center_vertical"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/toolbar_title_txt_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/ic_title"
+            android:text="@string/car_wash"
+            android:textSize="18sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/profile_card_id"
         android:layout_width="match_parent"

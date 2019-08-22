@@ -41,8 +41,8 @@
 
             <ImageView
                 android:id="@+id/profile_avatar_img_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
                 app:srcCompat="@drawable/custom_user" />
 
             <ImageView

@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +13,8 @@ import androidx.fragment.app.Fragment;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.myapplication.utils.OnBackPressedListener;
+import com.example.myapplication.views.CarProfileFragment;
+import com.example.myapplication.views.FillProfileFragment;
 import com.example.myapplication.views.HistoryFragment;
 import com.example.myapplication.views.MenuFragment;
 import com.example.myapplication.views.ProfileFragment;
@@ -18,6 +23,9 @@ import com.example.myapplication.views.WashFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
+
+    public static final int LOAD_PROFILE_PICTURE_CODE = 101;
+    public static final int LOAD_CAR_PICTURE_CODE = 110;
 
     private BottomNavigationView bottomNavigationView;
 
@@ -43,7 +51,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     // проверяем в SharedPreferences, если есть данные о логине,
     // возвращяем true, если нет false.
     public boolean isLoggedIn() {
-        return getSharedPreferences("login_data", MODE_PRIVATE).getBoolean("isAuthorized", false); // izmenit' na false
+        return getSharedPreferences("login_data", MODE_PRIVATE).getBoolean("isAuthorized", true); // izmenit' na false
     }
 
     public boolean loadFragment(Fragment fragment) {
@@ -93,6 +101,29 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
         } else {
             ((OnBackPressedListener) fragment).onBackPressed();
         }
+    }
+
+    public void pickFromGallery(int code) {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, code);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Uri uri;
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode) {
+                case LOAD_PROFILE_PICTURE_CODE:
+                    uri = data.getData();
+                    loadFragment(FillProfileFragment.newInstance(String.valueOf(uri)));
+                    break;
+                case LOAD_CAR_PICTURE_CODE:
+                    uri = data.getData();
+                    loadFragment(CarProfileFragment.newInstance(String.valueOf(uri)));
+                    break;
+            }
     }
 
     public BottomNavigationView getBottomNavigationView() {

@@ -37,4 +37,10 @@ dependencies {
     annotationProcessor 'tech.schoolhelper:moxy-x-compiler:1.7.0'
 
     implementation 'androidx.preference:preference:1.1.0-rc01'
-}
+
+    // Загрузка фотографий в приложение
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Дополнительные возможности трансформирования фото для библиотеки Picasso
+    implementation 'jp.wasabeef:picasso-transformations:2.1.0'
+  }

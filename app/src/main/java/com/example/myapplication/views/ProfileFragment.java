@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,6 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
     ProfilePresenter profilePresenter;
 
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
     public static ProfileFragment newInstance() {
@@ -38,10 +38,31 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
-        MainActivity activity = ((MainActivity) getActivity());
+        final MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
             activity.getBottomNavigationView().setVisibility(View.VISIBLE);
         }
+
+        Button editProfile = view.findViewById(R.id.edit_profile_btn_id);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (activity != null) {
+                    activity.loadFragment(FillProfileFragment.newInstance(null));
+                }
+            }
+        });
+
+        Button addCar = view.findViewById(R.id.add_car_btn_id);
+        addCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (activity != null) {
+                    activity.loadFragment(CarProfileFragment.newInstance(null));
+                }
+            }
+        });
+
         return view;
     }
 }
