@@ -45,15 +45,21 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.payment_fragment, container, false);
 
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
-        getActivity().findViewById(R.id.include).setVisibility(View.GONE);
+        final MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.GONE);
+            activity.findViewById(R.id.include).setVisibility(View.GONE);
+        }
 
         final Toolbar toolbar = view.findViewById(R.id.toolbar_id);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).loadFragment(MenuFragment.newInstance());
+                MainActivity activity = ((MainActivity) getActivity());
+                if (activity != null) {
+                    activity.loadFragment(MenuFragment.newInstance());
+                }
             }
         });
 

@@ -37,11 +37,13 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.payment_fragment, container, false);
+        View view = inflater.inflate(R.layout.car_profile_fragment, container, false);
 
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
-        getActivity().findViewById(R.id.include).setVisibility(View.GONE);
-
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.GONE);
+            activity.findViewById(R.id.include).setVisibility(View.GONE);
+        }
         EditText carNumber = view.findViewById(R.id.car_number_etxt_id);
 
         return view;

@@ -38,8 +38,10 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.VISIBLE);
-
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.VISIBLE);
+        }
         return view;
     }
 }

@@ -40,14 +40,18 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutIF {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.about_app, container, false);
 
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
-
+        final MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.GONE);
+        }
         Toolbar toolbar = view.findViewById(R.id.toolbar_id);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).loadFragment(MenuFragment.newInstance());
+                if (activity != null) {
+                    activity.loadFragment(MenuFragment.newInstance());
+                }
             }
         });
 
