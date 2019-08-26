@@ -73,6 +73,9 @@ public class MenuFragment extends ListFragment {
                 case R.drawable.ic_payment:
                     activity.loadFragment(PaymentFragment.newInstance());
                     break;
+                case R.drawable.menu_bubbles_item:
+                    activity.loadFragment(HistoryFragment.newInstance());
+                    break;
             }
         }
     }
