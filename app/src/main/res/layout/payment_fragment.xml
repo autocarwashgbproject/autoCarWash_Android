@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/background">
 
         <androidx.appcompat.widget.Toolbar
@@ -29,7 +28,7 @@
                 android:gravity="center"
                 android:src="@drawable/ic_title"
                 android:text="@string/car_wash"
-                android:textSize="18sp" />
+                android:textSize="@dimen/heading_text_size" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -51,9 +50,9 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="16dp"
-            android:text="Cloudpayment"
+            android:text="@string/cloudpayment"
             android:textColor="#939393"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintStart_toEndOf="@+id/user_img_id"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_id" />
 
@@ -66,7 +65,7 @@
             android:layout_marginTop="16dp"
             android:text="Способ оплаты:"
             android:textColor="#939393"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintStart_toEndOf="@+id/user_img_id"
             app:layout_constraintTop_toBottomOf="@+id/cloud_payment_txt_id" />
 
@@ -79,7 +78,7 @@
             android:layout_marginTop="16dp"
             android:text="Сумма платежа:"
             android:textColor="#939393"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintStart_toEndOf="@+id/user_img_id"
             app:layout_constraintTop_toBottomOf="@+id/choose_payment_txt_id" />
 
@@ -130,9 +129,9 @@
                     android:id="@+id/card_number_text_txt_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Номер карты"
+                    android:text="@string/card_number"
                     android:textColor="@color/colorWhite"
-                    android:textSize="10sp"
+                    android:textSize="@dimen/smallest_text_size"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,7 +144,7 @@
                     android:maxLength="16"
                     android:singleLine="true"
                     android:textColor="@color/colorWhite"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/default_text_size"
                     app:layout_constraintStart_toStartOf="@+id/card_number_text_txt_id"
                     app:layout_constraintTop_toBottomOf="@+id/card_number_text_txt_id" />
 
@@ -161,7 +160,7 @@
                     android:id="@+id/card_valid_to_txt_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Срок действия"
+                    android:text="@string/validity"
                     android:textColor="@color/colorWhite"
                     android:textSize="7sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -242,9 +241,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
             android:layout_marginRight="25dp"
-            android:text="Продлевать автоматически"
+            android:text="@string/renew_automatically"
             android:textColor="#939393"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintBottom_toBottomOf="@+id/auto_payment_checkbox_id"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/auto_payment_checkbox_id"
@@ -268,9 +267,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginLeft="24dp"
-            android:text="Добавить другую карту"
+            android:text="@string/add_another_card"
             android:textColor="#939393"
-            android:textSize="12sp"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintBottom_toBottomOf="@+id/add_payment_card_btn_id"
             app:layout_constraintStart_toEndOf="@+id/add_payment_card_btn_id"
             app:layout_constraintTop_toTopOf="@+id/add_payment_card_btn_id" />
@@ -303,7 +302,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Детали карты"
+                android:text="@string/card_details"
                 android:textColor="@color/colorGreyText"
                 android:textSize="9sp" />
 
@@ -329,9 +328,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginBottom="6dp"
-            android:text="Платежная система"
+            android:text="@string/payment_system"
             android:textColor="@color/colorGreyText"
-            android:textSize="10sp"
+            android:textSize="@dimen/smallest_text_size"
             app:layout_constraintBottom_toTopOf="@+id/number_txt_id"
             app:layout_constraintStart_toStartOf="@+id/card_number2_txt_id" />
 
@@ -343,7 +342,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="25dp"
             android:padding="0dp"
-            android:text="mastercard"
+            android:text="@string/mastercard"
             android:textColor="@color/colorDefaultText"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/number_txt_id"
@@ -358,7 +357,7 @@
             android:layout_marginTop="6dp"
             android:text="Номер "
             android:textColor="@color/colorGreyText"
-            android:textSize="10sp"
+            android:textSize="@dimen/smallest_text_size"
             app:layout_constraintStart_toStartOf="@+id/card_validation_txt_id"
             app:layout_constraintTop_toBottomOf="@+id/payment_system_txt_id" />
 
@@ -371,7 +370,7 @@
             android:padding="0dp"
             android:text="0000 0000 0000 0000"
             android:textColor="@color/colorDefaultText"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="@+id/card_validation_date_txt_id"
             app:layout_constraintTop_toBottomOf="@+id/payment_system_name_txt_id" />
 
@@ -382,9 +381,9 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="6dp"
-            android:text="Срок действия"
+            android:text="@string/validity"
             android:textColor="@color/colorGreyText"
-            android:textSize="10sp"
+            android:textSize="@dimen/smallest_text_size"
             app:layout_constraintStart_toStartOf="@+id/phone_number_title_txt_id"
             app:layout_constraintTop_toBottomOf="@+id/card_number2_txt_id" />
 
@@ -397,7 +396,7 @@
             android:padding="0dp"
             android:text="9/19"
             android:textColor="@color/colorDefaultText"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="@+id/phone_number_txt_id"
             app:layout_constraintTop_toBottomOf="@+id/number_txt_id" />
 
@@ -411,9 +410,9 @@
             android:layout_marginTop="6dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="Телефон"
+            android:text="@string/phone_number"
             android:textColor="@color/colorGreyText"
-            android:textSize="10sp"
+            android:textSize="@dimen/smallest_text_size"
             app:layout_constraintEnd_toStartOf="@+id/phone_number_txt_id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_validation_txt_id" />
@@ -429,7 +428,7 @@
             android:padding="0dp"
             android:text="8(800)-000-00-00 "
             android:textColor="@color/colorDefaultText"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/phone_number_title_txt_id"
             app:layout_constraintTop_toBottomOf="@+id/card_validation_date_txt_id" />
@@ -444,10 +443,10 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="120dp"
             android:layout_marginRight="120dp"
-            android:text="Привязать карту"
+            android:text="@string/bind_card"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
             android:textColor="#F3FAFB"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phone_number_txt_id" />
