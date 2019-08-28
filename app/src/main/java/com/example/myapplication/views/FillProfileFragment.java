@@ -1,12 +1,11 @@
 package com.example.myapplication.views;
 
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -69,30 +68,56 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
             }
         });
 
-        presenter.loadImage();
+        Button save = view.findViewById(R.id.save_profile_btn_id);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (activity != null) {
+                    activity.loadFragment(ProfileFragment.newInstance());
+                }
+            }
+        });
+
+        loadCurrentAvatarImg();
 
         return view;
     }
 
-    @Override
-    public void setAvatarImage(/*String path*/) {
+    private void loadCurrentAvatarImg() {
+
+        MainActivity activity = (MainActivity) getActivity();
+        String uri = null;
 
         if (getArguments() != null) {
-            Uri uri = Uri.parse(getArguments().getString("imgURI"));
+            uri = getArguments().getString("imgURI");
+
+            if (activity != null) {
+                activity.savePicture(
+                        MainActivity.PICTURE_PREFS,
+                        MainActivity.PROFILE_PIC,
+                        uri
+                );
+            }
 
             Picasso.get()
                     .load(uri)
                     .fit()
                     .transform(new CropCircleTransformation())
                     .into(avatar);
-        } else {
-//            Uri uri = Uri.parse(path);
-//
-//            Picasso.get()
-//                    .load(uri)
-//                    .fit()
-//                    .transform(new CropCircleTransformation())
-//                    .into(avatar);
+
+        } else if (activity != null) {
+            uri = activity.loadPicture(
+                    MainActivity.PICTURE_PREFS,
+                    MainActivity.PROFILE_PIC
+            );
+        }
+
+        if (uri != null) {
+            Picasso.get()
+                    .load(uri)
+                    .fit()
+                    .transform(new CropCircleTransformation())
+                    .into(avatar);
         }
     }
 }

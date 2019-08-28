@@ -1,8 +1,8 @@
 package com.example.myapplication.views;
 
 
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +26,9 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     @InjectPresenter
     CarProfilePresenter presenter;
 
+    private ImageView autoImg;
+
     public CarProfileFragment() {
-        // Required empty public constructor
     }
 
     public static CarProfileFragment newInstance(String uri) {
@@ -57,18 +58,8 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         }
         EditText carNumber = view.findViewById(R.id.car_number_etxt_id);
 
-        ImageView autoImg = view.findViewById(R.id.auto_profile_img_id);
+        autoImg = view.findViewById(R.id.auto_profile_img_id);
         ImageView addImgBtn = view.findViewById(R.id.add_btn_img_id);
-
-        if (getArguments() != null) {
-            Uri uri = Uri.parse(getArguments().getString("imgURI"));
-
-            Picasso.get()
-                    .load(uri)
-                    .fit()
-                    .transform(new CropCircleTransformation())
-                    .into(autoImg);
-        }
 
         addImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +70,46 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
             }
         });
 
+        loadCurrentCarImg();
+
         return view;
+    }
+
+    private void loadCurrentCarImg() {
+
+        MainActivity activity = (MainActivity) getActivity();
+        String uri = null;
+
+        if (getArguments() != null) {
+            uri = getArguments().getString("imgURI");
+
+            if (activity != null) {
+                activity.savePicture(
+                        MainActivity.PICTURE_PREFS,
+                        MainActivity.CAR_PIC,
+                        uri
+                );
+            }
+
+            Picasso.get()
+                    .load(uri)
+                    .fit()
+                    .transform(new CropCircleTransformation())
+                    .into(autoImg);
+
+        } else if (activity != null) {
+            uri = activity.loadPicture(
+                    MainActivity.PICTURE_PREFS,
+                    MainActivity.CAR_PIC
+            );
+        }
+
+        if (uri != null) {
+            Picasso.get()
+                    .load(uri)
+                    .fit()
+                    .transform(new CropCircleTransformation())
+                    .into(autoImg);
+        }
     }
 }

@@ -5,5 +5,4 @@ import com.arellomobile.mvp.MvpView;
 
 public interface FillProfileIF extends MvpView {
 
-    void setAvatarImage(/*String path*/);
 }

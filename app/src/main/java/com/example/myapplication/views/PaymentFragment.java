@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -21,14 +22,18 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.PaymentPresenter;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
 
     @InjectPresenter
     PaymentPresenter presenter;
 
+    private ImageView avatar;
+
     public PaymentFragment() {
-        // Required empty public constructor
     }
 
     public static PaymentFragment newInstance() {
@@ -80,6 +85,10 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
         payment.setAdapter(paymentAdapter);
         payment.setOnItemSelectedListener(new PaymentSpinnerListener());
 
+        avatar = view.findViewById(R.id.user_img_id);
+
+        loadCurrentAvatarImg();
+
         return view;
     }
 
@@ -101,6 +110,27 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
             }
         }
     };
+
+    private void loadCurrentAvatarImg() {
+
+        MainActivity activity = (MainActivity) getActivity();
+        String uri = null;
+
+        if (activity != null) {
+            uri = activity.loadPicture(
+                    MainActivity.PICTURE_PREFS,
+                    MainActivity.PROFILE_PIC
+            );
+        }
+
+        if (uri != null) {
+            Picasso.get()
+                    .load(uri)
+                    .fit()
+                    .transform(new CropCircleTransformation())
+                    .into(avatar);
+        }
+    }
 
     private class CardTypeSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override

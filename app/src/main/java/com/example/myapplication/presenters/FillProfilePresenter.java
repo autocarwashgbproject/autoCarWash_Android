@@ -9,10 +9,4 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
 
     public FillProfilePresenter() {}
 
-
-    public void loadImage() {
-        // TODO: 2019-08-21  Загрузка из базы данных ссылки на аватарку.
-        // String url;
-        getViewState().setAvatarImage(/*url*/);
-    }
 }

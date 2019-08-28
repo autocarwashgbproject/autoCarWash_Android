@@ -1,14 +1,20 @@
 package com.example.myapplication;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -26,6 +32,10 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
 
     public static final int LOAD_PROFILE_PICTURE_CODE = 101;
     public static final int LOAD_CAR_PICTURE_CODE = 110;
+    private static final int PERMISSION_REQUEST_CODE = 111;
+    public static final String PROFILE_PIC = "profilePic";
+    public static final String PICTURE_PREFS = "pictures";
+    public static final String CAR_PIC = "carPic";
 
     private BottomNavigationView bottomNavigationView;
 
@@ -103,7 +113,20 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
         }
     }
 
+    public void savePicture(String name, String key, String uri) {
+        SharedPreferences pref = getSharedPreferences(name, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(key, uri);
+        editor.apply();
+    }
+
+    public String loadPicture(String name, String key) {
+        SharedPreferences pref = getSharedPreferences(name, MODE_PRIVATE);
+        return pref.getString(key, null);
+    }
+
     public void pickFromGallery(int code) {
+        requestPermissions();
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, code);
@@ -124,6 +147,37 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
                     loadFragment(CarProfileFragment.newInstance(String.valueOf(uri)));
                     break;
             }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length == 2 && (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    || grantResults[1] == PackageManager.PERMISSION_GRANTED)) {
+                requestPermissions();
+            }
+        }
+    }
+
+    private void requestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED
+                    && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                requestPermissions(
+                        new String[]{
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE
+                        },
+                        PERMISSION_REQUEST_CODE
+                );
+            }
+        }
     }
 
     public BottomNavigationView getBottomNavigationView() {

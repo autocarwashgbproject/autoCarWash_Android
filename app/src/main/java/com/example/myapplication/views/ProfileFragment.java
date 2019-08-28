@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +16,17 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.ProfilePresenter;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
     @InjectPresenter
-    ProfilePresenter profilePresenter;
+    ProfilePresenter presenter;
+
+    private ImageView avatar;
+    private ImageView car;
 
     public ProfileFragment() {
     }
@@ -63,6 +70,46 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
             }
         });
 
+        avatar = view.findViewById(R.id.profile_img_id);
+        car = view.findViewById(R.id.profile_car_img_id);
+        loadCurrentImgs();
+
         return view;
+    }
+
+    private void loadCurrentImgs() {
+
+        MainActivity activity = (MainActivity) getActivity();
+        String uri = null;
+
+        if (activity != null) {
+            uri = activity.loadPicture(
+                    MainActivity.PICTURE_PREFS,
+                    MainActivity.PROFILE_PIC
+            );
+        }
+
+        if (uri != null) {
+            Picasso.get()
+                    .load(uri)
+                    .fit()
+                    .transform(new CropCircleTransformation())
+                    .into(avatar);
+        }
+
+        if (activity != null) {
+            uri = activity.loadPicture(
+                    MainActivity.PICTURE_PREFS,
+                    MainActivity.CAR_PIC
+            );
+        }
+
+        if (uri != null) {
+            Picasso.get()
+                    .load(uri)
+                    .fit()
+                    .transform(new CropCircleTransformation())
+                    .into(car);
+        }
     }
 }
