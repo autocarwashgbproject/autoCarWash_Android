@@ -2,7 +2,6 @@ package com.example.myapplication.views;
 
 
 import android.os.Bundle;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,6 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.RegisterPresenter;
@@ -40,6 +41,13 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
 
     private Button getCodeBtn;
     private Button registerBtn;
+
+    @ProvidePresenter
+    public RegisterPresenter providePresenter() {
+        final RegisterPresenter registerPresenter = new RegisterPresenter();
+        App.getInstance().getAppComponent().inject(registerPresenter);
+        return registerPresenter;
+    }
 
     public RegisterFragment() {
         // Required empty public constructor

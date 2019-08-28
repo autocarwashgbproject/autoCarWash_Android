@@ -1,5 +1,6 @@
 package com.example.myapplication.di;
 
+import com.example.myapplication.model.ApiRequests;
 import com.example.myapplication.model.DataGetter;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -44,6 +45,11 @@ public class ApiModule {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
+    }
+
+    @Provides
+    public ApiRequests createApi(Retrofit retrofit) {
+        return retrofit.create(ApiRequests.class);
     }
 
     @Singleton
