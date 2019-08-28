@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiRequests {
-    @GET("sms/request")
+    @POST("clients/get_sms/")
     Call<RegTel> regTel(@Query("phone") long telNumber);
 
     @POST("clients/register/?")
