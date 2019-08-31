@@ -1,16 +1,29 @@
 package com.example.myapplication.model.parsingJson;
 
-public class AuthUser {
+import androidx.annotation.NonNull;
+
+public class RegUser {
     private Boolean ok;
     private String token;
-    private int idClient;
+    private int id;
     private Boolean isRegistered;
-    private int telNum;
+    private int phone;
     private int errorCode;
     private String description;
 
     public Boolean getOk() {
         return ok;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "" + ok + " "
+                + token + " "
+                + isRegistered + " "
+                + phone + " "
+                + errorCode + " "
+                + description;
     }
 
     public void setOk(Boolean ok) {
@@ -25,12 +38,12 @@ public class AuthUser {
         this.token = token;
     }
 
-    public int getIdClient() {
-        return idClient;
+    public int getId() {
+        return id;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Boolean getRegistered() {
@@ -41,12 +54,12 @@ public class AuthUser {
         isRegistered = registered;
     }
 
-    public int getTelNum() {
-        return telNum;
+    public int getPhone() {
+        return phone;
     }
 
-    public void setTelNum(int telNum) {
-        this.telNum = telNum;
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 
     public int getErrorCode() {

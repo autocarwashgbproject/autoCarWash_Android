@@ -1,20 +1,23 @@
 package com.example.myapplication.model;
 
 import com.example.myapplication.model.parsingJson.ApiUser;
-import com.example.myapplication.model.parsingJson.AuthUser;
 import com.example.myapplication.model.parsingJson.RegTel;
+import com.example.myapplication.model.parsingJson.RegUser;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface ApiRequests {
+    @FormUrlEncoded
     @POST("clients/get_sms/")
-    Call<RegTel> regTel(@Query("phone") long telNumber);
+    Call<RegTel> regTel(@Field("phone") String telNumber);
 
-    @POST("clients/register/?")
-    Call<AuthUser> authUser(@Query("tel_num") int telNumber, @Query("sms") int sms);
+    @FormUrlEncoded
+    @POST("clients/register/")
+    Call<RegUser> regUser(@Field("phone") int phone, @Field("otp") int otp);
 
     @GET("clients/1/")
     Call<ApiUser> getClient();
