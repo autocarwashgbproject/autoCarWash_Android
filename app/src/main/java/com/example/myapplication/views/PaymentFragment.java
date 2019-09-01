@@ -114,21 +114,21 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
     private void loadCurrentAvatarImg() {
 
         MainActivity activity = (MainActivity) getActivity();
-        String uri = null;
+        String uri;
 
         if (activity != null) {
             uri = activity.loadPicture(
                     MainActivity.PICTURE_PREFS,
                     MainActivity.PROFILE_PIC
             );
-        }
 
-        if (uri != null) {
-            Picasso.get()
-                    .load(uri)
-                    .fit()
-                    .transform(new CropCircleTransformation())
-                    .into(avatar);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(avatar);
+            }
         }
     }
 
