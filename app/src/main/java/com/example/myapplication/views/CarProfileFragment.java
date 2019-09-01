@@ -21,6 +21,11 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+import static com.example.myapplication.Const.CAR_PIC;
+import static com.example.myapplication.Const.IMG_URI;
+import static com.example.myapplication.Const.LOAD_CAR_PICTURE_CODE;
+import static com.example.myapplication.Const.PICTURE_PREFS;
+
 public class CarProfileFragment extends MvpAppCompatFragment implements CarProfileIF {
 
     @InjectPresenter
@@ -35,7 +40,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         CarProfileFragment pf = new CarProfileFragment();
         if (uri != null) {
             Bundle args = new Bundle();
-            args.putString("imgURI", uri);
+            args.putString(IMG_URI, uri);
             pf.setArguments(args);
         }
         return pf;
@@ -65,7 +70,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
             @Override
             public void onClick(View v) {
                 if (activity != null) {
-                    activity.pickFromGallery(MainActivity.LOAD_CAR_PICTURE_CODE);
+                    activity.pickFromGallery(LOAD_CAR_PICTURE_CODE);
                 }
             }
         });
@@ -81,12 +86,12 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         String uri = null;
 
         if (getArguments() != null) {
-            uri = getArguments().getString("imgURI");
+            uri = getArguments().getString(IMG_URI);
 
             if (activity != null) {
                 activity.savePicture(
-                        MainActivity.PICTURE_PREFS,
-                        MainActivity.CAR_PIC,
+                        PICTURE_PREFS,
+                        CAR_PIC,
                         uri
                 );
             }
@@ -99,8 +104,8 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
 
         } else if (activity != null) {
             uri = activity.loadPicture(
-                    MainActivity.PICTURE_PREFS,
-                    MainActivity.CAR_PIC
+                    PICTURE_PREFS,
+                    CAR_PIC
             );
         }
 

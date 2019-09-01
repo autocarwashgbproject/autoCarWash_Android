@@ -25,6 +25,10 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.RegisterPresenter;
 
+import static com.example.myapplication.Const.CODE_ERROR;
+import static com.example.myapplication.Const.PHONE_ERROR;
+import static com.example.myapplication.Const.POLICY_ERROR;
+
 
 public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF {
 
@@ -157,16 +161,29 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
     };
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showErrorMessage(int code) {
+
+        String message = getString(R.string.code_check);
+
+        switch (code) {
+            case POLICY_ERROR:
+                message = getString(R.string.policy_check);
+                break;
+            case CODE_ERROR:
+                message = getString(R.string.code_check);
+                break;
+            case PHONE_ERROR:
+                message = getString(R.string.phone_check);
+                break;
+        }
         Context context = getContext();
         AlertDialog.Builder dialog;
         if (context != null) {
             dialog = new AlertDialog.Builder(context);
             dialog.setTitle(message);
-            dialog.setPositiveButton("Хорошо", null);
+            dialog.setPositiveButton(getString(R.string.positive_button_text), null);
             dialog.show();
         }
-
     }
 
     @Override
