@@ -57,21 +57,21 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
     private void loadCurrentProfilePicture() {
 
         MainActivity activity = (MainActivity) getActivity();
-        String uri = null;
+        String uri;
 
         if (activity != null) {
             uri = activity.loadPicture(
                     MainActivity.PICTURE_PREFS,
                     MainActivity.PROFILE_PIC
             );
-        }
-        if (uri != null) {
-            Picasso.get()
-                    .load(uri)
-                    .placeholder(R.drawable.user)
-                    .fit()
-                    .transform(new CropCircleTransformation())
-                    .into(avatar);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .placeholder(R.drawable.user)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(avatar);
+            }
         }
     }
 }
