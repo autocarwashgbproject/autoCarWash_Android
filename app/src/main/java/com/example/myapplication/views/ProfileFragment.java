@@ -20,6 +20,10 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+import static com.example.myapplication.Const.CAR_PIC;
+import static com.example.myapplication.Const.PICTURE_PREFS;
+import static com.example.myapplication.Const.PROFILE_PIC;
+
 public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
     @InjectPresenter
@@ -84,8 +88,8 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
         if (activity != null) {
             uri = activity.loadPicture(
-                    MainActivity.PICTURE_PREFS,
-                    MainActivity.PROFILE_PIC
+                    PICTURE_PREFS,
+                    PROFILE_PIC
             );
         }
 
@@ -99,8 +103,8 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
         if (activity != null) {
             uri = activity.loadPicture(
-                    MainActivity.PICTURE_PREFS,
-                    MainActivity.CAR_PIC
+                    PICTURE_PREFS,
+                    CAR_PIC
             );
         }
 

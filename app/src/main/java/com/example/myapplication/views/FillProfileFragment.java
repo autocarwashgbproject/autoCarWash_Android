@@ -20,6 +20,12 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+import static com.example.myapplication.Const.IMG_URI;
+import static com.example.myapplication.Const.LOAD_PROFILE_PICTURE_CODE;
+import static com.example.myapplication.Const.PICTURE_PREFS;
+import static com.example.myapplication.Const.PROFILE_PIC;
+
+
 public class FillProfileFragment extends MvpAppCompatFragment implements FillProfileIF {
 
     private ImageView avatar;
@@ -34,7 +40,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         FillProfileFragment pf = new FillProfileFragment();
         if (uri != null) {
             Bundle args = new Bundle();
-            args.putString("imgURI", uri);
+            args.putString(IMG_URI, uri);
             pf.setArguments(args);
         }
         return pf;
@@ -63,7 +69,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
             @Override
             public void onClick(View v) {
                 if (activity != null) {
-                    activity.pickFromGallery(MainActivity.LOAD_PROFILE_PICTURE_CODE);
+                    activity.pickFromGallery(LOAD_PROFILE_PICTURE_CODE);
                 }
             }
         });
@@ -89,12 +95,12 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         String uri = null;
 
         if (getArguments() != null) {
-            uri = getArguments().getString("imgURI");
+            uri = getArguments().getString(IMG_URI);
 
             if (activity != null) {
                 activity.savePicture(
-                        MainActivity.PICTURE_PREFS,
-                        MainActivity.PROFILE_PIC,
+                        PICTURE_PREFS,
+                        PROFILE_PIC,
                         uri
                 );
             }
@@ -107,8 +113,8 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         } else if (activity != null) {
             uri = activity.loadPicture(
-                    MainActivity.PICTURE_PREFS,
-                    MainActivity.PROFILE_PIC
+                    PICTURE_PREFS,
+                    PROFILE_PIC
             );
         }
 

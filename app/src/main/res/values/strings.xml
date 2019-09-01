@@ -43,4 +43,13 @@
     <string name="bind_card">Привязать карту</string>
     <string name="region">Регион</string>
     <string name="rus">RUS</string>
+    <string name="positive_button_text">Хорошо</string>
+    <string name="policy_check">Принять соглашение</string>
+    <string name="code_check">Пожалуйста введите код подтверждения</string>
+    <string name="phone_check">Проверьте номер телефона</string>
+    <string name="payment_menu_text">Безналичная оплата</string>
+    <string name="history_menu_text">История моек и платежей</string>
+    <string name="parameters_menu_text">Параметры</string>
+    <string name="help_menu_text">Поддержка</string>
+    <string name="about_menu_text">О приложении</string>
 </resources>

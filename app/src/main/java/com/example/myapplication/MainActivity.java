@@ -8,13 +8,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -28,14 +26,14 @@ import com.example.myapplication.views.RegisterFragment;
 import com.example.myapplication.views.WashFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static com.example.myapplication.Const.LOAD_CAR_PICTURE_CODE;
+import static com.example.myapplication.Const.LOAD_PROFILE_PICTURE_CODE;
+
 public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
 
-    public static final int LOAD_PROFILE_PICTURE_CODE = 101;
-    public static final int LOAD_CAR_PICTURE_CODE = 110;
     private static final int PERMISSION_REQUEST_CODE = 111;
-    public static final String PROFILE_PIC = "profilePic";
-    public static final String PICTURE_PREFS = "pictures";
-    public static final String CAR_PIC = "carPic";
+    public static final String LOGIN_DATA_PREFS = "login_data";
+    public static final String AUTHORIZATION_STATUS = "isAuthorized";
 
     private BottomNavigationView bottomNavigationView;
 
@@ -61,7 +59,8 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     // проверяем в SharedPreferences, если есть данные о логине,
     // возвращяем true, если нет false.
     public boolean isLoggedIn() {
-        return getSharedPreferences("login_data", MODE_PRIVATE).getBoolean("isAuthorized", true); // izmenit' na false
+        return getSharedPreferences(LOGIN_DATA_PREFS, MODE_PRIVATE)
+                .getBoolean(AUTHORIZATION_STATUS, true); // izmenit' na false
     }
 
     public boolean loadFragment(Fragment fragment) {

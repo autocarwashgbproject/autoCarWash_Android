@@ -19,6 +19,9 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+import static com.example.myapplication.Const.PICTURE_PREFS;
+import static com.example.myapplication.Const.PROFILE_PIC;
+
 public class WashFragment extends MvpAppCompatFragment implements WashIF {
 
     @InjectPresenter
@@ -61,8 +64,8 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
 
         if (activity != null) {
             uri = activity.loadPicture(
-                    MainActivity.PICTURE_PREFS,
-                    MainActivity.PROFILE_PIC
+                    PICTURE_PREFS,
+                    PROFILE_PIC
             );
         }
         if (uri != null) {
