@@ -84,36 +84,34 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
     private void loadCurrentImgs() {
 
         MainActivity activity = (MainActivity) getActivity();
-        String uri = null;
+        String uri;
 
         if (activity != null) {
             uri = activity.loadPicture(
                     PICTURE_PREFS,
                     PROFILE_PIC
             );
-        }
 
-        if (uri != null) {
-            Picasso.get()
-                    .load(uri)
-                    .fit()
-                    .transform(new CropCircleTransformation())
-                    .into(avatar);
-        }
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(avatar);
+            }
 
-        if (activity != null) {
             uri = activity.loadPicture(
                     PICTURE_PREFS,
                     CAR_PIC
             );
-        }
 
-        if (uri != null) {
-            Picasso.get()
-                    .load(uri)
-                    .fit()
-                    .transform(new CropCircleTransformation())
-                    .into(car);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(car);
+            }
         }
     }
 }

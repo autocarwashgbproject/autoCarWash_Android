@@ -1,6 +1,7 @@
 package com.example.myapplication.views;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -175,11 +176,14 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
                 message = getString(R.string.phone_check);
                 break;
         }
-
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-        dialog.setTitle(message);
-        dialog.setPositiveButton(getString(R.string.positive_button_text), null);
-        dialog.show();
+        Context context = getContext();
+        AlertDialog.Builder dialog;
+        if (context != null) {
+            dialog = new AlertDialog.Builder(context);
+            dialog.setTitle(message);
+            dialog.setPositiveButton(getString(R.string.positive_button_text), null);
+            dialog.show();
+        }
     }
 
     @Override
