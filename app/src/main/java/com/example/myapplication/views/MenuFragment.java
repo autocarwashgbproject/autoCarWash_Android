@@ -17,7 +17,18 @@ import com.example.myapplication.R;
 import com.example.myapplication.adapters.BottomMenuItemsAdapter;
 import com.example.myapplication.adapters.Menu;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MenuFragment extends ListFragment {
+
+    private final List<Menu> menuList = Arrays.asList(
+            new Menu(R.drawable.ic_payment, getString(R.string.payment_menu_text)),
+            new Menu(R.drawable.menu_bubbles_item, getString(R.string.history_menu_text)),
+            new Menu(R.drawable.menu_settings_item, getString(R.string.parameters_menu_text)),
+            new Menu(R.drawable.menu_help_item, getString(R.string.help_menu_text)),
+            new Menu(R.drawable.menu_about_item, getString(R.string.about_menu_text))
+    );
 
     // TODO: 2019-08-08 Presenter
     private BottomMenuItemsAdapter adapter;
@@ -36,7 +47,7 @@ public class MenuFragment extends ListFragment {
 
         MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
-            adapter = new BottomMenuItemsAdapter(activity, Menu.menuList);
+            adapter = new BottomMenuItemsAdapter(activity, menuList);
         }
         setListAdapter(adapter);
 

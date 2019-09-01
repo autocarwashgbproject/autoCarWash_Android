@@ -17,6 +17,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.myapplication.Const.CODE_ERROR;
+import static com.example.myapplication.Const.PHONE_ERROR;
+import static com.example.myapplication.Const.POLICY_ERROR;
+
 @InjectViewState
 public class RegisterPresenter extends MvpPresenter<RegisterIF> {
 
@@ -32,9 +36,9 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
         // парсить код и высылать как инт на проверку
 
         if (!checked) {
-            getViewState().showErrorMessage("Принять соглашение");
+            getViewState().showErrorMessage(POLICY_ERROR);
         } else if (code.length() < 4) {
-            getViewState().showErrorMessage("Пожалуйста введите код подтверждения");
+            getViewState().showErrorMessage(CODE_ERROR);
         } else {
             getViewState().loadMain();
         }
@@ -42,7 +46,7 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
 
     public void getSmsCode(String phone) {
         if (!Utils.isValidMobile(phone)) {
-            getViewState().showErrorMessage("Проверьте номер телефона");
+            getViewState().showErrorMessage(PHONE_ERROR);
             return;
         }
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
