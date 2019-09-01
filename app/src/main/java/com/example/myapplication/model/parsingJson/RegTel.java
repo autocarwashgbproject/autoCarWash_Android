@@ -1,10 +1,17 @@
 package com.example.myapplication.model.parsingJson;
 
+import com.google.gson.annotations.Expose;
+
 public class RegTel {
+    @Expose
     private Boolean ok;
+    @Expose
     private String phone;
+    @Expose
     private String smsForTests;
+    @Expose
     private int errorCode;
+    @Expose
     private String description;
 
     /*public RegTel(Boolean ok, int errorCode, String description) {

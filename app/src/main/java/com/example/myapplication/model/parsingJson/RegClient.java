@@ -2,28 +2,38 @@ package com.example.myapplication.model.parsingJson;
 
 import androidx.annotation.NonNull;
 
-public class RegUser {
-    private Boolean ok;
-    private String token;
-    private int id;
-    private Boolean isRegistered;
-    private int phone;
-    private int errorCode;
-    private String description;
+import com.google.gson.annotations.Expose;
 
-    public Boolean getOk() {
-        return ok;
-    }
+public class RegClient {
+    @Expose
+    private Boolean ok;
+    @Expose
+    private String token;
+    @Expose
+    private String idClient;
+    @Expose
+    private Boolean isRegistered;
+    @Expose
+    private String phone;
+    @Expose
+    private int errorCode;
+    @Expose
+    private String description;
 
     @NonNull
     @Override
     public String toString() {
         return "" + ok + " "
+                + idClient + " "
                 + token + " "
                 + isRegistered + " "
                 + phone + " "
                 + errorCode + " "
                 + description;
+    }
+
+    public Boolean getOk() {
+        return ok;
     }
 
     public void setOk(Boolean ok) {
@@ -38,12 +48,12 @@ public class RegUser {
         this.token = token;
     }
 
-    public int getId() {
-        return id;
+    public String getIdClient() {
+        return idClient;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdClient(String idClient) {
+        this.idClient = idClient;
     }
 
     public Boolean getRegistered() {
@@ -54,11 +64,11 @@ public class RegUser {
         isRegistered = registered;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
