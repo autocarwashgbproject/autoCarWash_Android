@@ -49,30 +49,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
 
-        final MainActivity activity = ((MainActivity) getActivity());
-        if (activity != null) {
-            activity.getBottomNavigationView().setVisibility(View.VISIBLE);
-        }
-
-        Button editProfile = view.findViewById(R.id.edit_profile_btn_id);
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activity != null) {
-                    activity.loadFragment(FillProfileFragment.newInstance(null));
-                }
-            }
-        });
-
-        Button addCar = view.findViewById(R.id.add_car_btn_id);
-        addCar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activity != null) {
-                    activity.loadFragment(CarProfileFragment.newInstance(null));
-                }
-            }
-        });
+        initButtons(view);
 
         avatar = view.findViewById(R.id.profile_img_id);
         car = view.findViewById(R.id.profile_car_img_id);
@@ -81,17 +58,32 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         return view;
     }
 
-    private void loadCurrentImgs() {
+    private void initButtons(View view) {
+        final MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.VISIBLE);
+        }
 
+        Button editProfile = view.findViewById(R.id.edit_profile_btn_id);
+        editProfile.setOnClickListener(v -> {
+            if (activity != null) {
+                activity.loadFragment(FillProfileFragment.newInstance(null));
+            }
+        });
+
+        Button addCar = view.findViewById(R.id.add_car_btn_id);
+        addCar.setOnClickListener(v -> {
+            if (activity != null) {
+                activity.loadFragment(CarProfileFragment.newInstance(null));
+            }
+        });
+    }
+
+    private void loadCurrentImgs() {
         MainActivity activity = (MainActivity) getActivity();
         String uri;
-
         if (activity != null) {
-            uri = activity.loadPicture(
-                    PICTURE_PREFS,
-                    PROFILE_PIC
-            );
-
+            uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
             if (uri != null) {
                 Picasso.get()
                         .load(uri)
@@ -99,12 +91,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
                         .transform(new CropCircleTransformation())
                         .into(avatar);
             }
-
-            uri = activity.loadPicture(
-                    PICTURE_PREFS,
-                    CAR_PIC
-            );
-
+            uri = activity.loadPicture(PICTURE_PREFS, CAR_PIC);
             if (uri != null) {
                 Picasso.get()
                         .load(uri)

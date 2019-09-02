@@ -52,4 +52,8 @@
     <string name="parameters_menu_text">Параметры</string>
     <string name="help_menu_text">Поддержка</string>
     <string name="about_menu_text">О приложении</string>
+    <string name="parameters_prefs_text">Параметры</string>
+    <string name="geolocation_preference_text">geolocation</string>
+    <string name="regions_preference_text">regions</string>
+    <string name="language_preference_text">language</string>
 </resources>

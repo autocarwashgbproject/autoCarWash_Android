@@ -33,52 +33,42 @@ public class ParametersFragment extends PreferenceFragmentCompat implements OnBa
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.parameters, rootKey);
 
-        lang = findPreference("language");
+        lang = findPreference(getString(R.string.language_preference_text));
 
         if (lang != null) {
-            lang.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    String value = (String) newValue;
-                    SharedPreferences.Editor e = preferences.edit();
-                    e.putString(preference.getKey(), value);
-                    e.apply();
-                    preference.setSummary(value);
-                    return true;
-                }
+            lang.setOnPreferenceChangeListener((preference, newValue) -> {
+                String value = (String) newValue;
+                SharedPreferences.Editor e = preferences.edit();
+                e.putString(preference.getKey(), value);
+                e.apply();
+                preference.setSummary(value);
+                return true;
             });
         }
 
-        regions = findPreference("regions");
+        regions = findPreference(getString(R.string.regions_preference_text));
 
         if (regions != null) {
-            regions.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    String value = (String) newValue;
-                    SharedPreferences.Editor e = preferences.edit();
-                    e.putString(preference.getKey(), value);
-                    e.apply();
-                    preference.setSummary(value);
-                    return true;
-                }
+            regions.setOnPreferenceChangeListener((preference, newValue) -> {
+                String value = (String) newValue;
+                SharedPreferences.Editor e = preferences.edit();
+                e.putString(preference.getKey(), value);
+                e.apply();
+                preference.setSummary(value);
+                return true;
             });
         }
 
-        geo = findPreference("geolocation");
+        geo = findPreference(getString(R.string.geolocation_preference_text));
 
         if (geo != null) {
-
-            geo.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    boolean value = (boolean) newValue;
-                    SharedPreferences.Editor e = preferences.edit();
-                    e.putBoolean(preference.getKey(), value);
-                    e.apply();
-                    ((AppGeolocationPreference) preference).setChecked(value);
-                    return true;
-                }
+            geo.setOnPreferenceChangeListener((preference, newValue) -> {
+                boolean value = (boolean) newValue;
+                SharedPreferences.Editor e = preferences.edit();
+                e.putBoolean(preference.getKey(), value);
+                e.apply();
+                ((AppGeolocationPreference) preference).setChecked(value);
+                return true;
             });
         }
 
@@ -87,27 +77,30 @@ public class ParametersFragment extends PreferenceFragmentCompat implements OnBa
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+            activity.getBottomNavigationView().setVisibility(View.GONE);
+        }
     }
 
     private void setViews() {
 
-        final Toolbar toolbar = getActivity().findViewById(R.id.include);
-        toolbar.setVisibility(View.VISIBLE);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
-        toolbar.setTitle("Параметры");
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            final Toolbar toolbar = activity.findViewById(R.id.include);
+            toolbar.setVisibility(View.VISIBLE);
+            toolbar.setTitleTextColor(getResources().getColor(R.color.colorWhite));
+            toolbar.setTitle(getString(R.string.parameters_prefs_text));
+            toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+            toolbar.setNavigationOnClickListener(v -> {
                 toolbar.setVisibility(View.GONE);
-                ((MainActivity) getActivity()).loadFragment(MenuFragment.newInstance());
-            }
-        });
+                activity.loadFragment(MenuFragment.newInstance());
+            });
 
-        ImageView img = toolbar.findViewById(R.id.toolbar_title_txt_id);
-        img.setVisibility(View.GONE);
+            ImageView img = toolbar.findViewById(R.id.toolbar_title_txt_id);
+            img.setVisibility(View.GONE);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -118,7 +111,6 @@ public class ParametersFragment extends PreferenceFragmentCompat implements OnBa
             v.setBackground(getResources().getDrawable(R.drawable.background));
         }
         return v;
-
     }
 
     @Override
@@ -129,8 +121,11 @@ public class ParametersFragment extends PreferenceFragmentCompat implements OnBa
 
     @Override
     public boolean onBackPressed() {
-        final Toolbar toolbar = getActivity().findViewById(R.id.include);
-        toolbar.setVisibility(View.GONE);
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            final Toolbar toolbar = activity.findViewById(R.id.include);
+            toolbar.setVisibility(View.GONE);
+        }
         return false;
     }
 }

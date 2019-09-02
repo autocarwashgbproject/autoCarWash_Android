@@ -2,7 +2,6 @@ package com.example.myapplication.views;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,12 +65,9 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         autoImg = view.findViewById(R.id.auto_profile_img_id);
         ImageView addImgBtn = view.findViewById(R.id.add_btn_img_id);
 
-        addImgBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activity != null) {
-                    activity.pickFromGallery(LOAD_CAR_PICTURE_CODE);
-                }
+        addImgBtn.setOnClickListener(v -> {
+            if (activity != null) {
+                activity.pickFromGallery(LOAD_CAR_PICTURE_CODE);
             }
         });
 
@@ -81,34 +77,21 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     }
 
     private void loadCurrentCarImg() {
-
         MainActivity activity = (MainActivity) getActivity();
         String uri = null;
-
         if (getArguments() != null) {
             uri = getArguments().getString(IMG_URI);
-
             if (activity != null) {
-                activity.savePicture(
-                        PICTURE_PREFS,
-                        CAR_PIC,
-                        uri
-                );
+                activity.savePicture(PICTURE_PREFS, CAR_PIC, uri);
             }
-
             Picasso.get()
                     .load(uri)
                     .fit()
                     .transform(new CropCircleTransformation())
                     .into(autoImg);
-
         } else if (activity != null) {
-            uri = activity.loadPicture(
-                    PICTURE_PREFS,
-                    CAR_PIC
-            );
+            uri = activity.loadPicture(PICTURE_PREFS, CAR_PIC);
         }
-
         if (uri != null) {
             Picasso.get()
                     .load(uri)

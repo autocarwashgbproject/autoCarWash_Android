@@ -30,11 +30,9 @@ public class MenuFragment extends ListFragment {
             new Menu(R.drawable.menu_about_item, getString(R.string.about_menu_text))
     );
 
-    // TODO: 2019-08-08 Presenter
     private BottomMenuItemsAdapter adapter;
 
     public MenuFragment() {
-        // Required empty public constructor
     }
 
     public static MenuFragment newInstance() {
