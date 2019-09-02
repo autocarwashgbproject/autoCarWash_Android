@@ -26,7 +26,8 @@
             android:gravity="center"
             android:src="@drawable/ic_title"
             android:text="@string/car_wash"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:contentDescription="@string/logo" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -62,7 +63,9 @@
         app:layout_constraintBottom_toTopOf="@+id/enter_code_edit_txt_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:importantForAutofill="no"
+        tools:targetApi="o" />
 
 
     <EditText
@@ -78,7 +81,9 @@
         app:layout_constraintBottom_toTopOf="@+id/enter_account_btn_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:importantForAutofill="no"
+        tools:targetApi="o"/>
 
 
     <Button

@@ -16,7 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_geo" />
+        app:srcCompat="@drawable/ic_geo"
+        android:contentDescription="@string/geolocation" />
 
     <TextView
         android:id="@+id/geolocation_txt_id"

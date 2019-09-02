@@ -22,13 +22,7 @@ import java.util.List;
 
 public class MenuFragment extends ListFragment {
 
-    private final List<Menu> menuList = Arrays.asList(
-            new Menu(R.drawable.ic_payment, getString(R.string.payment_menu_text)),
-            new Menu(R.drawable.menu_bubbles_item, getString(R.string.history_menu_text)),
-            new Menu(R.drawable.menu_settings_item, getString(R.string.parameters_menu_text)),
-            new Menu(R.drawable.menu_help_item, getString(R.string.help_menu_text)),
-            new Menu(R.drawable.menu_about_item, getString(R.string.about_menu_text))
-    );
+    private List<Menu> menuList;
 
     private BottomMenuItemsAdapter adapter;
 
@@ -43,14 +37,25 @@ public class MenuFragment extends ListFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        MainActivity activity = ((MainActivity) getActivity());
-        if (activity != null) {
-            adapter = new BottomMenuItemsAdapter(activity, menuList);
-        }
+        initMenu();
         setListAdapter(adapter);
 
         getListView().setDivider(null);
 
+    }
+
+    private void initMenu() {
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            menuList = Arrays.asList(
+                    new Menu(R.drawable.ic_payment, getString(R.string.payment_menu_text)),
+                    new Menu(R.drawable.menu_bubbles_item, getString(R.string.history_menu_text)),
+                    new Menu(R.drawable.menu_settings_item, getString(R.string.parameters_menu_text)),
+                    new Menu(R.drawable.menu_help_item, getString(R.string.help_menu_text)),
+                    new Menu(R.drawable.menu_about_item, getString(R.string.about_menu_text))
+            );
+            adapter = new BottomMenuItemsAdapter(activity, menuList);
+        }
     }
 
     @Override
