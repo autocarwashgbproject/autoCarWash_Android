@@ -18,6 +18,8 @@
             android:id="@+id/toolbar_title_txt_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="?attr/actionBarSize"
+            android:layout_marginEnd="?attr/actionBarSize"
             android:gravity="center"
             android:text="@string/about_app"
             android:textColor="@android:color/white"
@@ -30,7 +32,8 @@
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginTop="86dp"
-        android:src="@drawable/abc" />
+        android:src="@drawable/abc"
+        android:contentDescription="@string/about_app" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +55,7 @@
             style="@style/DefaultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Версия 1.0.0 от 2019.08.06" />
+            android:text="@string/app_version" />
 
         <TextView
             android:id="@+id/about_txt_id"

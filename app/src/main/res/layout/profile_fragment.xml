@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -27,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Профиль"
+                android:text="@string/title_profile"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
 
@@ -42,14 +41,15 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/custom_user"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_id" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_id"
+            android:contentDescription="@string/profile_image" />
 
         <TextView
             android:id="@+id/profile_name_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
-            android:text="Иван Иванов"
+            android:text="@string/example_full_name"
             android:textColor="@color/colorDefaultText"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/profile_phone_txt_id"
@@ -62,7 +62,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="8dp"
-            android:text="+7 (999) 999-99-99"
+            android:text="@string/example_phone_nr"
             android:textColor="@color/colorDefaultText"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/profile_img_id"
@@ -79,7 +79,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Редактировать данные"
+            android:text="@string/edit_data"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
             android:textColor="#F3FAFB"
             android:textSize="14sp"
@@ -96,14 +96,15 @@
             android:layout_marginTop="32dp"
             android:src="@drawable/car_profile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_profile_btn_id" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_profile_btn_id"
+            android:contentDescription="@string/car_image" />
 
         <TextView
             android:id="@+id/profile_car_data_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Нет данных"
+            android:text="@string/no_data"
             android:textColor="@color/colorDefaultText"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/profile_car_text_txt_id"
@@ -119,7 +120,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="8dp"
-            android:text="Вы не добавили информацию об автомобиле. Хотите ввести данные?"
+            android:text="@string/car_no_data_found"
             android:textColor="@color/colorDefaultText"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/profile_car_img_id"
@@ -137,7 +138,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Добавить машину"
+            android:text="@string/add_auto"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
             android:textColor="#F3FAFB"
             android:textSize="14sp"

@@ -58,15 +58,10 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
     }
 
     private void loadCurrentProfilePicture() {
-
         MainActivity activity = (MainActivity) getActivity();
         String uri;
-
         if (activity != null) {
-            uri = activity.loadPicture(
-                    PICTURE_PREFS,
-                    PROFILE_PIC
-            );
+            uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
             if (uri != null) {
                 Picasso.get()
                         .load(uri)

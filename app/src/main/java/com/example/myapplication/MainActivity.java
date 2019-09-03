@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 
 
@@ -75,29 +74,24 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
         return false;
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
+        Fragment fragment = null;
 
-            Fragment fragment = null;
-
-            switch (item.getItemId()) {
-                case R.id.wash:
-                    fragment = WashFragment.newInstance();
-                    break;
-                case R.id.history:
-                    fragment = HistoryFragment.newInstance();
-                    break;
-                case R.id.profile:
-                    fragment = ProfileFragment.newInstance();
-                    break;
-                case R.id.menu:
-                    fragment = MenuFragment.newInstance();
-                    break;
-            }
-            return MainActivity.this.loadFragment(fragment);
+        switch (item.getItemId()) {
+            case R.id.wash:
+                fragment = WashFragment.newInstance();
+                break;
+            case R.id.history:
+                fragment = HistoryFragment.newInstance();
+                break;
+            case R.id.profile:
+                fragment = ProfileFragment.newInstance();
+                break;
+            case R.id.menu:
+                fragment = MenuFragment.newInstance();
+                break;
         }
+        return MainActivity.this.loadFragment(fragment);
     };
 
     @Override
@@ -181,9 +175,5 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
 
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
-    }
-
-    public void setBottomNavigationView(BottomNavigationView bottomNavigationView) {
-        this.bottomNavigationView = bottomNavigationView;
     }
 }

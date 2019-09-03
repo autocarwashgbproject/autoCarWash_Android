@@ -26,7 +26,6 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryIF {
     private List<History> histories;
 
     public HistoryFragment() {
-        // Required empty public constructor
     }
 
     public static HistoryFragment newInstance() {

@@ -22,7 +22,8 @@
             android:gravity="center"
             android:src="@drawable/ic_title"
             android:text="@string/car_wash"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:contentDescription="@string/logo" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -49,7 +50,8 @@
                 android:layout_margin="8dp"
                 android:layout_gravity="center"
                 android:layout_weight="0.5"
-                android:src="@drawable/custom_user" />
+                android:src="@drawable/custom_user"
+                android:contentDescription="@string/profile_image" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -64,7 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_marginBottom="8dp"
-                    android:text="Иван Иванов"
+                    android:text="@string/example_full_name"
                     android:textColor="@color/colorDefaultText"
                     android:textSize="@dimen/heading_text_size"
                     android:textStyle="bold" />
@@ -74,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
-                    android:text="+7(999) 999 99 99" />
+                    android:text="@string/example_phone_nr" />
             </LinearLayout>
 
         </LinearLayout>
@@ -90,7 +92,8 @@
             android:id="@+id/location_icon_img_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_geo" />
+            android:src="@drawable/ic_geo"
+            android:contentDescription="@string/geolocation" />
 
         <TextView
             android:id="@+id/address_txt_id"
@@ -99,7 +102,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:gravity="center_vertical"
-            android:text="Великие Луки, пр-т Октябрьский, 9Б" />
+            android:text="@string/full_address_example" />
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
@@ -123,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text="Оплачено до 2020/08/08"
+                android:text="@string/paid_to_date"
                 android:textColor="@color/colorDefaultText"
                 android:textSize="16sp" />
 
@@ -133,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:gravity="center"
-                android:text=" 23:59"
+                android:text="@string/time"
                 android:textColor="@color/colorDefaultText"
                 android:textSize="16sp" />
 
@@ -151,7 +154,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:gravity="center_horizontal"
-                    android:text="A 001 AA"
+                    android:text="@string/registration_number"
                     android:textSize="@dimen/heading_text_size" />
 
                 <LinearLayout
@@ -163,7 +166,7 @@
                         android:id="@+id/reg_nr_txt2_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="60"
+                        android:text="@string/registration_number_part2"
                         android:textColor="@color/colorDefaultText"
                         android:textSize="16sp" />
 

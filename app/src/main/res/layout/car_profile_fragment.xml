@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -37,13 +38,15 @@
             android:id="@+id/auto_profile_img_id"
             android:layout_width="109dp"
             android:layout_height="109dp"
-            app:srcCompat="@drawable/car_profile" />
+            app:srcCompat="@drawable/car_profile"
+            android:contentDescription="@string/car_image" />
 
         <ImageView
             android:id="@+id/add_btn_img_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:contentDescription="@string/add_car_image"
             android:src="@drawable/ic_add_button" />
     </FrameLayout>
 
@@ -60,7 +63,7 @@
         android:text="@string/car_data" />
 
     <EditText
-        android:id="@+id/car_number_etxt_id"
+        android:id="@+id/car_nr_etxt_id"
         style="@style/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +72,10 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:hint="@string/plate_number"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/add_auto_btn_id"
