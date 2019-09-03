@@ -60,7 +60,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
             activity.getBottomNavigationView().setVisibility(View.GONE);
             activity.findViewById(R.id.include).setVisibility(View.GONE);
         }
-        EditText carNumber = view.findViewById(R.id.car_number_etxt_id);
+        EditText carNumber = view.findViewById(R.id.car_nr_etxt_id);
 
         autoImg = view.findViewById(R.id.auto_profile_img_id);
         ImageView addImgBtn = view.findViewById(R.id.add_btn_img_id);
