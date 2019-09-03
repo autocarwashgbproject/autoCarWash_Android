@@ -3,11 +3,17 @@ package com.example.myapplication.model;
 import android.widget.Toast;
 
 import com.example.myapplication.App;
+import com.example.myapplication.model.parsingJson.ApiCar;
 import com.example.myapplication.model.parsingJson.ApiClient;
 import com.example.myapplication.model.parsingJson.RegClient;
 import com.example.myapplication.model.parsingJson.RegTel;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 public class DataGetter {
 
@@ -17,6 +23,7 @@ public class DataGetter {
     private String clientId;
     private String sms;
     private ApiClient currentClient;
+    private Map<String, ApiCar> cars = new HashMap<>();
 
     public DataGetter(ApiRequests api) {
         this.api = api;
@@ -67,8 +74,21 @@ public class DataGetter {
                 .map(response -> {
                     sessionToken = response.getToken();
                     clientId = response.getIdClient();
+                    fillCars(response.getCarsId());
                     return response;
                 });
+    }
+
+    private void fillCars(Set<Integer> carsId) {
+        cars.clear();
+        for (int id : carsId) {
+            api.getCar(id, sessionToken)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(res -> {
+                        cars.put(res.getRegNum(), res);
+                        Toast.makeText(App.getInstance().getBaseContext(), res.getRegNum(), Toast.LENGTH_SHORT).show();
+                    });
+        }
     }
 
 
@@ -116,4 +136,32 @@ public class DataGetter {
                     return result;
                 });
     }
+
+    public Single<ApiCar> createCar(String carNumber) {
+        return api.createCar(carNumber, TOKEN_PREF + sessionToken)
+                .subscribeOn(Schedulers.newThread())
+                .map(result -> {
+                    cars.put(result.getRegNum(), result);
+                    return result;
+                });
+    }
+
+    public Single<ApiCar> updateCar(String carNumber) {
+        ApiCar currentCar = cars.get(carNumber.toUpperCase());
+        return api.updateCar(currentCar.getId(), TOKEN_PREF + sessionToken, currentCar)
+                .subscribeOn(Schedulers.newThread())
+                .map(result -> {
+                    cars.remove(currentCar.getRegNum());
+                    cars.put(result.getRegNum(), result);
+                    return result;
+                });
+    }
+
+    public Single<ApiCar> deleteCar(String carNumber) {
+        ApiCar currentCar = cars.get(carNumber.toUpperCase());
+        cars.remove(currentCar.getRegNum());
+        return api.deleteCar(currentCar.getId(), TOKEN_PREF + sessionToken)
+                .subscribeOn(Schedulers.newThread());
+    }
+
 }

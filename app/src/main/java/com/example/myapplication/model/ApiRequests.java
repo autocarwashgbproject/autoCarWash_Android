@@ -1,5 +1,6 @@
 package com.example.myapplication.model;
 
+import com.example.myapplication.model.parsingJson.ApiCar;
 import com.example.myapplication.model.parsingJson.ApiClient;
 import com.example.myapplication.model.parsingJson.RegClient;
 import com.example.myapplication.model.parsingJson.RegTel;
@@ -85,4 +86,44 @@ public interface ApiRequests {
      */
     @DELETE("clients/{id}/logout/")
     Single<ApiClient> logoutClient(@Path("id") String id, @Header("Authorization") String token);
+
+    /**
+     * @param carNumber - String(9) - car number, format A999AA777
+     * @param token     - String - token from regUser.getToken()
+     *                  function create new car in DB
+     * @return ApiCar
+     */
+    @FormUrlEncoded
+    @POST("cars/create/")
+    Single<ApiCar> createCar(@Field("reg_num") String carNumber, @Header("Authorization") String token);
+
+    /**
+     * @param id    - String - car id from List in ApiClient.
+     * @param token - String - token from regUser.getToken()
+     *              function response car info
+     * @return ApiClient
+     */
+    @GET("cars/{id}/")
+    Single<ApiCar> getCar(@Path("id") int id, @Header("Authorization") String token);
+
+
+    /**
+     * @param id    - String - car id from List in ApiClient.
+     * @param token - String - token from regUser.getToken()
+     *              function update carinfo
+     *              if you will add a car number, that DB contents, you will recieve error in arg phone:
+     *              "car с таким reg_num уже существует."
+     * @return ApiClient
+     */
+    @PUT("cars/{id}/")
+    Single<ApiCar> updateCar(@Path("id") int id, @Header("Authorization") String token, @Body ApiCar apiCar);
+
+    /**
+     * @param id    - String - car id from response regUser.
+     * @param token - String - token from regUser.getToken()
+     *              function delete car
+     * @return ApiClient
+     */
+    @DELETE("cars/{id}/")
+    Single<ApiCar> deleteCar(@Path("id") int id, @Header("Authorization") String token);
 }

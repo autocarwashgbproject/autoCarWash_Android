@@ -11,6 +11,8 @@ import com.example.myapplication.views.RegisterIF;
 
 import javax.inject.Inject;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+
 @InjectViewState
 public class RegisterPresenter extends MvpPresenter<RegisterIF> {
 
@@ -34,9 +36,12 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
 
             dataGetter.getToken("9855554229")
                     .subscribe(regClient -> {
-                        System.out.println("response " + regClient.toString());
-                        getViewState().loadMain();
-                    });
+                                System.out.println("response " + regClient.toString());
+                                getViewState().loadMain();
+                            },
+                            err -> {
+                                Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
+                            });
         }
 
     }
@@ -49,9 +54,14 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
         System.out.println("start request");
 
-        dataGetter.getSmsCode("9855554229").subscribe(result -> {
-            dataGetter.setSms(result.getSmsForTests());
-            System.out.println(result.toString());
-        });
+        dataGetter.getSmsCode("9855554229")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                            dataGetter.setSms(result.getSmsForTests());
+                            System.out.println(result.toString());
+                        },
+                        err -> {
+                            Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
+                        });
     }
 }

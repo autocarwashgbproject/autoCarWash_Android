@@ -21,6 +21,31 @@
         android:layout_height="wrap_content"
         android:text="Logout" />
 
+    <EditText
+        android:id="@+id/profile_fragment_car_number_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/profile_fragment_button_car_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create car" />
+
+    <Button
+        android:id="@+id/profile_fragment_button_car_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update car" />
+
+    <Button
+        android:id="@+id/profile_fragment_button_car_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete car" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

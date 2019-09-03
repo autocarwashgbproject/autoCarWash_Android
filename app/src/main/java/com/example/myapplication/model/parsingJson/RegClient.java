@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 public class RegClient {
     @Expose
     private Boolean ok;
@@ -19,17 +22,29 @@ public class RegClient {
     private int errorCode;
     @Expose
     private String description;
+    @Expose
+    private Set<Integer> carsId = new TreeSet<>();
 
     @NonNull
     @Override
     public String toString() {
-        return "" + ok + " "
+        String response = "" + ok + " "
                 + idClient + " "
                 + token + " "
                 + isRegistered + " "
                 + phone + " "
                 + errorCode + " "
-                + description;
+                + description + "\n"
+                + "carsId: ";
+        for (int id : carsId) {
+            response = response + id + ", ";
+        }
+        return response;
+    }
+
+
+    public Set<Integer> getCarsId() {
+        return carsId;
     }
 
     public Boolean getOk() {

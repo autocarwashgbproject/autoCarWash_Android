@@ -25,8 +25,9 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
         dataGetter.getProfile()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
-                    Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
-                });
+                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
+                        },
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
     }
 
     public void updateClient() {
@@ -38,18 +39,44 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
         client.setPhone("9855554229");
         dataGetter.updateProfile()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show());
+                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
     }
 
     public void deleteClient() {
         dataGetter.deleteProfile()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show());
+                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
     }
 
     public void logout() {
         dataGetter.logout()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show());
+                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
     }
+
+    public void createCar(String carNumber) {
+        dataGetter.createCar(carNumber.toUpperCase())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
+    }
+
+    public void updateCar(String carNumber) {
+        dataGetter.updateCar(carNumber.toUpperCase())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
+    }
+
+    public void deleteCar(String carNumber) {
+        dataGetter.deleteCar(carNumber)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
+    }
+
+
 }

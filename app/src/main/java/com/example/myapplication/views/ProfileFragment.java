@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,10 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
     private Button updateClientBtn;
     private Button deleteClientBtn;
     private Button logoutClientBtn;
+    private Button updateCarBtn;
+    private Button deleteCarBtn;
+    private Button createCarBtn;
+    private EditText carNumber;
 
     @ProvidePresenter
     public ProfilePresenter providePresenter() {
@@ -53,12 +58,19 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
         ((MainActivity)getActivity()).getBottomNavigationView().setVisibility(View.VISIBLE);
 
+        carNumber = view.findViewById(R.id.profile_fragment_car_number_text);
         updateClientBtn = view.findViewById(R.id.profile_fragment_button);
         deleteClientBtn = view.findViewById(R.id.profile_fragment_button_delete);
         logoutClientBtn = view.findViewById(R.id.profile_fragment_button_logout);
+        updateCarBtn = view.findViewById(R.id.profile_fragment_button_car_update);
+        deleteCarBtn = view.findViewById(R.id.profile_fragment_button_car_delete);
+        createCarBtn = view.findViewById(R.id.profile_fragment_button_car_create);
         updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
         deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
         logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
+        updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.toString()));
+        deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.toString()));
+        createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.toString()));
 
         profilePresenter.getClientFromApi();
 
