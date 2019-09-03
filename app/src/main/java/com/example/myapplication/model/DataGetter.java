@@ -33,24 +33,12 @@ public class DataGetter {
         return currentClient;
     }
 
-    public void setCurrentClient(ApiClient currentClient) {
-        this.currentClient = currentClient;
-    }
-
     public String getSessionToken() {
         return sessionToken;
     }
 
-    public void setSessionToken(String sessionToken) {
-        this.sessionToken = sessionToken;
-    }
-
     public String getClientId() {
         return clientId;
-    }
-
-    public void setClientId(String clientId) {
-        this.clientId = clientId;
     }
 
     public String getSms() {
@@ -82,7 +70,7 @@ public class DataGetter {
     private void fillCars(Set<Integer> carsId) {
         cars.clear();
         for (int id : carsId) {
-            api.getCar(id, sessionToken)
+            api.getCar(id, TOKEN_PREF + sessionToken)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(res -> {
                         cars.put(res.getRegNum(), res);
@@ -146,12 +134,13 @@ public class DataGetter {
                 });
     }
 
-    public Single<ApiCar> updateCar(String carNumber) {
-        ApiCar currentCar = cars.get(carNumber.toUpperCase());
+    public Single<ApiCar> updateCar(String oldCarNumber, String carNumber) {
+        ApiCar currentCar = cars.get(oldCarNumber.toUpperCase());
+        currentCar.setRegNum(carNumber);
         return api.updateCar(currentCar.getId(), TOKEN_PREF + sessionToken, currentCar)
                 .subscribeOn(Schedulers.newThread())
                 .map(result -> {
-                    cars.remove(currentCar.getRegNum());
+                    cars.remove(oldCarNumber);
                     cars.put(result.getRegNum(), result);
                     return result;
                 });

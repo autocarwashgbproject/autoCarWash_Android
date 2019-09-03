@@ -65,7 +65,7 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
     }
 
     public void updateCar(String carNumber) {
-        dataGetter.updateCar(carNumber.toUpperCase())
+        dataGetter.updateCar(carNumber.toUpperCase(), carNumber.toUpperCase())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
                         err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());

@@ -68,9 +68,9 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
         deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
         logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
-        updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.toString()));
-        deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.toString()));
-        createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.toString()));
+        updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.getText().toString()));
+        deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.getText().toString()));
+        createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
 
         profilePresenter.getClientFromApi();
 
