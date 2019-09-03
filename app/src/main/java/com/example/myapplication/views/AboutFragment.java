@@ -23,7 +23,6 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutIF {
     AboutPresenter aboutPresenter;
 
     public AboutFragment() {
-        // Required empty public constructor
     }
 
     public static AboutFragment newInstance() {
@@ -40,33 +39,30 @@ public class AboutFragment extends MvpAppCompatFragment implements AboutIF {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.about_app, container, false);
 
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.GONE);
+        final MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.GONE);
+        }
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar_id);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) getActivity()).loadFragment(MenuFragment.newInstance());
-            }
-        });
+        initToolbar(view);
 
         TextView agreement = view.findViewById(R.id.service_agreement_txt_id);
-        agreement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aboutPresenter.showAgreement();
-            }
-        });
+        agreement.setOnClickListener(v -> aboutPresenter.showAgreement());
 
         TextView policy = view.findViewById(R.id.privacy_policy_txt_id);
-        policy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                aboutPresenter.showPrivacyPolicy();
-            }
-        });
+        policy.setOnClickListener(v -> aboutPresenter.showPrivacyPolicy());
 
         return view;
+    }
+
+    private void initToolbar(View view) {
+        final Toolbar toolbar = view.findViewById(R.id.toolbar_id);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(v -> {
+            MainActivity activity = ((MainActivity) getActivity());
+            if (activity != null) {
+                activity.loadFragment(MenuFragment.newInstance());
+            }
+        });
     }
 }

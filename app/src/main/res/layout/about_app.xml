@@ -14,14 +14,16 @@
         android:gravity="center_horizontal|center_vertical"
         android:minHeight="?attr/actionBarSize">
 
-            <TextView
-                android:id="@+id/toolbar_title_txt_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/about_app"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+        <TextView
+            android:id="@+id/toolbar_title_txt_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="?attr/actionBarSize"
+            android:layout_marginEnd="?attr/actionBarSize"
+            android:gravity="center"
+            android:text="@string/about_app"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/heading_text_size" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -30,65 +32,55 @@
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginTop="86dp"
-        android:src="@drawable/abc"/>
+        android:src="@drawable/abc"
+        android:contentDescription="@string/about_app" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="16dp"
-        android:padding="8dp"
-        android:gravity="start">
+        android:gravity="start"
+        android:orientation="vertical"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/car_wash_txt_id"
+            style="@style/BigBoldText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="CarWash"
-            android:textColor="@color/colorDefaultText"/>
+            android:text="@string/carwash" />
 
         <TextView
             android:id="@+id/version_txt_id"
+            style="@style/DefaultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="14sp"
-            android:text="Версия 1.0.0 от 2019.08.06"
-            android:textColor="@color/colorDefaultText"/>
+            android:text="@string/app_version" />
 
         <TextView
             android:id="@+id/about_txt_id"
+            style="@style/DefaultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="14sp"
-            android:text="@string/about_txt"
-            android:textColor="@color/colorDefaultText"/>
+            android:text="@string/about_txt" />
 
         <TextView
             android:id="@+id/service_agreement_txt_id"
+            style="@style/DefaultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="14sp"
             android:clickable="true"
             android:focusable="true"
-            android:text="@string/service_agreement"
-            android:textColor="@color/colorDefaultText" />
+            android:text="@string/service_agreement" />
 
         <TextView
             android:id="@+id/privacy_policy_txt_id"
+            style="@style/DefaultText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="14sp"
             android:clickable="true"
             android:focusable="true"
-            android:text="@string/privacy_policy_about"
-            android:textColor="@color/colorDefaultText"/>
+            android:text="@string/privacy_policy_about" />
 
     </LinearLayout>
 

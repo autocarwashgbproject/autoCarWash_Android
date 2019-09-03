@@ -77,6 +77,4 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
                 .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
                         err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
     }
-
-
 }

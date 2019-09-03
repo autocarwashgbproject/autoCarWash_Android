@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,13 @@ import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.ProfilePresenter;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
+import static com.example.myapplication.Const.CAR_PIC;
+import static com.example.myapplication.Const.PICTURE_PREFS;
+import static com.example.myapplication.Const.PROFILE_PIC;
 
 public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
@@ -39,8 +47,10 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         return profilePresenter;
     }
 
+    private ImageView avatar;
+    private ImageView car;
+
     public ProfileFragment() {
-        // Required empty public constructor
     }
 
     public static ProfileFragment newInstance() {
@@ -56,24 +66,73 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
-        ((MainActivity)getActivity()).getBottomNavigationView().setVisibility(View.VISIBLE);
 
-        carNumber = view.findViewById(R.id.profile_fragment_car_number_text);
-        updateClientBtn = view.findViewById(R.id.profile_fragment_button);
-        deleteClientBtn = view.findViewById(R.id.profile_fragment_button_delete);
-        logoutClientBtn = view.findViewById(R.id.profile_fragment_button_logout);
-        updateCarBtn = view.findViewById(R.id.profile_fragment_button_car_update);
-        deleteCarBtn = view.findViewById(R.id.profile_fragment_button_car_delete);
-        createCarBtn = view.findViewById(R.id.profile_fragment_button_car_create);
-        updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
-        deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
-        logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
-        updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.getText().toString()));
-        deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.getText().toString()));
-        createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
+        initButtons(view);
+
+        avatar = view.findViewById(R.id.profile_img_id);
+        car = view.findViewById(R.id.profile_car_img_id);
+        loadCurrentImgs();
+
+//         carNumber = view.findViewById(R.id.profile_fragment_car_number_text);
+//         updateClientBtn = view.findViewById(R.id.profile_fragment_button);
+//         deleteClientBtn = view.findViewById(R.id.profile_fragment_button_delete);
+//         logoutClientBtn = view.findViewById(R.id.profile_fragment_button_logout);
+//         updateCarBtn = view.findViewById(R.id.profile_fragment_button_car_update);
+//         deleteCarBtn = view.findViewById(R.id.profile_fragment_button_car_delete);
+//         createCarBtn = view.findViewById(R.id.profile_fragment_button_car_create);
+//         updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
+//         deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
+//         logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
+//         updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.getText().toString()));
+//         deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.getText().toString()));
+//         createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
 
         profilePresenter.getClientFromApi();
 
         return view;
+    }
+
+    private void initButtons(View view) {
+        final MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.VISIBLE);
+        }
+
+        Button editProfile = view.findViewById(R.id.edit_profile_btn_id);
+        editProfile.setOnClickListener(v -> {
+            if (activity != null) {
+                activity.loadFragment(FillProfileFragment.newInstance(null));
+            }
+        });
+
+        Button addCar = view.findViewById(R.id.add_car_btn_id);
+        addCar.setOnClickListener(v -> {
+            if (activity != null) {
+                activity.loadFragment(CarProfileFragment.newInstance(null));
+            }
+        });
+    }
+
+    private void loadCurrentImgs() {
+        MainActivity activity = (MainActivity) getActivity();
+        String uri;
+        if (activity != null) {
+            uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(avatar);
+            }
+            uri = activity.loadPicture(PICTURE_PREFS, CAR_PIC);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(car);
+            }
+        }
     }
 }

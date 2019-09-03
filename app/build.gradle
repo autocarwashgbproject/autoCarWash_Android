@@ -42,6 +42,12 @@ dependencies {
 
     implementation 'androidx.preference:preference:1.1.0-rc01'
 
+    // Загрузка фотографий в приложение
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Дополнительные возможности трансформирования фото для библиотеки Picasso
+    implementation 'jp.wasabeef:picasso-transformations:2.1.0'
+
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/toolbar_title_txt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/fill_profile"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp">
+
+            <ImageView
+                android:id="@+id/profile_avatar_img_id"
+                android:layout_width="109dp"
+                android:layout_height="109dp"
+                app:srcCompat="@drawable/custom_user"
+                android:contentDescription="@string/profile_image" />
+
+            <ImageView
+                android:id="@+id/add_photo_btn_img_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_add_button"
+                android:contentDescription="@string/add_profile_image" />
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/user_data_txt_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/user_data"
+            android:textColor="@color/colorGreyText"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/name_etxt_id"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPersonName"
+            android:hint="@string/hint_name"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/last_name_etxt_id"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPersonName"
+            android:hint="@string/hint_surname"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/father_name_etxt_id"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPersonName"
+            android:hint="@string/father_name"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"  />
+
+        <EditText
+            android:id="@+id/birth_date_etxt_id"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="date"
+            android:hint="@string/hint_birthday"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/email_etxt_id"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"  />
+
+        <EditText
+            android:id="@+id/phone_etxt_id"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="phone"
+            android:hint="@string/hint_phone"
+            android:textColor="@color/colorWhite"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"  />
+
+        <TextView
+            android:id="@+id/required_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/fields_needed"
+            android:textColor="@color/colorGreyText"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/save_profile_btn_id"
+            style="@style/MainButton"
+            android:layout_width="156dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
+            android:text="@string/save_data"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+            android:textColor="#F3FAFB"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/delete_profile_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/delete_profile"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</ScrollView>

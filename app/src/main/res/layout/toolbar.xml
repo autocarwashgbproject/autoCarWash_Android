@@ -11,6 +11,8 @@
         android:id="@+id/toolbar_title_txt_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginRight="?attr/actionBarSize"
+        android:layout_marginEnd="?attr/actionBarSize"
         android:gravity="center"
         android:src="@drawable/ic_title"
         android:text="@string/car_wash"

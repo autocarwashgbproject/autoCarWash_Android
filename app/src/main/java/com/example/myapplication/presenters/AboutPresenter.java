@@ -1,8 +1,6 @@
 package com.example.myapplication.presenters;
 
 
-import android.util.Log;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.myapplication.views.AboutIF;
@@ -14,10 +12,8 @@ public class AboutPresenter extends MvpPresenter<AboutIF> {
     }
 
     public void showAgreement() {
-        Log.d("TAGG", " Agreement ");
     }
 
     public void showPrivacyPolicy() {
-        Log.d("TAGG", " showPrivacyPolicy ");
     }
 }

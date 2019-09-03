@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal|center_vertical"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/toolbar_title_txt_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/car"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/heading_text_size" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+        <ImageView
+            android:id="@+id/auto_profile_img_id"
+            android:layout_width="109dp"
+            android:layout_height="109dp"
+            app:srcCompat="@drawable/car_profile"
+            android:contentDescription="@string/car_image" />
+
+        <ImageView
+            android:id="@+id/add_btn_img_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:contentDescription="@string/add_car_image"
+            android:src="@drawable/ic_add_button" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/car_data_txt_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SmallestGreyText"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/car_data" />
+
+    <EditText
+        android:id="@+id/car_nr_etxt_id"
+        style="@style/EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="@string/plate_number"
+        android:textColor="@color/colorWhite"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        tools:targetApi="o" />
+
+    <Button
+        android:id="@+id/add_auto_btn_id"
+        style="@style/MainButton"
+        android:layout_width="156dp"
+        android:layout_height="40dp"
+        android:layout_margin="32dp"
+        android:text="@string/add_car"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+        android:textColor="#F3FAFB" />
+
+    <TextView
+        android:id="@+id/delete_data_txt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/SmallGreyText"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/delete_data" />
+
+</LinearLayout>

@@ -13,6 +13,10 @@ import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
+import static com.example.myapplication.Const.CODE_ERROR;
+import static com.example.myapplication.Const.PHONE_ERROR;
+import static com.example.myapplication.Const.POLICY_ERROR;
+
 @InjectViewState
 public class RegisterPresenter extends MvpPresenter<RegisterIF> {
 
@@ -27,9 +31,9 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
     public void register(String code, boolean checked) {
 
         if (!checked) {
-            getViewState().showErrorMessage("Принять соглашение");
+            getViewState().showErrorMessage(POLICY_ERROR);
         } else if (code.length() < 4) {
-            getViewState().showErrorMessage("Пожалуйста введите код подтверждения");
+            getViewState().showErrorMessage(CODE_ERROR);
         } else {
             Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
             System.out.println("start request");

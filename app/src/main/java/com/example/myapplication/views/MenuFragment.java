@@ -17,13 +17,16 @@ import com.example.myapplication.R;
 import com.example.myapplication.adapters.BottomMenuItemsAdapter;
 import com.example.myapplication.adapters.Menu;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class MenuFragment extends ListFragment {
 
-    // TODO: 2019-08-08 Presenter
+    private List<Menu> menuList;
+
     private BottomMenuItemsAdapter adapter;
 
     public MenuFragment() {
-        // Required empty public constructor
     }
 
     public static MenuFragment newInstance() {
@@ -34,11 +37,25 @@ public class MenuFragment extends ListFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        adapter = new BottomMenuItemsAdapter(getActivity(), Menu.menuList);
+        initMenu();
         setListAdapter(adapter);
 
         getListView().setDivider(null);
 
+    }
+
+    private void initMenu() {
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            menuList = Arrays.asList(
+                    new Menu(R.drawable.ic_payment, getString(R.string.payment_menu_text)),
+                    new Menu(R.drawable.menu_bubbles_item, getString(R.string.history_menu_text)),
+                    new Menu(R.drawable.menu_settings_item, getString(R.string.parameters_menu_text)),
+                    new Menu(R.drawable.menu_help_item, getString(R.string.help_menu_text)),
+                    new Menu(R.drawable.menu_about_item, getString(R.string.about_menu_text))
+            );
+            adapter = new BottomMenuItemsAdapter(activity, menuList);
+        }
     }
 
     @Override
@@ -46,27 +63,34 @@ public class MenuFragment extends ListFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_fragment, container, false);
 
-        ((MainActivity) getActivity()).getBottomNavigationView().setVisibility(View.VISIBLE);
-
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.getBottomNavigationView().setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
         int img = ((Menu) l.getAdapter().getItem(position)).getImg();
-
-        switch (img) {
-            case R.drawable.menu_about_item:
-                ((MainActivity) getActivity()).loadFragment(AboutFragment.newInstance());
-                break;
-            case R.drawable.menu_settings_item:
-                ((MainActivity) getActivity()).loadFragment(new ParametersFragment());
-                break;
-            case R.drawable.ic_payment:
-                ((MainActivity) getActivity()).loadFragment(PaymentFragment.newInstance());
-                break;
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            switch (img) {
+                case R.drawable.menu_about_item:
+                    activity.loadFragment(AboutFragment.newInstance());
+                    break;
+                case R.drawable.menu_settings_item:
+                    activity.loadFragment(new ParametersFragment());
+                    break;
+                case R.drawable.ic_payment:
+                    activity.loadFragment(PaymentFragment.newInstance());
+                    break;
+                case R.drawable.menu_bubbles_item:
+                    activity.loadFragment(HistoryFragment.newInstance());
+                    break;
+            }
         }
     }
 }

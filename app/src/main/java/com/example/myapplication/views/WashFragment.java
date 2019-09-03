@@ -5,19 +5,31 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.presenters.WashPresenter;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
+import static com.example.myapplication.Const.PICTURE_PREFS;
+import static com.example.myapplication.Const.PROFILE_PIC;
 
 public class WashFragment extends MvpAppCompatFragment implements WashIF {
-    // TODO: 2019-08-06 WashPresenter
+
+    @InjectPresenter
+    public WashPresenter presenter;
+
+    private ImageView avatar;
 
     public WashFragment() {
-        // Required empty public constructor
     }
 
     public static WashFragment newInstance() {
@@ -39,6 +51,25 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
             activity.getBottomNavigationView().setVisibility(View.VISIBLE);
         }
 
+        avatar = view.findViewById(R.id.user_avatar_img_id);
+        loadCurrentProfilePicture();
+
         return view;
+    }
+
+    private void loadCurrentProfilePicture() {
+        MainActivity activity = (MainActivity) getActivity();
+        String uri;
+        if (activity != null) {
+            uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .placeholder(R.drawable.user)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(avatar);
+            }
+        }
     }
 }
