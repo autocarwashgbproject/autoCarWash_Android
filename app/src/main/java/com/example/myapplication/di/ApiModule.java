@@ -12,7 +12,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -24,10 +26,18 @@ public class ApiModule {
         return "http://185.17.121.228/api/v1/";
     }
 
+    @Provides
+    public HttpLoggingInterceptor loggingInterceptor() {
+
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return interceptor;
+    }
 
     @Provides
-    public OkHttpClient getOkHttpClient() {
+    public OkHttpClient getOkHttpClient(HttpLoggingInterceptor loggingInterceptor) {
         return new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
                 .build();
     }
 
@@ -35,6 +45,7 @@ public class ApiModule {
     public Gson getGson() {
         return new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                .excludeFieldsWithoutExposeAnnotation()
                 .create();
     }
 
@@ -44,6 +55,7 @@ public class ApiModule {
                 .baseUrl(baseUrl)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
@@ -54,7 +66,7 @@ public class ApiModule {
 
     @Singleton
     @Provides
-    public DataGetter getData() {
-        return new DataGetter();
+    public DataGetter getData(ApiRequests apiRequests) {
+        return new DataGetter(apiRequests);
     }
 }
