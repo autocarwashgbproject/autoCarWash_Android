@@ -51,10 +51,8 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
     }
 
     public void getSmsCode(String phone) {
-
         /*if (!Utils.isValidMobile(phone)) {
             getViewState().showErrorMessage("Проверьте номер телефона");
->>>>>>> feature/api-model
             return;
         }*/
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();

@@ -29,9 +29,6 @@ import static com.example.myapplication.Const.PROFILE_PIC;
 
 public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
-    @InjectPresenter
-    ProfilePresenter presenter;
-
     private ImageView avatar;
     private ImageView car;
 
@@ -76,19 +73,20 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         car = view.findViewById(R.id.profile_car_img_id);
         loadCurrentImgs();
 
-//        carNumber = view.findViewById(R.id.profile_fragment_car_number_text);
-//        updateClientBtn = view.findViewById(R.id.profile_fragment_button);
-//        deleteClientBtn = view.findViewById(R.id.profile_fragment_button_delete);
-//        logoutClientBtn = view.findViewById(R.id.profile_fragment_button_logout);
-//        updateCarBtn = view.findViewById(R.id.profile_fragment_button_car_update);
-//        deleteCarBtn = view.findViewById(R.id.profile_fragment_button_car_delete);
-//        createCarBtn = view.findViewById(R.id.profile_fragment_button_car_create);
-//        updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
-//        deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
-//        logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
-//        updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.getText().toString()));
-//        deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.getText().toString()));
-//        createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
+
+//         carNumber = view.findViewById(R.id.profile_fragment_car_number_text);
+//         updateClientBtn = view.findViewById(R.id.profile_fragment_button);
+//         deleteClientBtn = view.findViewById(R.id.profile_fragment_button_delete);
+//         logoutClientBtn = view.findViewById(R.id.profile_fragment_button_logout);
+//         updateCarBtn = view.findViewById(R.id.profile_fragment_button_car_update);
+//         deleteCarBtn = view.findViewById(R.id.profile_fragment_button_car_delete);
+//         createCarBtn = view.findViewById(R.id.profile_fragment_button_car_create);
+//         updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
+//         deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
+//         logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
+//         updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.getText().toString()));
+//         deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.getText().toString()));
+//         createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
 
         profilePresenter.getClientFromApi();
 
