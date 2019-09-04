@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.ProfilePresenter;
@@ -27,7 +30,22 @@ import static com.example.myapplication.Const.PROFILE_PIC;
 public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
     @InjectPresenter
-    ProfilePresenter presenter;
+    ProfilePresenter profilePresenter;
+
+    private Button updateClientBtn;
+    private Button deleteClientBtn;
+    private Button logoutClientBtn;
+    private Button updateCarBtn;
+    private Button deleteCarBtn;
+    private Button createCarBtn;
+    private EditText carNumber;
+
+    @ProvidePresenter
+    public ProfilePresenter providePresenter() {
+        final ProfilePresenter profilePresenter = new ProfilePresenter();
+        App.getInstance().getAppComponent().inject(profilePresenter);
+        return profilePresenter;
+    }
 
     private ImageView avatar;
     private ImageView car;
@@ -54,6 +72,22 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         avatar = view.findViewById(R.id.profile_img_id);
         car = view.findViewById(R.id.profile_car_img_id);
         loadCurrentImgs();
+
+//         carNumber = view.findViewById(R.id.profile_fragment_car_number_text);
+//         updateClientBtn = view.findViewById(R.id.profile_fragment_button);
+//         deleteClientBtn = view.findViewById(R.id.profile_fragment_button_delete);
+//         logoutClientBtn = view.findViewById(R.id.profile_fragment_button_logout);
+//         updateCarBtn = view.findViewById(R.id.profile_fragment_button_car_update);
+//         deleteCarBtn = view.findViewById(R.id.profile_fragment_button_car_delete);
+//         createCarBtn = view.findViewById(R.id.profile_fragment_button_car_create);
+//         updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
+//         deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
+//         logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
+//         updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.getText().toString()));
+//         deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.getText().toString()));
+//         createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
+
+        profilePresenter.getClientFromApi();
 
         return view;
     }
