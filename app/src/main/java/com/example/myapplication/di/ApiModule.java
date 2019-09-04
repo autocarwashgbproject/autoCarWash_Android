@@ -1,7 +1,7 @@
 package com.example.myapplication.di;
 
-import com.example.myapplication.model.ApiRequests;
 import com.example.myapplication.model.DataGetter;
+import com.example.myapplication.model.api.ApiRequests;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

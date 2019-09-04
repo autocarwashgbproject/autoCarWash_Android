@@ -3,10 +3,11 @@ package com.example.myapplication.model;
 import android.widget.Toast;
 
 import com.example.myapplication.App;
-import com.example.myapplication.model.parsingJson.ApiCar;
-import com.example.myapplication.model.parsingJson.ApiClient;
-import com.example.myapplication.model.parsingJson.RegClient;
-import com.example.myapplication.model.parsingJson.RegTel;
+import com.example.myapplication.model.api.ApiRequests;
+import com.example.myapplication.model.api.parsingJson.ApiCar;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
+import com.example.myapplication.model.api.parsingJson.RegClient;
+import com.example.myapplication.model.api.parsingJson.RegTel;
 
 import java.util.HashMap;
 import java.util.Map;
