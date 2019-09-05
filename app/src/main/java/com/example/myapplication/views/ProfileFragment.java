@@ -42,6 +42,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
     private Button deleteCarBtn;
     private Button createCarBtn;
     private EditText carNumber;
+    private Button testBtn;
 
     @ProvidePresenter
     public ProfilePresenter providePresenter() {
@@ -71,6 +72,8 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
         avatar = view.findViewById(R.id.profile_img_id);
         car = view.findViewById(R.id.profile_car_img_id);
+        testBtn = view.findViewById(R.id.profile_fragment_button);
+        testBtn.setOnClickListener(v -> profilePresenter.addRandomWash());
         loadCurrentImgs();
 
 
@@ -89,6 +92,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 //         createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
 
         profilePresenter.getClientFromApi();
+        profilePresenter.getWashes();
 
         return view;
     }

@@ -3,7 +3,6 @@ package com.example.myapplication;
 import android.app.Application;
 
 import com.example.myapplication.di.AppComponent;
-import com.example.myapplication.di.AppModule;
 import com.example.myapplication.di.DaggerAppComponent;
 
 public class App extends Application {
@@ -21,7 +20,6 @@ public class App extends Application {
         instance = this;
 
         appComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
                 .build();
     }
 

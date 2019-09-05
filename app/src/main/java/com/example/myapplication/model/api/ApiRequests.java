@@ -1,9 +1,9 @@
-package com.example.myapplication.model;
+package com.example.myapplication.model.api;
 
-import com.example.myapplication.model.parsingJson.ApiCar;
-import com.example.myapplication.model.parsingJson.ApiClient;
-import com.example.myapplication.model.parsingJson.RegClient;
-import com.example.myapplication.model.parsingJson.RegTel;
+import com.example.myapplication.model.api.parsingJson.ApiCar;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
+import com.example.myapplication.model.api.parsingJson.RegClient;
+import com.example.myapplication.model.api.parsingJson.RegTel;
 
 import io.reactivex.Single;
 import retrofit2.http.Body;
