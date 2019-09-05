@@ -16,8 +16,8 @@ public class CacheModule {
 
     @Singleton
     @Provides
-    public Database getDatabase(App app) {
-        return Room.databaseBuilder(app, Database.class, Database.DB_NAME).fallbackToDestructiveMigration().build();
+    public Database getDatabase() {
+        return Room.databaseBuilder(App.getInstance(), Database.class, Database.DB_NAME).fallbackToDestructiveMigration().build();
     }
 
     @Singleton

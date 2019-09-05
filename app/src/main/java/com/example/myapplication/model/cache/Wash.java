@@ -1,5 +1,6 @@
 package com.example.myapplication.model.cache;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -44,5 +45,11 @@ public class Wash {
 
     public int getWash() {
         return wash;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "" + status + " " + active + " " + washTime + " " + userId + " " + carId + " " + wash;
     }
 }

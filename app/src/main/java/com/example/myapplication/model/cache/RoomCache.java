@@ -17,18 +17,15 @@ public class RoomCache {
     public Completable addWashes(List<Wash> washes) {
         return Completable.fromAction(() -> {
             database.getWash().insert(washes);
-        });
+        })
+                .subscribeOn(Schedulers.io());
 
     }
 
     public Single<List<Wash>> getWashes() {
         return Single.create(emitter -> {
             List<Wash> washes = database.getWash().getAll();
-            if (washes.isEmpty()) {
-                emitter.onError(new RuntimeException("List of washes is empty"));
-            } else {
                 emitter.onSuccess(washes);
-            }
         }).subscribeOn(Schedulers.io())
                 .cast((Class<List<Wash>>) (Class) List.class);
 
