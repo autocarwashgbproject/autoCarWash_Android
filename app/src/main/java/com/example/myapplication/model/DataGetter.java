@@ -6,8 +6,8 @@ import com.example.myapplication.App;
 import com.example.myapplication.model.api.ApiRequests;
 import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
-import com.example.myapplication.model.api.parsingJson.RegClient;
 import com.example.myapplication.model.api.parsingJson.RegTel;
+import com.example.myapplication.model.api.parsingJson.Registration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -54,7 +54,7 @@ public class DataGetter {
         this.api = api;
     }
 
-    public Single<RegClient> getToken(String phone) {
+    public Single<Registration> getToken(String phone) {
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
         System.out.println("start request");
 
@@ -62,7 +62,7 @@ public class DataGetter {
                 .subscribeOn(Schedulers.newThread())
                 .map(response -> {
                     sessionToken = response.getToken();
-                    clientId = response.getIdClient();
+                    clientId = String.valueOf(response.getId());
                     fillCars(response.getCarsId());
                     return response;
                 });
@@ -152,6 +152,10 @@ public class DataGetter {
         cars.remove(currentCar.getRegNum());
         return api.deleteCar(currentCar.getId(), TOKEN_PREF + sessionToken)
                 .subscribeOn(Schedulers.newThread());
+    }
+
+    public Single<ApiCar> getCar(String id) {
+        return api.getCar(Integer.parseInt(id), TOKEN_PREF + sessionToken).subscribeOn(Schedulers.io());
     }
 
 }

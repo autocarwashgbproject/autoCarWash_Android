@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.CarProfilePresenter;
@@ -31,6 +35,17 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     CarProfilePresenter presenter;
 
     private ImageView autoImg;
+    private ImageView addImgBtn;
+    private EditText carNumber;
+    private Button addCar;
+    private TextView deleteData;
+
+    @ProvidePresenter
+    public CarProfilePresenter providePresenter() {
+        final CarProfilePresenter presenter = new CarProfilePresenter();
+        App.getInstance().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public CarProfileFragment() {
     }
@@ -55,25 +70,35 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.car_profile_fragment, container, false);
 
+        initViews(view);
+
+        loadCurrentCarImg();
+
+        return view;
+    }
+
+    private void initViews(View view) {
         final MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
             activity.getBottomNavigationView().setVisibility(View.GONE);
             activity.findViewById(R.id.include).setVisibility(View.GONE);
         }
-        EditText carNumber = view.findViewById(R.id.car_nr_etxt_id);
+        carNumber = view.findViewById(R.id.car_nr_etxt_id);
+        addCar = view.findViewById(R.id.add_auto_btn_id);
+        addCar.setOnClickListener(v -> {
+            presenter.createCar("a777aa77"/*carNumber.getText().toString()*/);
+        });
+        deleteData = view.findViewById(R.id.delete_data_txt_id);
+        deleteData.setOnClickListener(v -> {
 
+        });
         autoImg = view.findViewById(R.id.auto_profile_img_id);
-        ImageView addImgBtn = view.findViewById(R.id.add_btn_img_id);
-
+        addImgBtn = view.findViewById(R.id.add_btn_img_id);
         addImgBtn.setOnClickListener(v -> {
             if (activity != null) {
                 activity.pickFromGallery(LOAD_CAR_PICTURE_CODE);
             }
         });
-
-        loadCurrentCarImg();
-
-        return view;
     }
 
     private void loadCurrentCarImg() {

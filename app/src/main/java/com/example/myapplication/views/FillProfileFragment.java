@@ -6,13 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.FillProfilePresenter;
@@ -29,9 +33,22 @@ import static com.example.myapplication.Const.PROFILE_PIC;
 public class FillProfileFragment extends MvpAppCompatFragment implements FillProfileIF {
 
     private ImageView avatar;
+    private EditText profileName;
+    private EditText profileLastName;
+    private EditText fatherName;
+    private EditText birthDate;
+    private EditText email;
+    private EditText phone;
 
     @InjectPresenter
     FillProfilePresenter presenter;
+
+    @ProvidePresenter
+    public FillProfilePresenter providePresenter() {
+        final FillProfilePresenter presenter = new FillProfilePresenter();
+        App.getInstance().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public FillProfileFragment() {
     }
@@ -56,7 +73,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fill_profile_fragment, container, false);
 
-        avatar = view.findViewById(R.id.profile_avatar_img_id);
+        initViews(view);
 
         final MainActivity activity = (MainActivity) getActivity();
         if (activity != null) {
@@ -68,6 +85,16 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         loadCurrentAvatarImg();
 
         return view;
+    }
+
+    private void initViews(View view) {
+        avatar = view.findViewById(R.id.profile_avatar_img_id);
+        profileName = view.findViewById(R.id.name_etxt_id);
+        profileLastName = view.findViewById(R.id.last_name_etxt_id);
+        fatherName = view.findViewById(R.id.father_name_etxt_id);
+        birthDate = view.findViewById(R.id.birth_date_etxt_id);
+        email = view.findViewById(R.id.email_etxt_id);
+        phone = view.findViewById(R.id.phone_etxt_id);
     }
 
     private void initButtons(View view) {
@@ -85,6 +112,11 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
             if (activity != null) {
                 activity.loadFragment(ProfileFragment.newInstance());
             }
+        });
+
+        TextView deleteProfile = view.findViewById(R.id.delete_profile_txt_id);
+        deleteProfile.setOnClickListener(v -> {
+
         });
     }
 

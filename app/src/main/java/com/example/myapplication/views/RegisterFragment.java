@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,6 +114,8 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
         codeNum3.addTextChangedListener(codeNumsWatcher);
         codeNum4 = view.findViewById(R.id.enter_digit_4_edit_txt_id);
         codeNum4.addTextChangedListener(codeNumsWatcher);
+
+        registerPresenter.fillCodeField();
     }
 
     private void initPhoneField(View view) {
@@ -197,5 +200,14 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
         if (activity != null) {
             activity.loadFragment(WashFragment.newInstance());
         }
+    }
+
+    // Заполнение полей для кода из смс, только для тестов.
+    @Override
+    public void fillCodeFields(String smsForTests) {
+        codeNum1.getText().insert(0, String.valueOf(smsForTests.charAt(0)));
+        codeNum2.getText().insert(0, String.valueOf(smsForTests.charAt(1)));
+        codeNum3.getText().insert(0, String.valueOf(smsForTests.charAt(2)));
+        codeNum4.getText().insert(0, String.valueOf(smsForTests.charAt(3)));
     }
 }

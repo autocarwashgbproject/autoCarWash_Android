@@ -12,6 +12,7 @@ import com.example.myapplication.views.RegisterIF;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 
 import static com.example.myapplication.Const.CODE_ERROR;
 import static com.example.myapplication.Const.PHONE_ERROR;
@@ -23,9 +24,11 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
     @Inject
     public DataGetter dataGetter;
 
+    private CompositeDisposable disposable;
+
 
     public RegisterPresenter() {
-
+        disposable = new CompositeDisposable();
     }
 
     public void register(String code, boolean checked) {
@@ -38,14 +41,14 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
             Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
             System.out.println("start request");
 
-            dataGetter.getToken("9855554229")
+            disposable.add(dataGetter.getToken("9855554229")
                     .subscribe(regClient -> {
                                 System.out.println("response " + regClient.toString());
                                 getViewState().loadMain();
                             },
                             err -> {
                                 Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
-                            });
+                            }));
         }
 
     }
@@ -58,7 +61,7 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
         System.out.println("start request");
 
-        dataGetter.getSmsCode("9855554229")
+        disposable.add(dataGetter.getSmsCode("9855554229")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                             dataGetter.setSms(result.getSmsForTests());
@@ -66,6 +69,21 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
                         },
                         err -> {
                             Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
-                        });
+                        }));
+    }
+
+    public void dispose() {
+        disposable.dispose();
+    }
+
+    public void fillCodeField() {
+        disposable.add(dataGetter.getSmsCode("9855554229")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                            getViewState().fillCodeFields(result.getSmsForTests());
+                        },
+                        err -> {
+                            Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
+                        }));
     }
 }

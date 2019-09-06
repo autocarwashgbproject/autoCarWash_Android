@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +18,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.model.api.parsingJson.ApiCar;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.ProfilePresenter;
 import com.squareup.picasso.Picasso;
 
@@ -35,14 +37,10 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
     @InjectPresenter
     ProfilePresenter profilePresenter;
 
-    private Button updateClientBtn;
-    private Button deleteClientBtn;
-    private Button logoutClientBtn;
-    private Button updateCarBtn;
-    private Button deleteCarBtn;
-    private Button createCarBtn;
-    private EditText carNumber;
-    private Button testBtn;
+    private TextView profileName;
+    private TextView profilePhone;
+    private TextView profileCarNumber;
+    private TextView profileCarDescription;
 
     @ProvidePresenter
     public ProfilePresenter providePresenter() {
@@ -70,31 +68,23 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
         initButtons(view);
 
-        avatar = view.findViewById(R.id.profile_img_id);
-        car = view.findViewById(R.id.profile_car_img_id);
-        testBtn = view.findViewById(R.id.profile_fragment_button);
-        testBtn.setOnClickListener(v -> profilePresenter.addRandomWash());
+        initViews(view);
+
         loadCurrentImgs();
 
-
-//         carNumber = view.findViewById(R.id.profile_fragment_car_number_text);
-//         updateClientBtn = view.findViewById(R.id.profile_fragment_button);
-//         deleteClientBtn = view.findViewById(R.id.profile_fragment_button_delete);
-//         logoutClientBtn = view.findViewById(R.id.profile_fragment_button_logout);
-//         updateCarBtn = view.findViewById(R.id.profile_fragment_button_car_update);
-//         deleteCarBtn = view.findViewById(R.id.profile_fragment_button_car_delete);
-//         createCarBtn = view.findViewById(R.id.profile_fragment_button_car_create);
-//         updateClientBtn.setOnClickListener(v -> profilePresenter.updateClient());
-//         deleteClientBtn.setOnClickListener(v -> profilePresenter.deleteClient());
-//         logoutClientBtn.setOnClickListener(v -> profilePresenter.logout());
-//         updateCarBtn.setOnClickListener(v -> profilePresenter.updateCar(carNumber.getText().toString()));
-//         deleteCarBtn.setOnClickListener(v -> profilePresenter.deleteCar(carNumber.getText().toString()));
-//         createCarBtn.setOnClickListener(v -> profilePresenter.createCar(carNumber.getText().toString()));
-
         profilePresenter.getClientFromApi();
-        profilePresenter.getWashes();
+        profilePresenter.getCarData();
 
         return view;
+    }
+
+    private void initViews(View view) {
+        profileName = view.findViewById(R.id.profile_name_txt_id);
+        profilePhone = view.findViewById(R.id.profile_phone_txt_id);
+        profileCarNumber = view.findViewById(R.id.profile_car_data_txt_id);
+        profileCarDescription = view.findViewById(R.id.profile_car_text_txt_id);
+        avatar = view.findViewById(R.id.profile_img_id);
+        car = view.findViewById(R.id.profile_car_img_id);
     }
 
     private void initButtons(View view) {
@@ -139,5 +129,17 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
                         .into(car);
             }
         }
+    }
+
+    @Override
+    public void updateData(ApiClient client) {
+        profileName.setText(String.format("%s %s", client.getName(), client.getSurname()));
+        profilePhone.setText(client.getPhone());
+    }
+
+    @Override
+    public void updateCarData(ApiCar car) {
+        profileCarNumber.setText(car.getRegNum());
+        profileCarDescription.setText("");
     }
 }
