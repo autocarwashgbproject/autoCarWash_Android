@@ -19,6 +19,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.FillProfilePresenter;
 import com.squareup.picasso.Picasso;
 
@@ -87,6 +88,24 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         return view;
     }
 
+    private void getDataFromFields() {
+        String firstName = profileName.getText().toString();
+        String lastName = profileLastName.getText().toString();
+        String fathersName = fatherName.getText().toString();
+        // int birthdate... формат даты?
+        String mail = email.getText().toString();
+        String phoneNr = phone.getText().toString();
+
+        ApiClient client = new ApiClient();
+        client.setName(firstName);
+        client.setSurname(lastName);
+        client.setPatronymic(fathersName);
+        client.setEmail(mail);
+        client.setPhone("9855554229");
+
+        presenter.fillProfileData(client);
+    }
+
     private void initViews(View view) {
         avatar = view.findViewById(R.id.profile_avatar_img_id);
         profileName = view.findViewById(R.id.name_etxt_id);
@@ -109,6 +128,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         Button save = view.findViewById(R.id.save_profile_btn_id);
         save.setOnClickListener(v -> {
+            getDataFromFields();
             if (activity != null) {
                 activity.loadFragment(ProfileFragment.newInstance());
             }
@@ -116,7 +136,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         TextView deleteProfile = view.findViewById(R.id.delete_profile_txt_id);
         deleteProfile.setOnClickListener(v -> {
-
+            presenter.deleteProfile();
+            if (activity != null) {
+                activity.loadFragment(RegisterFragment.newInstance());
+            }
         });
     }
 

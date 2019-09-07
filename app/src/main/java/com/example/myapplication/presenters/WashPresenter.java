@@ -35,20 +35,13 @@ public class WashPresenter extends MvpPresenter<WashIF> {
                         },
                         err -> {
                             Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
-                        }));
+                        })
+        );
 
     }
 
     public void getCarData() {
-        disposable.add(
-                dataGetter.getCar(dataGetter.getClientId())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(car -> {
-                            getViewState().updateCarData(car);
-                        }, throwable -> {
-                            System.out.println("ERROR" + throwable);
-                        })
-        );
+        getViewState().updateCarsData(dataGetter.getCars());
     }
 
     public void dispose() {

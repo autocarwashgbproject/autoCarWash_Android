@@ -47,15 +47,7 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
     }
 
     public void getCarData() {
-        disposable.add(
-                dataGetter.getCar(dataGetter.getClientId())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(car -> {
-                            getViewState().updateCarData(car);
-                        }, throwable -> {
-                            System.out.println("ERROR" + throwable);
-                        })
-        );
+        getViewState().updateCarsData(dataGetter.getCars());
     }
 
     public void updateClient() {

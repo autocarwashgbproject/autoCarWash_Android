@@ -1,5 +1,6 @@
 package com.example.myapplication.model;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.myapplication.App;
@@ -154,8 +155,8 @@ public class DataGetter {
                 .subscribeOn(Schedulers.newThread());
     }
 
-    public Single<ApiCar> getCar(String id) {
-        return api.getCar(Integer.parseInt(id), TOKEN_PREF + sessionToken).subscribeOn(Schedulers.io());
+    public Map<String, ApiCar> getCars() {
+        return cars;
     }
 
 }

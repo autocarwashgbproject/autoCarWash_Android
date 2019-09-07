@@ -1,11 +1,20 @@
 package com.example.myapplication.presenters;
 
+import android.widget.Toast;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.model.DataGetter;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
+import com.example.myapplication.model.cache.RoomCache;
 import com.example.myapplication.views.FillProfileIF;
 
 import javax.inject.Inject;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 
 @InjectViewState
 public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
@@ -13,6 +22,45 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
     @Inject
     public DataGetter dataGetter;
 
-    public FillProfilePresenter() {}
+    @Inject
+    public RoomCache roomCache;
 
+    private CompositeDisposable disposable;
+
+    public FillProfilePresenter() {
+        disposable = new CompositeDisposable();
+    }
+
+    public void fillProfileData(ApiClient apiClient) {
+        final ApiClient client = dataGetter.getCurrentClient();
+        client.setName(apiClient.getName());
+        client.setSurname(apiClient.getSurname());
+        client.setPatronymic(apiClient.getPatronymic());
+        client.setBirthday(apiClient.getBirthday());
+        client.setEmail(apiClient.getEmail());
+        client.setPhone(apiClient.getPhone());
+
+        disposable.add(dataGetter.updateProfile()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result ->
+                        {
+                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
+                        },
+                        err -> {
+                            Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
+                        }
+                )
+        );
+    }
+
+    public void deleteProfile() {
+        disposable.add(dataGetter.deleteProfile()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(client -> {
+                    Toast.makeText(App.getInstance(), client.toString(), Toast.LENGTH_SHORT).show();
+                }, throwable -> {
+                    Toast.makeText(App.getInstance(), throwable.toString(), Toast.LENGTH_SHORT).show();
+                })
+        );
+    }
 }

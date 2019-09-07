@@ -22,6 +22,8 @@ import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.WashPresenter;
 import com.squareup.picasso.Picasso;
 
+import java.util.Map;
+
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 import static com.example.myapplication.Const.PICTURE_PREFS;
@@ -122,8 +124,11 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
     }
 
     @Override
-    public void updateCarData(ApiCar car) {
-        String carNumber = car.getRegNum();
-        registrationNr.setText(carNumber == null ? "Номер авто" : carNumber);
+    public void updateCarsData(Map<String, ApiCar> cars) {
+        // Пока одна машина, если больше нужно передалать View что бы показывал список.
+        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+            String carNumber = entry.getValue().getRegNum();
+            registrationNr.setText(carNumber == null ? "Номер авто" : carNumber);
+        }
     }
 }

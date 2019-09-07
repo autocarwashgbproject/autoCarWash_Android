@@ -23,6 +23,8 @@ import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.ProfilePresenter;
 import com.squareup.picasso.Picasso;
 
+import java.util.Map;
+
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 import static com.example.myapplication.Const.CAR_PIC;
@@ -133,13 +135,29 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
     @Override
     public void updateData(ApiClient client) {
-        profileName.setText(String.format("%s %s", client.getName(), client.getSurname()));
-        profilePhone.setText(client.getPhone());
+        String firsName = client.getName();
+        String lastName = client.getSurname();
+
+        profileName.setText(
+                String.format("%s %s",
+                        firsName == null ? "Имя" : firsName,
+                        lastName == null ? "Фамилия" : lastName
+                )
+        );
+
+        String phone = client.getPhone();
+
+        profilePhone.setText("+7 " );
+        profilePhone.append(phone == null ? "Телефон" : phone);
     }
 
     @Override
-    public void updateCarData(ApiCar car) {
-        profileCarNumber.setText(car.getRegNum());
-        profileCarDescription.setText("");
+    public void updateCarsData(Map<String, ApiCar> cars) {
+        // Пока одна машина, если больше нужно передалать View что бы показывал список.
+        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+            String carNumber = entry.getValue().getRegNum();
+            profileCarNumber.setText(carNumber == null ? "Номер авто" : carNumber);
+            profileCarDescription.setText("");
+        }
     }
 }

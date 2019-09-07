@@ -81,7 +81,6 @@
             android:layout_marginRight="20dp"
             android:inputType="textPersonName"
             android:hint="@string/hint_name"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:importantForAutofill="no"
             tools:targetApi="o" />
@@ -97,7 +96,6 @@
             android:layout_marginRight="20dp"
             android:inputType="textPersonName"
             android:hint="@string/hint_surname"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:importantForAutofill="no"
             tools:targetApi="o" />
@@ -113,7 +111,6 @@
             android:layout_marginRight="20dp"
             android:inputType="textPersonName"
             android:hint="@string/father_name"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:importantForAutofill="no"
             tools:targetApi="o"  />
@@ -129,7 +126,6 @@
             android:layout_marginRight="20dp"
             android:inputType="date"
             android:hint="@string/hint_birthday"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:importantForAutofill="no"
             tools:targetApi="o" />
@@ -145,7 +141,6 @@
             android:layout_marginRight="20dp"
             android:inputType="textEmailAddress"
             android:hint="@string/hint_email"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:importantForAutofill="no"
             tools:targetApi="o"  />
@@ -161,7 +156,6 @@
             android:layout_marginRight="20dp"
             android:inputType="phone"
             android:hint="@string/hint_phone"
-            android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:importantForAutofill="no"
             tools:targetApi="o"  />
@@ -194,6 +188,7 @@
             android:id="@+id/delete_profile_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/delete_profile"

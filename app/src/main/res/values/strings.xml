@@ -72,7 +72,7 @@
     <string name="hint_phone">Телефон</string>
     <string name="fields_needed">* - обязательные поля для заполнения</string>
     <string name="save_data">Сохранить данные</string>
-    <string name="delete_profile">Удалить профиль</string>
+    <string name="delete_profile"><u>Удалить профиль</u></string>
     <string name="icon">icon</string>
     <string name="account_icon">account icon</string>
     <string name="payment_method">Способ оплаты:</string>
