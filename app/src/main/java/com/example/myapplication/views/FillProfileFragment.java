@@ -36,10 +36,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     private ImageView avatar;
     private EditText profileName;
     private EditText profileLastName;
-    private EditText fatherName;
-    private EditText birthDate;
-    private EditText email;
-    private EditText phone;
+    private EditText profileFatherName;
+    private EditText profileBirthDate;
+    private EditText profileEmail;
+    private EditText profilePhone;
 
     @InjectPresenter
     FillProfilePresenter presenter;
@@ -84,6 +84,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         initButtons(view);
         loadCurrentAvatarImg();
+        presenter.getClientFromApi();
 
         return view;
     }
@@ -91,10 +92,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     private void getDataFromFields() {
         String firstName = profileName.getText().toString();
         String lastName = profileLastName.getText().toString();
-        String fathersName = fatherName.getText().toString();
+        String fathersName = profileFatherName.getText().toString();
         // int birthdate... формат даты?
-        String mail = email.getText().toString();
-        String phoneNr = phone.getText().toString();
+        String mail = profileEmail.getText().toString();
+        String phoneNr = profilePhone.getText().toString();
 
         ApiClient client = new ApiClient();
         client.setName(firstName);
@@ -110,10 +111,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         avatar = view.findViewById(R.id.profile_avatar_img_id);
         profileName = view.findViewById(R.id.name_etxt_id);
         profileLastName = view.findViewById(R.id.last_name_etxt_id);
-        fatherName = view.findViewById(R.id.father_name_etxt_id);
-        birthDate = view.findViewById(R.id.birth_date_etxt_id);
-        email = view.findViewById(R.id.email_etxt_id);
-        phone = view.findViewById(R.id.phone_etxt_id);
+        profileFatherName = view.findViewById(R.id.father_name_etxt_id);
+        profileBirthDate = view.findViewById(R.id.birth_date_etxt_id);
+        profileEmail = view.findViewById(R.id.email_etxt_id);
+        profilePhone = view.findViewById(R.id.phone_etxt_id);
     }
 
     private void initButtons(View view) {
@@ -166,5 +167,23 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
                     .transform(new CropCircleTransformation())
                     .into(avatar);
         }
+    }
+
+    @Override
+    public void updateData(ApiClient client) {
+        String mName = client.getName();
+        String mSurname = client.getSurname();
+        String mFatherName = client.getPatronymic();
+        int mBirthDate = client.getBirthday();
+        String mEmail = client.getEmail();
+        String mPhone = client.getPhone();
+
+        profileName.setText(mName);
+        profileLastName.setText(mSurname);
+        profileFatherName.setText(mFatherName);
+        profileBirthDate.setText(String.valueOf(mBirthDate));
+        profileEmail.setText(mEmail);
+        profilePhone.setText("+7 ");
+        profilePhone.append(mPhone == null ? "Телефон" : mPhone);
     }
 }
