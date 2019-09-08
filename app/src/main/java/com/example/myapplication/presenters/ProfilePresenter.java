@@ -91,13 +91,6 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
                         err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
     }
 
-    public void deleteCar(String carNumber) {
-        dataGetter.deleteCar(carNumber)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
-                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
-    }
-
     public void addRandomWash() {
         final Wash wash1 = new Wash("fff", true, new Date().getTime() - 50000, 1, 1, 1);
         final Wash wash2 = new Wash("fsss", true, new Date().getTime() - 40000, 2, 2, 2);

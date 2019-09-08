@@ -3,6 +3,7 @@ package com.example.myapplication.presenters;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.model.DataGetter;
 import com.example.myapplication.model.cache.RoomCache;
 import com.example.myapplication.views.CarProfileIF;
@@ -35,6 +36,20 @@ public class CarProfilePresenter extends MvpPresenter<CarProfileIF> {
                 }, throwable -> {
                 }));
     }
+
+    public void getCarData() {
+        getViewState().updateCarsData(dataGetter.getCars());
+    }
+
+    public void deleteCar(String carNumber) {
+        dataGetter.deleteCar(carNumber)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(car -> {
+                }, throwable -> {
+                });
+    }
+
+
 
     public void dispose() {
         disposable.dispose();
