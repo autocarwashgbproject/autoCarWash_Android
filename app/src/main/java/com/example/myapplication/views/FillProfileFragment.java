@@ -84,6 +84,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         initButtons(view);
         loadCurrentAvatarImg();
+        presenter.getClientFromApi();
 
         return view;
     }
