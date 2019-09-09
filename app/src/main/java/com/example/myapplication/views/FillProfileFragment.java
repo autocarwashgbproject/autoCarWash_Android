@@ -1,7 +1,6 @@
 package com.example.myapplication.views;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +25,10 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-import static android.content.Context.MODE_PRIVATE;
 import static com.example.myapplication.Const.IMG_URI;
 import static com.example.myapplication.Const.LOAD_PROFILE_PICTURE_CODE;
 import static com.example.myapplication.Const.PICTURE_PREFS;
 import static com.example.myapplication.Const.PROFILE_PIC;
-import static com.example.myapplication.MainActivity.AUTHORIZATION_STATUS;
-import static com.example.myapplication.MainActivity.LOGIN_DATA_PREFS;
 
 
 public class FillProfileFragment extends MvpAppCompatFragment implements FillProfileIF {
@@ -40,10 +36,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     private ImageView avatar;
     private EditText profileName;
     private EditText profileLastName;
-    private EditText fatherName;
-    private EditText birthDate;
-    private EditText email;
-    private EditText phone;
+    private EditText profileFatherName;
+    private EditText profileBirthDate;
+    private EditText profileEmail;
+    private EditText profilePhone;
 
     @InjectPresenter
     FillProfilePresenter presenter;
@@ -95,10 +91,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     private void getDataFromFields() {
         String firstName = profileName.getText().toString().trim();
         String lastName = profileLastName.getText().toString().trim();
-        String fathersName = fatherName.getText().toString().trim();
+        String fathersName = profileFatherName.getText().toString().trim();
         // int birthdate... формат даты?
-        String mail = email.getText().toString().trim();
-        String phoneNr = phone.getText().toString().trim();
+        String mail = profileEmail.getText().toString().trim();
+        String phoneNr = profilePhone.getText().toString().trim();
 
         ApiClient client = new ApiClient();
         if (!firstName.isEmpty()) {
@@ -125,10 +121,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         avatar = view.findViewById(R.id.profile_avatar_img_id);
         profileName = view.findViewById(R.id.name_etxt_id);
         profileLastName = view.findViewById(R.id.last_name_etxt_id);
-        fatherName = view.findViewById(R.id.father_name_etxt_id);
-        birthDate = view.findViewById(R.id.birth_date_etxt_id);
-        email = view.findViewById(R.id.email_etxt_id);
-        phone = view.findViewById(R.id.phone_etxt_id);
+        profileFatherName = view.findViewById(R.id.father_name_etxt_id);
+        profileBirthDate = view.findViewById(R.id.birth_date_etxt_id);
+        profileEmail = view.findViewById(R.id.email_etxt_id);
+        profilePhone = view.findViewById(R.id.phone_etxt_id);
     }
 
     private void initButtons(View view) {
@@ -181,5 +177,23 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
                     .transform(new CropCircleTransformation())
                     .into(avatar);
         }
+    }
+
+    @Override
+    public void updateData(ApiClient client) {
+        String mName = client.getName();
+        String mSurname = client.getSurname();
+        String mFatherName = client.getPatronymic();
+        int mBirthDate = client.getBirthday();
+        String mEmail = client.getEmail();
+        String mPhone = client.getPhone();
+
+        profileName.setText(mName);
+        profileLastName.setText(mSurname);
+        profileFatherName.setText(mFatherName);
+        profileBirthDate.setText(String.valueOf(mBirthDate));
+        profileEmail.setText(mEmail);
+        profilePhone.setText("+7 ");
+        profilePhone.append(mPhone == null ? "Телефон" : mPhone);
     }
 }

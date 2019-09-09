@@ -31,6 +31,16 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
         disposable = new CompositeDisposable();
     }
 
+    public void getClientFromApi() {
+        disposable.add(dataGetter.getProfile()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                            getViewState().updateData(result);
+                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
+                        },
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show()));
+    }
+
     public void fillProfileData(ApiClient apiClient) {
         final ApiClient client = dataGetter.getCurrentClient();
         client.setName(apiClient.getName());

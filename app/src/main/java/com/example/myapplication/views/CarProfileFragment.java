@@ -19,8 +19,11 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.presenters.CarProfilePresenter;
 import com.squareup.picasso.Picasso;
+
+import java.util.Map;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
@@ -39,6 +42,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     private EditText carNumber;
     private Button addCar;
     private TextView deleteData;
+
 
     @ProvidePresenter
     public CarProfilePresenter providePresenter() {
@@ -71,8 +75,9 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         View view = inflater.inflate(R.layout.car_profile_fragment, container, false);
 
         initViews(view);
-
         loadCurrentCarImg();
+
+        presenter.getCarData();
 
         return view;
     }
@@ -86,11 +91,17 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         carNumber = view.findViewById(R.id.car_nr_etxt_id);
         addCar = view.findViewById(R.id.add_auto_btn_id);
         addCar.setOnClickListener(v -> {
-            presenter.createCar("a777aa77"/*carNumber.getText().toString()*/);
+            presenter.createCar(carNumber.getText().toString());
+            if (activity != null) {
+                activity.loadFragment(ProfileFragment.newInstance());
+            }
         });
         deleteData = view.findViewById(R.id.delete_data_txt_id);
         deleteData.setOnClickListener(v -> {
-
+            presenter.deleteCar(carNumber.getText().toString());
+            if (activity != null) {
+                activity.loadFragment(ProfileFragment.newInstance());
+            }
         });
         autoImg = view.findViewById(R.id.auto_profile_img_id);
         addImgBtn = view.findViewById(R.id.add_btn_img_id);
@@ -123,6 +134,15 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
                     .fit()
                     .transform(new CropCircleTransformation())
                     .into(autoImg);
+        }
+    }
+
+
+    @Override
+    public void updateCarsData(Map<String, ApiCar> cars) {
+        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+            String mCarNumber = entry.getValue().getRegNum();
+            carNumber.setText(mCarNumber);
         }
     }
 }
