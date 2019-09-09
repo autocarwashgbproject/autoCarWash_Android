@@ -2,6 +2,7 @@ package com.example.myapplication.views;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,9 +27,12 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.RegisterPresenter;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.myapplication.Const.CODE_ERROR;
 import static com.example.myapplication.Const.PHONE_ERROR;
 import static com.example.myapplication.Const.POLICY_ERROR;
+import static com.example.myapplication.MainActivity.AUTHORIZATION_STATUS;
+import static com.example.myapplication.MainActivity.LOGIN_DATA_PREFS;
 
 
 public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF {

@@ -1,6 +1,7 @@
 package com.example.myapplication.views;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,10 +26,13 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.myapplication.Const.IMG_URI;
 import static com.example.myapplication.Const.LOAD_PROFILE_PICTURE_CODE;
 import static com.example.myapplication.Const.PICTURE_PREFS;
 import static com.example.myapplication.Const.PROFILE_PIC;
+import static com.example.myapplication.MainActivity.AUTHORIZATION_STATUS;
+import static com.example.myapplication.MainActivity.LOGIN_DATA_PREFS;
 
 
 public class FillProfileFragment extends MvpAppCompatFragment implements FillProfileIF {
@@ -89,18 +93,29 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     }
 
     private void getDataFromFields() {
-        String firstName = profileName.getText().toString();
-        String lastName = profileLastName.getText().toString();
-        String fathersName = fatherName.getText().toString();
+        String firstName = profileName.getText().toString().trim();
+        String lastName = profileLastName.getText().toString().trim();
+        String fathersName = fatherName.getText().toString().trim();
         // int birthdate... формат даты?
-        String mail = email.getText().toString();
-        String phoneNr = phone.getText().toString();
+        String mail = email.getText().toString().trim();
+        String phoneNr = phone.getText().toString().trim();
 
         ApiClient client = new ApiClient();
-        client.setName(firstName);
-        client.setSurname(lastName);
-        client.setPatronymic(fathersName);
-        client.setEmail(mail);
+        if (!firstName.isEmpty()) {
+            client.setName(firstName);
+        }
+
+        if (!lastName.isEmpty()) {
+            client.setSurname(lastName);
+        }
+
+        if (!fathersName.isEmpty()) {
+            client.setPatronymic(fathersName);
+        }
+
+        if (!mail.isEmpty()) {
+            client.setEmail(mail);
+        }
         client.setPhone("9855554229");
 
         presenter.fillProfileData(client);

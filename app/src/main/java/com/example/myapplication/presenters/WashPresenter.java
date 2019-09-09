@@ -1,5 +1,6 @@
 package com.example.myapplication.presenters;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;

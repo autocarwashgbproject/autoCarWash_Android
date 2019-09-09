@@ -84,6 +84,8 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
                         },
                         err -> {
                             Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
-                        }));
+                        }
+                )
+        );
     }
 }

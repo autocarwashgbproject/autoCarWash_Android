@@ -2,6 +2,7 @@ package com.example.myapplication.di;
 
 import com.example.myapplication.presenters.CarProfilePresenter;
 import com.example.myapplication.presenters.FillProfilePresenter;
+import com.example.myapplication.presenters.MenuPresenter;
 import com.example.myapplication.presenters.ProfilePresenter;
 import com.example.myapplication.presenters.RegisterPresenter;
 import com.example.myapplication.presenters.WashPresenter;
@@ -23,4 +24,6 @@ public interface AppComponent {
     void inject(FillProfilePresenter fillProfilePresenter);
 
     void inject(CarProfilePresenter carProfilePresenter);
+
+    void inject(MenuPresenter presenter);
 }
