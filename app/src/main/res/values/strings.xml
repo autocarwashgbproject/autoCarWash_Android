@@ -24,7 +24,7 @@
     <string name="car">Автомобиль</string>
     <string name="edit_photo">Изменить фото</string>
     <string name="delete_photo">Удалить фото</string>
-    <string name="delete_data">Удалить данные</string>
+    <string name="delete_data"><u>Удалить данные</u></string>
     <string name="plate_number">Гос. номер</string>
     <string name="car_data">Данные автомобиля</string>
     <string name="carwash">CarWash</string>

@@ -9,4 +9,6 @@ public interface RegisterIF extends MvpView {
     void loadMain();
 
     void fillCodeFields(String smsForTests);
+
+    void saveRegistrationStatus();
 }

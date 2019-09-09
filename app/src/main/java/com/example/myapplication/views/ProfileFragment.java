@@ -2,6 +2,7 @@ package com.example.myapplication.views;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,7 +148,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
         String phone = client.getPhone();
 
-        profilePhone.setText("+7 " );
+        profilePhone.setText("+" );
         profilePhone.append(phone == null ? "Телефон" : phone);
     }
 

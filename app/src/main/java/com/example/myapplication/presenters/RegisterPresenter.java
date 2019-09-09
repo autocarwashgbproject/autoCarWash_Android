@@ -1,6 +1,7 @@
 package com.example.myapplication.presenters;
 
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -25,6 +26,7 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
     public DataGetter dataGetter;
 
     private CompositeDisposable disposable;
+    private String phoneNr;
 
 
     public RegisterPresenter() {
@@ -41,7 +43,8 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
             Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
             System.out.println("start request");
 
-            disposable.add(dataGetter.getToken("9855554229")
+            disposable.add(dataGetter.getToken(phoneNr)
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(regClient -> {
                                 System.out.println("response " + regClient.toString());
                                 getViewState().loadMain();
@@ -54,6 +57,7 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
     }
 
     public void getSmsCode(String phone) {
+        phoneNr = phone;
         /*if (!Utils.isValidMobile(phone)) {
             getViewState().showErrorMessage("Проверьте номер телефона");
             return;
@@ -61,10 +65,11 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
         System.out.println("start request");
 
-        disposable.add(dataGetter.getSmsCode("9855554229")
+        disposable.add(dataGetter.getSmsCode(phoneNr)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                             dataGetter.setSms(result.getSmsForTests());
+                            getViewState().fillCodeFields(result.getSmsForTests());
                             System.out.println(result.toString());
                         },
                         err -> {
@@ -76,16 +81,4 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
         disposable.dispose();
     }
 
-    public void fillCodeField() {
-        disposable.add(dataGetter.getSmsCode("9855554229")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                            getViewState().fillCodeFields(result.getSmsForTests());
-                        },
-                        err -> {
-                            Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                )
-        );
-    }
 }

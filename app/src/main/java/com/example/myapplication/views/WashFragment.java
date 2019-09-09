@@ -119,7 +119,7 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
 
         String phone = client.getPhone();
 
-        profilePhone.setText("+7 " );
+        profilePhone.setText("+ " );
         profilePhone.append(phone == null ? "Телефон" : phone);
     }
 

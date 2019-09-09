@@ -176,4 +176,11 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
     }
+
+    public void changeAuthorizationStatus(boolean status) {
+        SharedPreferences pref = getSharedPreferences(LOGIN_DATA_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(AUTHORIZATION_STATUS, status);
+        editor.apply();
+    }
 }

@@ -42,13 +42,13 @@ public class CarProfilePresenter extends MvpPresenter<CarProfileIF> {
     }
 
     public void deleteCar(String carNumber) {
-        dataGetter.deleteCar(carNumber)
+        disposable.add(dataGetter.deleteCar(carNumber)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(car -> {
                 }, throwable -> {
-                });
+                })
+        );
     }
-
 
 
     public void dispose() {

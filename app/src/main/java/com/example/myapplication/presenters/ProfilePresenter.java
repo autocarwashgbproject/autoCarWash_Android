@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.myapplication.views.ProfileIF;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.myapplication.App;

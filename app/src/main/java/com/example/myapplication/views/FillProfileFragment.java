@@ -113,7 +113,10 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         if (!mail.isEmpty()) {
             client.setEmail(mail);
         }
-        client.setPhone("9855554229");
+
+        if (!phoneNr.isEmpty()) {
+            client.setPhone(phoneNr);
+        }
 
         presenter.fillProfileData(client);
     }
@@ -150,6 +153,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         deleteProfile.setOnClickListener(v -> {
             presenter.deleteProfile();
             if (activity != null) {
+                activity.changeAuthorizationStatus(false);
                 activity.loadFragment(RegisterFragment.newInstance());
             }
         });
@@ -194,7 +198,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         profileFatherName.setText(mFatherName);
         profileBirthDate.setText(String.valueOf(mBirthDate));
         profileEmail.setText(mEmail);
-        profilePhone.setText("+7 ");
+        profilePhone.setText("+");
         profilePhone.append(mPhone == null ? "Телефон" : mPhone);
     }
 }
