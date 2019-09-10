@@ -8,8 +8,11 @@ import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.model.api.parsingJson.RegClient;
 import com.example.myapplication.model.api.parsingJson.RegTel;
+import com.example.myapplication.model.cache.RoomCache;
+import com.example.myapplication.model.cache.Wash;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,14 +23,18 @@ public class DataGetter {
 
     private static final String TOKEN_PREF = "Token ";
     private ApiRequests api;
+    private RoomCache cache;
     private String sessionToken;
     private String clientId;
     private String sms;
     private ApiClient currentClient;
     private Map<String, ApiCar> cars = new HashMap<>();
 
-    public DataGetter(ApiRequests api) {
+    public DataGetter(ApiRequests api, RoomCache cache) {
+
         this.api = api;
+        this.cache = cache;
+
     }
 
     public ApiClient getCurrentClient() {
@@ -152,6 +159,15 @@ public class DataGetter {
         cars.remove(currentCar.getRegNum());
         return api.deleteCar(currentCar.getId(), TOKEN_PREF + sessionToken)
                 .subscribeOn(Schedulers.newThread());
+    }
+
+    public Single<List<Wash>> getWashHistiry() {
+        return api.getWashesHistory(clientId, TOKEN_PREF + sessionToken)
+                .subscribeOn(Schedulers.newThread())
+                .map(result -> {
+                    cache.addWashes(result.getWashes()).subscribe();
+                    return result.getWashes();
+                });
     }
 
 }

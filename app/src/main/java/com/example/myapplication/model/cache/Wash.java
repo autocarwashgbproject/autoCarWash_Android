@@ -4,52 +4,93 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+
+import java.util.Date;
+
 @Entity
 public class Wash {
-    private String status;
-    private Boolean active;
+    @Expose
+    private int id;
+
+    @Expose
+    private String washing;
+
+    @Expose
+    private Boolean isActive;
+
+    @Expose
     @PrimaryKey
-    private long washTime;
-    private int userId;
-    private int carId;
+    private long timestamp;
+
+    @Expose
+    private int user;
+
+    @Expose
+    private int car;
+
+    @Expose
     private int wash;
 
-    public Wash(String status, Boolean active, long washTime, int userId, int carId, int wash) {
-        this.status = status;
-        this.active = active;
-        this.washTime = washTime;
-        this.userId = userId;
-        this.carId = carId;
-        this.wash = wash;
+    public String getWashing() {
+        return washing;
     }
 
-    public String getStatus() {
-        return status;
+    public void setWashing(String washing) {
+        this.washing = washing;
     }
 
     public Boolean getActive() {
-        return active;
+        return isActive;
     }
 
-    public long getWashTime() {
-        return washTime;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
-    public int getUserId() {
-        return userId;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public int getCarId() {
-        return carId;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUser() {
+        return user;
+    }
+
+    public void setUser(int user) {
+        this.user = user;
+    }
+
+    public int getCar() {
+        return car;
+    }
+
+    public void setCar(int car) {
+        this.car = car;
     }
 
     public int getWash() {
         return wash;
     }
 
+    public void setWash(int wash) {
+        this.wash = wash;
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return "" + status + " " + active + " " + washTime + " " + userId + " " + carId + " " + wash;
+        return "" + isActive + " " + id + " " + new Date(timestamp) + " " + user + " " + car + " " + wash;
     }
 }

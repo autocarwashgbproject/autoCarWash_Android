@@ -2,6 +2,7 @@ package com.example.myapplication.model.api;
 
 import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
+import com.example.myapplication.model.api.parsingJson.ApiWashHistory;
 import com.example.myapplication.model.api.parsingJson.RegClient;
 import com.example.myapplication.model.api.parsingJson.RegTel;
 
@@ -101,7 +102,7 @@ public interface ApiRequests {
      * @param id    - String - car id from List in ApiClient.
      * @param token - String - token from regUser.getToken()
      *              function response car info
-     * @return ApiClient
+     * @return ApiCar
      */
     @GET("cars/{id}/")
     Single<ApiCar> getCar(@Path("id") int id, @Header("Authorization") String token);
@@ -113,7 +114,7 @@ public interface ApiRequests {
      *              function update carinfo
      *              if you will add a car number, that DB contents, you will recieve error in arg phone:
      *              "car с таким reg_num уже существует."
-     * @return ApiClient
+     * @return ApiCar
      */
     @PUT("cars/{id}/")
     Single<ApiCar> updateCar(@Path("id") int id, @Header("Authorization") String token, @Body ApiCar apiCar);
@@ -122,8 +123,17 @@ public interface ApiRequests {
      * @param id    - String - car id from response regUser.
      * @param token - String - token from regUser.getToken()
      *              function delete car
-     * @return ApiClient
+     * @return ApiCar
      */
     @DELETE("cars/{id}/")
     Single<ApiCar> deleteCar(@Path("id") int id, @Header("Authorization") String token);
+
+    /**
+     * @param id    - String - client id
+     * @param token - String - token from regUser.getToken()
+     *              function response washes history
+     * @return ApiClient
+     */
+    @GET("/washing//{id}/")
+    Single<ApiWashHistory> getWashesHistory(@Path("id") String id, @Header("Authorization") String token);
 }

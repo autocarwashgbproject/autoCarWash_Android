@@ -73,7 +73,6 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         avatar = view.findViewById(R.id.profile_img_id);
         car = view.findViewById(R.id.profile_car_img_id);
         testBtn = view.findViewById(R.id.profile_fragment_button);
-        testBtn.setOnClickListener(v -> profilePresenter.addRandomWash());
         loadCurrentImgs();
 
 //         carNumber = view.findViewById(R.id.profile_fragment_car_number_text);

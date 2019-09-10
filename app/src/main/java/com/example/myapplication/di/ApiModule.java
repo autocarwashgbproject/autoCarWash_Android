@@ -2,6 +2,7 @@ package com.example.myapplication.di;
 
 import com.example.myapplication.model.DataGetter;
 import com.example.myapplication.model.api.ApiRequests;
+import com.example.myapplication.model.cache.RoomCache;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,7 +18,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module
+@Module(includes = {CacheModule.class})
 public class ApiModule {
 
     @Named("testUrl")
@@ -66,7 +67,7 @@ public class ApiModule {
 
     @Singleton
     @Provides
-    public DataGetter getData(ApiRequests apiRequests) {
-        return new DataGetter(apiRequests);
+    public DataGetter getData(ApiRequests apiRequests, RoomCache cache) {
+        return new DataGetter(apiRequests, cache);
     }
 }
