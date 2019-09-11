@@ -10,15 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
-import com.example.myapplication.models.History;
+import com.example.myapplication.model.cache.Wash;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
-    List<History> histories;
+    public List<Wash> histories = new ArrayList<>();
 
-    public HistoryAdapter(List<History> histories) {
-        this.histories = histories;
+    public List<Wash> getHistories() {
+        return histories;
     }
 
     @NonNull
@@ -31,10 +35,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        holder.image.setImageResource(histories.get(position).getImageResRef());
-        holder.description.setText(histories.get(position).getDescription());
-        holder.date.setText(histories.get(position).getDate());
-        holder.price.setText(histories.get(position).getPrice());
+        //holder.image.setImageResource(histories.get(position).getImageResRef());
+        holder.description.setText("" + histories.get(position).getCar());
+        holder.date.setText(new SimpleDateFormat("DD.MMM.YYYY HH:mm", Locale.getDefault()).format(new Date(histories.get(position).getTimestamp())));
+        holder.price.setText("" + histories.get(position).getWash());
     }
 
     @Override

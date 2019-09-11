@@ -2,6 +2,9 @@ package com.example.myapplication.model.api.parsingJson;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 public class ApiClient {
     @Expose
     private int birthday;
@@ -38,6 +41,13 @@ public class ApiClient {
 
     @Expose(serialize = false)
     private String detail;
+
+    @Expose
+    private Set<Integer> carsId = new TreeSet<>();
+
+    public Set<Integer> getCarsId() {
+        return carsId;
+    }
 
     public String getDetail() {
         return detail;
@@ -114,7 +124,7 @@ public class ApiClient {
     @Override
     public String toString() {
 
-        return "id: " + id + "\n"
+        String response = "id: " + id + "\n"
                 + "name: " + name + "\n"
                 + "surname: " + surname + "\n"
                 + "patronymic: " + patronymic + "\n"
@@ -125,6 +135,11 @@ public class ApiClient {
                 + "updateDate: " + updateDate + "\n"
                 + "description: " + description + "\n"
                 + "detail: " + detail + "\n";
+        for (int id : carsId) {
+            response = response + id + ", ";
+        }
+
+        return response;
     }
 
 }

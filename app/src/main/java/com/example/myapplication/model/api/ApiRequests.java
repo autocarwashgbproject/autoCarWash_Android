@@ -3,9 +3,10 @@ package com.example.myapplication.model.api;
 import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.model.api.parsingJson.ApiWashHistory;
-import com.example.myapplication.model.api.parsingJson.RegClient;
 import com.example.myapplication.model.api.parsingJson.RegTel;
+import com.example.myapplication.model.api.parsingJson.Registration;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -25,7 +26,7 @@ public interface ApiRequests {
      * @return RegTel.smsForTests - otp code in next request
      */
     @FormUrlEncoded
-    @POST("clients/get_sms/")
+    @POST("clients/sms/")
     Single<RegTel> regTel(@Field("phone") String phone);
 
     /**
@@ -37,7 +38,7 @@ public interface ApiRequests {
      */
     @FormUrlEncoded
     @POST("clients/register/")
-    Single<RegClient> regUser(@Field("phone") String phone, @Field("otp") String otp);
+    Single<Registration> regUser(@Field("phone") String phone, @Field("otp") String otp);
 
     /**
      * @param id    - String - client id from response regUser. If you try get client
@@ -46,8 +47,8 @@ public interface ApiRequests {
      *              function response client info
      * @return ApiClient
      */
-    @GET("clients/{id}/")
-    Single<ApiClient> getClient(@Path("id") String id, @Header("Authorization") String token);
+    @GET("clients/{id_client}/")
+    Single<ApiClient> getClient(@Path("id_client") String id, @Header("Authorization") String token);
 
 
     /**
@@ -59,8 +60,8 @@ public interface ApiRequests {
      *              "user с таким phone уже существует."
      * @return ApiClient
      */
-    @PUT("clients/{id}/")
-    Single<ApiClient> updateClient(@Path("id") String id, @Header("Authorization") String token, @Body ApiClient apiClient);
+    @PUT("clients/{id_client}/")
+    Single<ApiClient> updateClient(@Path("id_client") String id, @Header("Authorization") String token, @Body ApiClient apiClient);
 
     /**
      * @param id    - String - client id from response regUser. If you try get client
@@ -72,8 +73,8 @@ public interface ApiRequests {
      * id
      * description
      */
-    @DELETE("clients/{id}/")
-    Single<ApiClient> deleteClient(@Path("id") String id, @Header("Authorization") String token);
+    @DELETE("clients/{id_client}/")
+    Single<ApiClient> deleteClient(@Path("id_client") String id, @Header("Authorization") String token);
 
     /**
      * @param id    - String - client id from response regUser. If you try get client
@@ -85,8 +86,8 @@ public interface ApiRequests {
      * id
      * description
      */
-    @DELETE("clients/{id}/logout/")
-    Single<ApiClient> logoutClient(@Path("id") String id, @Header("Authorization") String token);
+    @DELETE("clients/{id_client}/logout/")
+    Single<ApiClient> logoutClient(@Path("id_client") String id, @Header("Authorization") String token);
 
     /**
      * @param carNumber - String(9) - car number, format A999AA777
@@ -95,7 +96,7 @@ public interface ApiRequests {
      * @return ApiCar
      */
     @FormUrlEncoded
-    @POST("cars/create/")
+    @POST("cars/")
     Single<ApiCar> createCar(@Field("reg_num") String carNumber, @Header("Authorization") String token);
 
     /**
@@ -134,6 +135,10 @@ public interface ApiRequests {
      *              function response washes history
      * @return ApiClient
      */
-    @GET("/washing//{id}/")
+    @GET("washing/{id}/")
     Single<ApiWashHistory> getWashesHistory(@Path("id") String id, @Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("washing/")
+    Completable addWash(@Header("Authorization") String token, @Field("reg_num") String regNum, @Field("pay") Boolean pay);
 }

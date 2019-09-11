@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/txt_history_item_background"
-            android:text="О 999 ОK 60 RUS"
+            tools:text="О 999 ОK 60 RUS"
             android:textColor="@color/colorDefaultText"
             android:textSize="@dimen/heading_text_size" />
 
@@ -45,7 +45,7 @@
             style="@style/SmallestGreyText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сб. 3 июл. 9:44" />
+            tools:text="Сб. 3 июл. 9:44" />
 
     </LinearLayout>
 
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="2000 Р"
+        tools:text="2000 Р"
         android:textColor="@color/colorDefaultText"
         android:textSize="@dimen/heading_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

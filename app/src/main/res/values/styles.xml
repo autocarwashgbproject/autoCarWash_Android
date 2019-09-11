@@ -73,7 +73,7 @@
         <item name="android:paddingRight">@dimen/default_margin</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/default_text_size</item>
-        <item name="android:textColor">@color/colorGreyText</item>
+        <item name="android:textColor">@color/colorDefaultText</item>
         <item name="android:textColorHint">@color/colorGreyEdit</item>
     </style>
 

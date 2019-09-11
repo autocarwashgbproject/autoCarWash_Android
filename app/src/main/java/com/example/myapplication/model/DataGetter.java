@@ -6,8 +6,8 @@ import com.example.myapplication.App;
 import com.example.myapplication.model.api.ApiRequests;
 import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
-import com.example.myapplication.model.api.parsingJson.RegClient;
 import com.example.myapplication.model.api.parsingJson.RegTel;
+import com.example.myapplication.model.api.parsingJson.Registration;
 import com.example.myapplication.model.cache.RoomCache;
 import com.example.myapplication.model.cache.Wash;
 
@@ -61,7 +61,7 @@ public class DataGetter {
         this.api = api;
     }
 
-    public Single<RegClient> getToken(String phone) {
+    public Single<Registration> getToken(String phone) {
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
         System.out.println("start request");
 
@@ -69,7 +69,7 @@ public class DataGetter {
                 .subscribeOn(Schedulers.newThread())
                 .map(response -> {
                     sessionToken = response.getToken();
-                    clientId = response.getIdClient();
+                    clientId = String.valueOf(response.getId());
                     fillCars(response.getCarsId());
                     return response;
                 });
@@ -165,9 +165,25 @@ public class DataGetter {
         return api.getWashesHistory(clientId, TOKEN_PREF + sessionToken)
                 .subscribeOn(Schedulers.newThread())
                 .map(result -> {
-                    cache.addWashes(result.getWashes()).subscribe();
+                    if (!result.getWashes().isEmpty()) {
+                        cache.addWashes(result.getWashes()).subscribe();
+                    }
                     return result.getWashes();
                 });
+    }
+
+    public Map<String, ApiCar> getCars() {
+        return cars;
+    }
+
+    public void addWash() {
+        String mCarNumber = "";
+        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+            mCarNumber = entry.getValue().getRegNum();
+        }
+        api.addWash(TOKEN_PREF + sessionToken, mCarNumber, true)
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
 }

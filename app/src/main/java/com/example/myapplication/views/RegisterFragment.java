@@ -87,8 +87,10 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
         agreement = view.findViewById(R.id.user_agreement_checkbox_id);
 
         getCodeBtn = view.findViewById(R.id.get_code_btn_id);
-        getCodeBtn.setOnClickListener(v -> registerPresenter
-                .getSmsCode(enteredPhone.getText().toString()));
+        getCodeBtn.setOnClickListener(v -> {
+                    registerPresenter.getSmsCode(enteredPhone.getText().toString().trim());
+                }
+        );
 
         registerBtn = view.findViewById(R.id.register_btn_id);
         registerBtn.setOnClickListener(v -> {
@@ -113,6 +115,7 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
         codeNum3.addTextChangedListener(codeNumsWatcher);
         codeNum4 = view.findViewById(R.id.enter_digit_4_edit_txt_id);
         codeNum4.addTextChangedListener(codeNumsWatcher);
+
     }
 
     private void initPhoneField(View view) {
@@ -196,6 +199,25 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
         MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
             activity.loadFragment(WashFragment.newInstance());
+        }
+    }
+
+    // Заполнение полей для кода из смс, только для тестов.
+    @Override
+    public void fillCodeFields(String smsForTests) {
+        if (smsForTests != null) {
+            codeNum1.getText().insert(0, String.valueOf(smsForTests.charAt(0)));
+            codeNum2.getText().insert(0, String.valueOf(smsForTests.charAt(1)));
+            codeNum3.getText().insert(0, String.valueOf(smsForTests.charAt(2)));
+            codeNum4.getText().insert(0, String.valueOf(smsForTests.charAt(3)));
+        }
+    }
+
+    @Override
+    public void saveRegistrationStatus() {
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.changeAuthorizationStatus(true);
         }
     }
 }
