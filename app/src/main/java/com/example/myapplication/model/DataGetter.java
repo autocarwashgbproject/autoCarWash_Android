@@ -3,10 +3,11 @@ package com.example.myapplication.model;
 import android.widget.Toast;
 
 import com.example.myapplication.App;
-import com.example.myapplication.model.parsingJson.ApiCar;
-import com.example.myapplication.model.parsingJson.ApiClient;
-import com.example.myapplication.model.parsingJson.RegClient;
-import com.example.myapplication.model.parsingJson.RegTel;
+import com.example.myapplication.model.api.ApiRequests;
+import com.example.myapplication.model.api.parsingJson.ApiCar;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
+import com.example.myapplication.model.api.parsingJson.RegTel;
+import com.example.myapplication.model.api.parsingJson.Registration;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Set;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+
 public class DataGetter {
 
     private static final String TOKEN_PREF = "Token ";
@@ -53,7 +55,7 @@ public class DataGetter {
         this.api = api;
     }
 
-    public Single<RegClient> getToken(String phone) {
+    public Single<Registration> getToken(String phone) {
         Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
         System.out.println("start request");
 
@@ -61,7 +63,7 @@ public class DataGetter {
                 .subscribeOn(Schedulers.newThread())
                 .map(response -> {
                     sessionToken = response.getToken();
-                    clientId = response.getIdClient();
+                    clientId = String.valueOf(response.getId());
                     fillCars(response.getCarsId());
                     return response;
                 });
@@ -151,6 +153,10 @@ public class DataGetter {
         cars.remove(currentCar.getRegNum());
         return api.deleteCar(currentCar.getId(), TOKEN_PREF + sessionToken)
                 .subscribeOn(Schedulers.newThread());
+    }
+
+    public Map<String, ApiCar> getCars() {
+        return cars;
     }
 
 }

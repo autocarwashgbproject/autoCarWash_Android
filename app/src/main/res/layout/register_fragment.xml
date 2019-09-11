@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/toolbar_title_txt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/ic_title"
+                android:text="@string/car_wash"
+                android:textSize="@dimen/heading_text_size"
+                android:contentDescription="@string/logo" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:layout_marginTop="36dp"
+            android:gravity="center"
+            android:text="Введите ваши данные"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="24sp" />
+
+        <EditText
+            android:layout_marginTop="36dp"
+            android:id="@+id/register_surname"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPersonName"
+            android:hint="@string/hint_surname"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            android:nextFocusDown="@id/register_name"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/register_name"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPersonName"
+            android:hint="@string/hint_name"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            android:nextFocusDown="@id/register_patronymic"
+            tools:targetApi="o" />
+
+        <EditText
+            android:id="@+id/register_patronymic"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textPersonName"
+            android:hint="@string/father_name"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            android:nextFocusDown="@id/register_email"
+            tools:targetApi="o"  />
+
+
+        <EditText
+            android:id="@+id/register_email"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/hint_email"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            android:nextFocusDown="@id/register_phone"
+            tools:targetApi="o"  />
+
+        <EditText
+            android:id="@+id/register_phone"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:inputType="phone"
+            android:hint="@string/hint_phone"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            android:nextFocusDown="@id/register_checkbox"
+            tools:targetApi="o"  />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/register_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="@string/user_agreement_checkbox_txt"
+                android:textColor="@color/colorGreyText"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/register_next_btn"
+            style="@style/MainButton"
+            android:layout_width="156dp"
+            android:layout_height="40dp"
+            android:layout_margin="16dp"
+            android:text="@string/next"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+            android:textColor="#F3FAFB"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/fields_needed"
+            android:textColor="@color/colorGreyText"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</ScrollView>

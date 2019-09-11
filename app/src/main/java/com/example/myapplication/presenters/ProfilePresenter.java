@@ -6,7 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.myapplication.App;
 import com.example.myapplication.model.DataGetter;
-import com.example.myapplication.model.parsingJson.ApiClient;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.views.ProfileIF;
 
 import javax.inject.Inject;

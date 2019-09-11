@@ -1,4 +1,4 @@
-package com.example.myapplication.model.parsingJson;
+package com.example.myapplication.model.api.parsingJson;
 
 import androidx.annotation.NonNull;
 

@@ -21,8 +21,8 @@ import com.example.myapplication.views.FillProfileFragment;
 import com.example.myapplication.views.HistoryFragment;
 import com.example.myapplication.views.MenuFragment;
 import com.example.myapplication.views.ProfileFragment;
-import com.example.myapplication.views.RegisterFragment;
 import com.example.myapplication.views.WashFragment;
+import com.example.myapplication.views.WelcomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import static com.example.myapplication.Const.LOAD_CAR_PICTURE_CODE;
@@ -51,7 +51,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
             bottomNavigationView.setSelectedItemId(R.id.wash);
         } else {
             bottomNavigationView.setVisibility(View.GONE);
-            loadFragment(RegisterFragment.newInstance());
+            loadFragment(WelcomeFragment.newInstance());
         }
     }
 
@@ -59,7 +59,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     // возвращяем true, если нет false.
     public boolean isLoggedIn() {
         return getSharedPreferences(LOGIN_DATA_PREFS, MODE_PRIVATE)
-                .getBoolean(AUTHORIZATION_STATUS, true); // izmenit' na false
+                .getBoolean(AUTHORIZATION_STATUS, false); // izmenit' na false
     }
 
     public boolean loadFragment(Fragment fragment) {

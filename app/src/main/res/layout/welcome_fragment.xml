@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@drawable/background"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/toolbar_title_txt_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/ic_title"
+                android:text="@string/car_wash"
+                android:textSize="@dimen/heading_text_size"
+                android:contentDescription="@string/logo" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/welcome_txt_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|center"
+            android:layout_marginTop="36dp"
+            android:gravity="center"
+            android:text="@string/welcome"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/enter_to_continue_txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/enter_to_continue"
+            android:textAlignment="center"
+            android:textColor="@color/colorGreyText"
+            android:textSize="@dimen/heading_text_size" />
+
+
+        <EditText
+            android:id="@+id/welcome_phone"
+            style="@style/EditText"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:textAlignment="center"
+            android:hint="@string/hint_phone_number"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            android:textColor="@color/colorDefaultText"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:maxLength="12"
+            android:nextFocusDown="@id/welcome_code_btn"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/welcome_code_btn"
+            style="@style/MainButton"
+            android:layout_width="128dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/get_code"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+            android:textColor="#F3FAFB"
+            android:textSize="@dimen/default_text_size" />
+
+
+        <EditText
+            android:id="@+id/welcome_code"
+            style="@style/EditText"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:textAlignment="center"
+            android:textColor="@color/colorDefaultText"
+            android:hint="@string/confirmation_code"
+            android:importantForAutofill="no"
+            tools:targetApi="o"
+            android:imeOptions="actionNext"
+            android:inputType="phone"
+            android:maxLength="12"
+            android:nextFocusDown="@id/register_btn_id"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/repeat_request_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGreyText"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/welcome_next_btn"
+            style="@style/MainButton"
+            android:layout_width="128dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/next"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
+            android:textColor="#F3FAFB"
+            android:textSize="@dimen/default_text_size" />
+
+
+    </LinearLayout>
+
+</ScrollView>

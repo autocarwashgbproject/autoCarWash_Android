@@ -42,7 +42,6 @@
     <string name="phone_number">Телефон</string>
     <string name="bind_card">Привязать карту</string>
     <string name="region">Регион</string>
-    <string name="rus">RUS</string>
     <string name="positive_button_text">Хорошо</string>
     <string name="policy_check">Принять соглашение</string>
     <string name="code_check">Пожалуйста введите код подтверждения</string>
@@ -104,4 +103,16 @@
     <string name="time">23:59</string>
     <string name="registration_number">A 001 AA</string>
     <string name="registration_number_part2">60</string>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="enter_to_continue">Для авторизации или регистрации введите ваш номер телефона</string>
+    <string name="confirmation_code">Код подтверждения</string>
+    <string name="next">Далее</string>
+    <string name="enter_car_info">Введите данные автомобиля</string>
+    <string name="save">Сохранить</string>
+    <string name="rus">RUS</string>
+    <string name="set_car_number_and_region">Укажите номер автомобиля и регион</string>
+    <string name="x">Х</string>
+    <string name="_0">0</string>
+    <string name="_00">00</string>
+
 </resources>
