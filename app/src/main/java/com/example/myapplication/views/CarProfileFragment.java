@@ -2,6 +2,8 @@ package com.example.myapplication.views;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +41,13 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
 
     private ImageView autoImg;
     private ImageView addImgBtn;
-    private EditText carNumber;
+    private EditText carChar1;
+    private EditText carChar2;
+    private EditText carChar3;
+    private EditText carChar4;
+    private EditText carChar5;
+    private EditText carChar6;
+    private EditText carChar7;
     private Button addCar;
     private TextView deleteData;
 
@@ -82,23 +90,62 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         return view;
     }
 
+    private TextWatcher codeNumsWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            MainActivity activity = ((MainActivity) getActivity());
+            TextView text = null;
+            if (activity != null) {
+                text = (TextView) getActivity().getCurrentFocus();
+            }
+
+            if (text != null && text.length() > 0) {
+                View next = text.focusSearch(View.FOCUS_RIGHT);
+                if (next != null)
+                    next.requestFocus();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
     private void initViews(View view) {
         final MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
             activity.getBottomNavigationView().setVisibility(View.GONE);
             activity.findViewById(R.id.include).setVisibility(View.GONE);
         }
-        carNumber = view.findViewById(R.id.car_nr_etxt_id);
+        carChar1 = view.findViewById(R.id.car_number_1);
+        carChar1.addTextChangedListener(codeNumsWatcher);
+        carChar2 = view.findViewById(R.id.car_number_2);
+        carChar2.addTextChangedListener(codeNumsWatcher);
+        carChar3 = view.findViewById(R.id.car_number_3);
+        carChar3.addTextChangedListener(codeNumsWatcher);
+        carChar4 = view.findViewById(R.id.car_number_4);
+        carChar4.addTextChangedListener(codeNumsWatcher);
+        carChar5 = view.findViewById(R.id.car_number_5);
+        carChar5.addTextChangedListener(codeNumsWatcher);
+        carChar6 = view.findViewById(R.id.car_number_6);
+        carChar6.addTextChangedListener(codeNumsWatcher);
+        carChar7 = view.findViewById(R.id.car_number_7);
         addCar = view.findViewById(R.id.add_auto_btn_id);
         addCar.setOnClickListener(v -> {
-            presenter.createCar(carNumber.getText().toString());
+            presenter.createCar(getCarNumber());
             if (activity != null) {
                 activity.loadFragment(ProfileFragment.newInstance());
             }
         });
         deleteData = view.findViewById(R.id.delete_data_txt_id);
         deleteData.setOnClickListener(v -> {
-            presenter.deleteCar(carNumber.getText().toString());
+            presenter.deleteCar(getCarNumber());
             if (activity != null) {
                 activity.loadFragment(ProfileFragment.newInstance());
             }
@@ -110,6 +157,16 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
                 activity.pickFromGallery(LOAD_CAR_PICTURE_CODE);
             }
         });
+    }
+
+    private String getCarNumber() {
+        return carChar1.getText().toString()
+                + carChar2.getText().toString()
+                + carChar3.getText().toString()
+                + carChar4.getText().toString()
+                + carChar5.getText().toString()
+                + carChar6.getText().toString()
+                + carChar7.getText().toString();
     }
 
     private void loadCurrentCarImg() {
@@ -142,7 +199,21 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     public void updateCarsData(Map<String, ApiCar> cars) {
         for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
             String mCarNumber = entry.getValue().getRegNum();
-            carNumber.setText(mCarNumber);
+            setCharsOnView(mCarNumber);
+            break;
+        }
+    }
+
+    public void setCharsOnView(String mCarNumber) {
+        if (mCarNumber != null) {
+
+            carChar1.getText().insert(0, String.valueOf(mCarNumber.charAt(0)));
+            carChar2.getText().insert(0, String.valueOf(mCarNumber.charAt(1)));
+            carChar3.getText().insert(0, String.valueOf(mCarNumber.charAt(2)));
+            carChar4.getText().insert(0, String.valueOf(mCarNumber.charAt(3)));
+            carChar5.getText().insert(0, String.valueOf(mCarNumber.charAt(4)));
+            carChar6.getText().insert(0, String.valueOf(mCarNumber.charAt(5)));
+            carChar7.getText().insert(0, mCarNumber, 6, mCarNumber.length());
         }
     }
 }

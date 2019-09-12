@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -62,19 +61,107 @@
         android:layout_marginRight="20dp"
         android:text="@string/car_data" />
 
-    <EditText
-        android:id="@+id/car_nr_etxt_id"
-        style="@style/EditText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:hint="@string/plate_number"
-        android:inputType="text"
-        android:importantForAutofill="no"
-        tools:targetApi="o" />
+        android:layout_marginTop="72dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/car_number_1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_edttxt"
+            android:hint="@string/x"
+            android:maxLength="1"
+            android:nextFocusRight="@id/car_number_2"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/car_number_2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_edttxt"
+            android:hint="@string/_0"
+            android:maxLength="1"
+            android:nextFocusRight="@id/car_number_3"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/car_number_3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_edttxt"
+            android:hint="@string/_0"
+            android:maxLength="1"
+            android:nextFocusRight="@id/car_number_4"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/car_number_4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_edttxt"
+            android:hint="@string/_0"
+            android:maxLength="1"
+            android:nextFocusRight="@id/car_number_5"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/car_number_5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_edttxt"
+            android:hint="@string/x"
+            android:maxLength="1"
+            android:nextFocusRight="@id/car_number_6"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/car_number_6"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_edttxt"
+            android:hint="@string/x"
+            android:maxLength="1"
+            android:nextFocusRight="@id/car_number_7"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/car_number_7"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/rounded_edttxt"
+            android:hint="@string/_00"
+            android:maxLength="3"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:maxLength="1"
+            android:text="@string/rus"
+            android:textColor="@color/colorDefaultText" />
+
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/add_auto_btn_id"

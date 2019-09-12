@@ -104,4 +104,8 @@
     <string name="time">23:59</string>
     <string name="registration_number">A 001 AA</string>
     <string name="registration_number_part2">60</string>
+    <string name="set_car_number_and_region">Укажите номер автомобиля и регион</string>
+    <string name="x">Х</string>
+    <string name="_0">0</string>
+    <string name="_00">00</string>
 </resources>
