@@ -22,7 +22,6 @@ import com.example.myapplication.adapters.HistoryAdapter;
 import com.example.myapplication.model.cache.Wash;
 import com.example.myapplication.presenters.HistoryPresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HistoryFragment extends MvpAppCompatFragment implements HistoryIF {
@@ -31,7 +30,6 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryIF {
     @InjectPresenter
     public HistoryPresenter historyPresenter;
     private Button addBtn;
-    private List<Wash> histories = new ArrayList<>();
 
     @ProvidePresenter
     public HistoryPresenter providePresenter() {
@@ -57,7 +55,6 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryIF {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.history_fragment, container, false);
-        //histories = HistoryList.getInstance().getHistories();
         historyPresenter.getHistoryList();
         addBtn = view.findViewById(R.id.history_button_add);
         addBtn.setOnClickListener(v -> {
@@ -78,10 +75,8 @@ public class HistoryFragment extends MvpAppCompatFragment implements HistoryIF {
 
     @Override
     public void updateList(List<Wash> washes) {
-        histories.clear();
-        histories.addAll(washes);
         adapter.getHistories().clear();
-        adapter.getHistories().addAll(histories);
+        adapter.getHistories().addAll(washes);
         adapter.notifyDataSetChanged();
     }
 }

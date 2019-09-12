@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
-    public List<Wash> histories = new ArrayList<>();
+    private List<Wash> histories = new ArrayList<>();
 
     public List<Wash> getHistories() {
         return histories;
