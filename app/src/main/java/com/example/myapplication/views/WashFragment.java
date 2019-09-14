@@ -119,8 +119,9 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
 
         String phone = client.getPhone();
 
-        profilePhone.setText("+ ");
+        profilePhone.setText("+7");
         profilePhone.append(phone == null ? "Телефон" : phone);
+        loadCurrentImgs();
     }
 
     @Override
@@ -129,6 +130,21 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
         for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
             String carNumber = entry.getValue().getRegNum();
             registrationNr.setText(carNumber == null ? "Номер авто" : carNumber);
+        }
+    }
+
+    private void loadCurrentImgs() {
+        MainActivity activity = (MainActivity) getActivity();
+        String uri;
+        if (activity != null) {
+            uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(avatar);
+            }
         }
     }
 }

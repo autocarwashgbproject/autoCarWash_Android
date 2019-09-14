@@ -132,7 +132,11 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().startsWith("+7")) {
-                    s.insert(0, "+7");
+                    if (s.toString().startsWith("+")) {
+                        s.insert(1, "7");
+                    } else {
+                        s.insert(0, "+7");
+                    }
                 }
             }
         });

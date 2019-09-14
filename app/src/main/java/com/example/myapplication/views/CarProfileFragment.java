@@ -64,7 +64,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
 
     public static CarProfileFragment newInstance(String uri) {
         CarProfileFragment pf = new CarProfileFragment();
-        if (!uri.isEmpty()) {
+        if (uri != null) {
             Bundle args = new Bundle();
             args.putString(IMG_URI, uri);
             pf.setArguments(args);
@@ -96,6 +96,12 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         presenter.getCarData();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadCurrentCarImg();
     }
 
     private TextWatcher codeNumsWatcher = new TextWatcher() {
@@ -166,7 +172,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         addImgBtn = view.findViewById(R.id.add_btn_img_id);
         addImgBtn.setOnClickListener(v -> {
             if (activity != null) {
-                activity.pickFromGallery(LOAD_CAR_PICTURE_CODE);
+                activity.pickFromGallery(LOAD_CAR_PICTURE_CODE, this);
             }
         });
     }

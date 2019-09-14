@@ -24,8 +24,11 @@ import com.example.myapplication.views.RegisterFragment;
 import com.example.myapplication.views.WashFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import static com.example.myapplication.Const.CAR_PIC;
 import static com.example.myapplication.Const.LOAD_CAR_PICTURE_CODE;
 import static com.example.myapplication.Const.LOAD_PROFILE_PICTURE_CODE;
+import static com.example.myapplication.Const.PICTURE_PREFS;
+import static com.example.myapplication.Const.PROFILE_PIC;
 
 public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
 
@@ -34,6 +37,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     public static final String AUTHORIZATION_STATUS = "isAuthorized";
 
     private BottomNavigationView bottomNavigationView;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +121,8 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
         return pref.getString(key, null);
     }
 
-    public void pickFromGallery(int code) {
+    public void pickFromGallery(int code, Fragment fragment) {
+        currentFragment = fragment;
         requestPermissions();
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -132,11 +137,21 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
             switch (requestCode) {
                 case LOAD_PROFILE_PICTURE_CODE:
                     uri = data.getData();
-                    loadFragment(FillProfileFragment.newInstance(String.valueOf(uri)));
+                    savePicture(PICTURE_PREFS, PROFILE_PIC, String.valueOf(uri));
+                    if (currentFragment != null) {
+                        loadFragment(currentFragment);
+                    } else {
+                        loadFragment(FillProfileFragment.newInstance(String.valueOf(uri)));
+                    }
                     break;
                 case LOAD_CAR_PICTURE_CODE:
                     uri = data.getData();
-                    loadFragment(CarProfileFragment.newInstance(String.valueOf(uri)));
+                    savePicture(PICTURE_PREFS, CAR_PIC, String.valueOf(uri));
+                    if (currentFragment != null) {
+                        loadFragment(currentFragment);
+                    } else {
+                        loadFragment(CarProfileFragment.newInstance(String.valueOf(uri)));
+                    }
                     break;
             }
     }
@@ -164,7 +179,8 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
                 requestPermissions(
                         new String[]{
                                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                Manifest.permission.READ_EXTERNAL_STORAGE
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.INTERNET
                         },
                         PERMISSION_REQUEST_CODE
                 );

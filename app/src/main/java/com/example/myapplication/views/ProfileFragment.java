@@ -98,14 +98,14 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         Button editProfile = view.findViewById(R.id.edit_profile_btn_id);
         editProfile.setOnClickListener(v -> {
             if (activity != null) {
-                activity.loadFragment(FillProfileFragment.newInstance(""));
+                activity.loadFragment(FillProfileFragment.newInstance(activity.loadPicture(PICTURE_PREFS, PROFILE_PIC)));
             }
         });
 
         Button addCar = view.findViewById(R.id.add_car_btn_id);
         addCar.setOnClickListener(v -> {
             if (activity != null) {
-                activity.loadFragment(CarProfileFragment.newInstance(""));
+                activity.loadFragment(CarProfileFragment.newInstance(activity.loadPicture(PICTURE_PREFS, CAR_PIC)));
             }
         });
     }
@@ -147,7 +147,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
         String phone = client.getPhone();
 
-        profilePhone.setText("+");
+        profilePhone.setText("+7");
         profilePhone.append(phone == null ? "Телефон" : phone);
     }
 
@@ -158,6 +158,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
             String carNumber = entry.getValue().getRegNum();
             profileCarNumber.setText(carNumber == null ? "Номер авто" : carNumber);
             profileCarDescription.setText("");
+            break;
         }
     }
 }

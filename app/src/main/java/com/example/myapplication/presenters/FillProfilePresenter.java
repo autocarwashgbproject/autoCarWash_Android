@@ -41,6 +41,7 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
     }
 
     public void fillProfileData(ApiClient apiClient) {
+
         final ApiClient client = dataGetter.getCurrentClient();
         client.setName(apiClient.getName());
         client.setSurname(apiClient.getSurname());

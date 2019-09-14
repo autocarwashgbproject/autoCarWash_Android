@@ -2,6 +2,8 @@ package com.example.myapplication.views;
 
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +58,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
     public static FillProfileFragment newInstance(String uri) {
         FillProfileFragment pf = new FillProfileFragment();
-        if (!uri.isEmpty()) {
+        if (uri != null) {
             Bundle args = new Bundle();
             args.putString(IMG_URI, uri);
             pf.setArguments(args);
@@ -97,13 +99,19 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadCurrentAvatarImg();
+    }
+
     private void getDataFromFields() {
         String firstName = profileName.getText().toString().trim();
         String lastName = profileLastName.getText().toString().trim();
         String fathersName = profileFatherName.getText().toString().trim();
         // int birthdate... формат даты?
         String mail = profileEmail.getText().toString().trim();
-        String phoneNr = profilePhone.getText().toString().trim();
+        String phoneNr = profilePhone.getText().toString().trim().substring(2);
 
         ApiClient client = new ApiClient();
         if (!firstName.isEmpty()) {
@@ -136,7 +144,8 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         profileFatherName = view.findViewById(R.id.father_name_etxt_id);
         profileBirthDate = view.findViewById(R.id.birth_date_etxt_id);
         profileEmail = view.findViewById(R.id.email_etxt_id);
-        profilePhone = view.findViewById(R.id.phone_etxt_id);
+        //profilePhone = view.findViewById(R.id.phone_etxt_id);
+        initPhoneField(view);
     }
 
     private void initButtons(View view) {
@@ -145,7 +154,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         ImageView addPhoto = view.findViewById(R.id.add_photo_btn_img_id);
         addPhoto.setOnClickListener(v -> {
             if (activity != null) {
-                activity.pickFromGallery(LOAD_PROFILE_PICTURE_CODE);
+                activity.pickFromGallery(LOAD_PROFILE_PICTURE_CODE, this);
             }
         });
 
@@ -206,6 +215,30 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         }
     }
 
+    private void initPhoneField(View view) {
+        profilePhone = view.findViewById(R.id.phone_etxt_id);
+        profilePhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().startsWith("+7")) {
+                    if (s.toString().startsWith("+")) {
+                        s.insert(1, "7");
+                    } else {
+                        s.insert(0, "+7");
+                    }
+                }
+            }
+        });
+    }
+
     @Override
     public void updateData(ApiClient client) {
         String mName = client.getName();
@@ -220,7 +253,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         profileFatherName.setText(mFatherName);
         if (mBirthDate != 0) profileBirthDate.setText(String.valueOf(mBirthDate));
         profileEmail.setText(mEmail);
-        profilePhone.setText("+");
+        profilePhone.setText("+7");
         profilePhone.append(mPhone == null ? "Телефон" : mPhone);
     }
 }
