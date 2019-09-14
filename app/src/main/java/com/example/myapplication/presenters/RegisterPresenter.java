@@ -1,7 +1,6 @@
 package com.example.myapplication.presenters;
 
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -81,4 +80,14 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
         disposable.dispose();
     }
 
+    public void logout() {
+        disposable.add(dataGetter.logout()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(client -> {
+                    Toast.makeText(App.getInstance(), "Logged out", Toast.LENGTH_SHORT).show();
+                }, throwable -> {
+                    Toast.makeText(App.getInstance(), throwable.toString(), Toast.LENGTH_SHORT).show();
+                })
+        );
+    }
 }

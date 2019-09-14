@@ -98,11 +98,19 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_container_id);
-        if (!(fragment instanceof OnBackPressedListener)
-                || !((OnBackPressedListener) fragment).onBackPressed()) {
-            super.onBackPressed();
-        } else {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (fragment instanceof OnBackPressedListener
+                && ((OnBackPressedListener) fragment).onBackPressed()) {
             ((OnBackPressedListener) fragment).onBackPressed();
+        }
+        if (count == 1) {
+            finish();
+        } else if (count > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
         }
     }
 
