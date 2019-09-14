@@ -16,7 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_geo" />
+        app:srcCompat="@drawable/ic_geo"
+        android:contentDescription="@string/geolocation" />
 
     <TextView
         android:id="@+id/geolocation_txt_id"
@@ -26,9 +27,9 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Геолокация"
+        android:text="@string/geolocation"
         android:textColor="@color/colorDefaultText"
-        android:textSize="18sp"
+        android:textSize="@dimen/heading_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/geolocation_icon_id"
         app:layout_constraintTop_toTopOf="parent" />

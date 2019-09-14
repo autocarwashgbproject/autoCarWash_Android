@@ -1,8 +1,8 @@
 package com.example.myapplication.views;
 
 
+import android.content.Context;
 import android.os.Bundle;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,9 +19,15 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.RegisterPresenter;
+
+import static com.example.myapplication.Const.CODE_ERROR;
+import static com.example.myapplication.Const.PHONE_ERROR;
+import static com.example.myapplication.Const.POLICY_ERROR;
 
 
 public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF {
@@ -41,8 +47,14 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
     private Button getCodeBtn;
     private Button registerBtn;
 
+    @ProvidePresenter
+    public RegisterPresenter providePresenter() {
+        final RegisterPresenter registerPresenter = new RegisterPresenter();
+        App.getInstance().getAppComponent().inject(registerPresenter);
+        return registerPresenter;
+    }
+
     public RegisterFragment() {
-        // Required empty public constructor
     }
 
     public static RegisterFragment newInstance() {
@@ -64,6 +76,49 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.register, container, false);
 
+        initPhoneField(view);
+        initCodeFields(view);
+        initButtons(view);
+
+        return view;
+    }
+
+    private void initButtons(View view) {
+        agreement = view.findViewById(R.id.user_agreement_checkbox_id);
+
+        getCodeBtn = view.findViewById(R.id.get_code_btn_id);
+        getCodeBtn.setOnClickListener(v -> {
+                    registerPresenter.getSmsCode(enteredPhone.getText().toString().trim());
+                }
+        );
+
+        registerBtn = view.findViewById(R.id.register_btn_id);
+        registerBtn.setOnClickListener(v -> {
+            String code = codeNum1.getText().toString() +
+                    codeNum2.getText().toString() +
+                    codeNum3.getText().toString() +
+                    codeNum4.getText().toString();
+
+            registerPresenter.register(
+                    code,
+                    agreement.isChecked()
+            );
+        });
+    }
+
+    private void initCodeFields(View view) {
+        codeNum1 = view.findViewById(R.id.enter_digit_1_edit_txt_id);
+        codeNum1.addTextChangedListener(codeNumsWatcher);
+        codeNum2 = view.findViewById(R.id.enter_digit_2_edit_txt_id);
+        codeNum2.addTextChangedListener(codeNumsWatcher);
+        codeNum3 = view.findViewById(R.id.enter_digit_3_edit_txt_id);
+        codeNum3.addTextChangedListener(codeNumsWatcher);
+        codeNum4 = view.findViewById(R.id.enter_digit_4_edit_txt_id);
+        codeNum4.addTextChangedListener(codeNumsWatcher);
+
+    }
+
+    private void initPhoneField(View view) {
         enteredPhone = view.findViewById(R.id.enter_phone_edit_txt_id);
         enteredPhone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -77,47 +132,14 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
             @Override
             public void afterTextChanged(Editable s) {
                 if (!s.toString().startsWith("+7")) {
-                    s.insert(0, "+7");
+                    if (s.toString().startsWith("+")) {
+                        s.insert(1, "7");
+                    } else {
+                        s.insert(0, "+7");
+                    }
                 }
             }
         });
-
-        codeNum1 = view.findViewById(R.id.enter_digit_1_edit_txt_id);
-        codeNum1.addTextChangedListener(codeNumsWatcher);
-        codeNum2 = view.findViewById(R.id.enter_digit_2_edit_txt_id);
-        codeNum2.addTextChangedListener(codeNumsWatcher);
-        codeNum3 = view.findViewById(R.id.enter_digit_3_edit_txt_id);
-        codeNum3.addTextChangedListener(codeNumsWatcher);
-        codeNum4 = view.findViewById(R.id.enter_digit_4_edit_txt_id);
-        codeNum4.addTextChangedListener(codeNumsWatcher);
-
-        agreement = view.findViewById(R.id.user_agreement_checkbox_id);
-
-        getCodeBtn = view.findViewById(R.id.get_code_btn_id);
-        getCodeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registerPresenter.getSmsCode(enteredPhone.getText().toString());
-            }
-        });
-
-        registerBtn = view.findViewById(R.id.register_btn_id);
-        registerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String code = codeNum1.getText().toString() +
-                        codeNum2.getText().toString() +
-                        codeNum3.getText().toString() +
-                        codeNum4.getText().toString();
-
-                registerPresenter.register(
-                        code,
-                        agreement.isChecked()
-                );
-            }
-        });
-
-        return view;
     }
 
     private TextWatcher codeNumsWatcher = new TextWatcher() {
@@ -148,11 +170,32 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
     };
 
     @Override
-    public void showErrorMessage(String message) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-        dialog.setTitle(message);
-        dialog.setPositiveButton("Хорошо", null);
-        dialog.show();
+    public void showErrorMessage(int code) {
+        String message = getString(R.string.code_check);
+        switch (code) {
+            case POLICY_ERROR:
+                message = getString(R.string.policy_check);
+                break;
+            case CODE_ERROR:
+                message = getString(R.string.code_check);
+                break;
+            case PHONE_ERROR:
+                message = getString(R.string.phone_check);
+                break;
+        }
+
+        showAlertDialog(message);
+    }
+
+    private void showAlertDialog(String message) {
+        Context context = getContext();
+        AlertDialog.Builder dialog;
+        if (context != null) {
+            dialog = new AlertDialog.Builder(context);
+            dialog.setTitle(message);
+            dialog.setPositiveButton(getString(R.string.positive_button_text), null);
+            dialog.show();
+        }
     }
 
     @Override
@@ -160,6 +203,33 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
         MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
             activity.loadFragment(WashFragment.newInstance());
+        }
+    }
+
+    @Override
+    public void loadProfile() {
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.loadFragment(FillProfileFragment.newInstance(true));
+        }
+    }
+
+    // Заполнение полей для кода из смс, только для тестов.
+    @Override
+    public void fillCodeFields(String smsForTests) {
+        if (smsForTests != null) {
+            codeNum1.getText().insert(0, String.valueOf(smsForTests.charAt(0)));
+            codeNum2.getText().insert(0, String.valueOf(smsForTests.charAt(1)));
+            codeNum3.getText().insert(0, String.valueOf(smsForTests.charAt(2)));
+            codeNum4.getText().insert(0, String.valueOf(smsForTests.charAt(3)));
+        }
+    }
+
+    @Override
+    public void saveRegistrationStatus() {
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.changeAuthorizationStatus(true);
         }
     }
 }

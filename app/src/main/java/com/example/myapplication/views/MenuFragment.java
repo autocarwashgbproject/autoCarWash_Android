@@ -5,25 +5,38 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.ListFragment;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
-import com.example.myapplication.preferences.ParametersFragment;
 import com.example.myapplication.R;
-import com.example.myapplication.adapters.BottomMenuItemsAdapter;
-import com.example.myapplication.adapters.Menu;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
+import com.example.myapplication.preferences.ParametersFragment;
+import com.example.myapplication.presenters.MenuPresenter;
 
-public class MenuFragment extends ListFragment {
 
-    // TODO: 2019-08-08 Presenter
-    private BottomMenuItemsAdapter adapter;
+public class MenuFragment extends MvpAppCompatFragment implements MenuIF, View.OnClickListener {
+
+    @InjectPresenter
+    MenuPresenter presenter;
+    private TextView profileName;
+    private TextView profilePhone;
+
+    @ProvidePresenter
+    public MenuPresenter providePresenter() {
+        final MenuPresenter presenter = new MenuPresenter();
+        App.getInstance().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public MenuFragment() {
-        // Required empty public constructor
     }
 
     public static MenuFragment newInstance() {
@@ -34,14 +47,19 @@ public class MenuFragment extends ListFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        MainActivity activity = ((MainActivity) getActivity());
-        if (activity != null) {
-            adapter = new BottomMenuItemsAdapter(activity, Menu.menuList);
-        }
-        setListAdapter(adapter);
+    }
 
-        getListView().setDivider(null);
-
+    private void initButtons(View view) {
+        Button payment = view.findViewById(R.id.payment_btn_id);
+        payment.setOnClickListener(this);
+        Button history = view.findViewById(R.id.history_btn_id);
+        history.setOnClickListener(this);
+        Button settings = view.findViewById(R.id.settings_btn_id);
+        settings.setOnClickListener(this);
+        Button help = view.findViewById(R.id.help_btn_id);
+        help.setOnClickListener(this);
+        Button about = view.findViewById(R.id.about_btn_id);
+        about.setOnClickListener(this);
     }
 
     @Override
@@ -49,29 +67,57 @@ public class MenuFragment extends ListFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.menu_fragment, container, false);
 
+        profileName = view.findViewById(R.id.account_name_txt_id);
+        profilePhone = view.findViewById(R.id.account_phone_txt_id);
+
         MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
             activity.getBottomNavigationView().setVisibility(View.VISIBLE);
         }
+
+        initButtons(view);
+
+        presenter.updateProfile();
         return view;
     }
 
     @Override
-    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
+    public void updateProfile(ApiClient client) {
+        String firsName = client.getName();
+        String patronymic = client.getPatronymic();
+        String lastName = client.getSurname();
+        profileName.setText(
+                String.format(
+                        "%s %s %s",
+                        firsName == null ? "Имя" : firsName,
+                        patronymic == null ? "Отчество" : patronymic,
+                        lastName == null ? "Фамилия" : lastName
+                )
+        );
+        String phone = client.getPhone();
+        profilePhone.setText(String.format("+7%s", phone == null ? "Телефон" : phone));
+    }
 
-        int img = ((Menu) l.getAdapter().getItem(position)).getImg();
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
         MainActivity activity = ((MainActivity) getActivity());
         if (activity != null) {
-            switch (img) {
-                case R.drawable.menu_about_item:
-                    activity.loadFragment(AboutFragment.newInstance());
+            switch (viewId) {
+                case R.id.payment_btn_id:
+                    activity.loadFragment(PaymentFragment.newInstance());
                     break;
-                case R.drawable.menu_settings_item:
+                case R.id.history_btn_id:
+                    activity.loadFragment(HistoryFragment.newInstance());
+                    break;
+                case R.id.settings_btn_id:
                     activity.loadFragment(new ParametersFragment());
                     break;
-                case R.drawable.ic_payment:
-                    activity.loadFragment(PaymentFragment.newInstance());
+                case R.id.help_btn_id:
+                    /*activity.loadFragment(HelpFragment.newInstance());*/
+                    break;
+                case R.id.about_btn_id:
+                    activity.loadFragment(AboutFragment.newInstance());
                     break;
             }
         }

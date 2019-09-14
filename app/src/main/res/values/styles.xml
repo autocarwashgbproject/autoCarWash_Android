@@ -26,6 +26,19 @@
     <style name="DefaultText">
         <item name="android:textSize">@dimen/default_text_size</item>
         <item name="android:textColor">@color/colorDefaultText</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
+    </style>
+
+    <style name="BigText">
+        <item name="android:textSize">@dimen/heading_text_size</item>
+        <item name="android:textColor">@color/colorDefaultText</item>
+    </style>
+
+    <style name="BigBoldText">
+        <item name="android:textSize">@dimen/heading_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorDefaultText</item>
+        <item name="android:layout_margin">@dimen/default_margin</item>
     </style>
 
     <style name="DefaultGreyText">
@@ -60,7 +73,7 @@
         <item name="android:paddingRight">@dimen/default_margin</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">@dimen/default_text_size</item>
-        <item name="android:textColor">@color/colorGreyText</item>
+        <item name="android:textColor">@color/colorDefaultText</item>
         <item name="android:textColorHint">@color/colorGreyEdit</item>
     </style>
 

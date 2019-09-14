@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,14 +30,19 @@ public class BottomMenuItemsAdapter extends ArrayAdapter<Menu> {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.profile_menu_item, parent, false);
-        }
+        if (inflater != null) {
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.profile_menu_item, parent, false);
+            }
 
-        ImageView image = convertView.findViewById(R.id.icon_id);
-        image.setImageResource(menu.getImg());
-        TextView txt = convertView.findViewById(R.id.txt_id);
-        txt.setText(menu.getTitle());
+            ImageView image = convertView.findViewById(R.id.icon_id);
+            TextView txt = convertView.findViewById(R.id.txt_id);
+
+            if (menu != null) {
+                image.setImageResource(menu.getImg());
+                txt.setText(menu.getTitle());
+            }
+        }
 
         return convertView;
     }

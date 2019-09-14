@@ -1,6 +1,7 @@
 package com.example.myapplication.views;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
@@ -21,14 +23,21 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.presenters.PaymentPresenter;
+import com.squareup.picasso.Picasso;
+
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
+import static com.example.myapplication.Const.PICTURE_PREFS;
+import static com.example.myapplication.Const.PROFILE_PIC;
 
 public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
 
     @InjectPresenter
     PaymentPresenter presenter;
 
+    private ImageView avatar;
+
     public PaymentFragment() {
-        // Required empty public constructor
     }
 
     public static PaymentFragment newInstance() {
@@ -51,36 +60,56 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
             activity.findViewById(R.id.include).setVisibility(View.GONE);
         }
 
-        final Toolbar toolbar = view.findViewById(R.id.toolbar_id);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity activity = ((MainActivity) getActivity());
-                if (activity != null) {
-                    activity.loadFragment(MenuFragment.newInstance());
-                }
-            }
-        });
+        initToolbar(view);
+        initSpinners(view);
 
         EditText cardDate = view.findViewById(R.id.card_date_etxt_id);
         cardDate.addTextChangedListener(cardDateWatcher);
 
-        Spinner cardTypes = view.findViewById(R.id.choose_card_spinner_id);
-        ArrayAdapter<CharSequence> cardAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.card_types, R.layout.spinner_item);
-        cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        cardTypes.setAdapter(cardAdapter);
-        cardTypes.setOnItemSelectedListener(new CardTypeSpinnerListener());
+        avatar = view.findViewById(R.id.user_img_id);
 
-        Spinner payment = view.findViewById(R.id.choose_payment_amount_spinner_id);
-        ArrayAdapter<CharSequence> paymentAdapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.payment_amount, R.layout.spinner_item);
-        paymentAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        payment.setAdapter(paymentAdapter);
-        payment.setOnItemSelectedListener(new PaymentSpinnerListener());
+        loadCurrentAvatarImg();
 
         return view;
+    }
+
+    private void initSpinners(View view) {
+        Context context = getContext();
+        if (context != null) {
+            Spinner cardTypes = view.findViewById(R.id.choose_card_spinner_id);
+
+            ArrayAdapter<CharSequence> cardAdapter = ArrayAdapter.createFromResource(
+                    context,
+                    R.array.card_types,
+                    R.layout.spinner_item
+            );
+            cardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            cardTypes.setAdapter(cardAdapter);
+            cardTypes.setOnItemSelectedListener(new CardTypeSpinnerListener());
+
+            Spinner payment = view.findViewById(R.id.choose_payment_amount_spinner_id);
+
+            ArrayAdapter<CharSequence> paymentAdapter = ArrayAdapter.createFromResource(
+                    context,
+                    R.array.payment_amount,
+                    R.layout.spinner_item
+            );
+            paymentAdapter.setDropDownViewResource(
+                    android.R.layout.simple_spinner_dropdown_item);
+            payment.setAdapter(paymentAdapter);
+            payment.setOnItemSelectedListener(new PaymentSpinnerListener());
+        }
+    }
+
+    private void initToolbar(View view) {
+        final Toolbar toolbar = view.findViewById(R.id.toolbar_id);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        toolbar.setNavigationOnClickListener(v -> {
+            MainActivity activity1 = ((MainActivity) getActivity());
+            if (activity1 != null) {
+                activity1.loadFragment(MenuFragment.newInstance());
+            }
+        });
     }
 
     private TextWatcher cardDateWatcher = new TextWatcher() {
@@ -101,6 +130,21 @@ public class PaymentFragment extends MvpAppCompatFragment implements PaymentIF {
             }
         }
     };
+
+    private void loadCurrentAvatarImg() {
+        MainActivity activity = (MainActivity) getActivity();
+        String uri;
+        if (activity != null) {
+            uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
+            if (uri != null) {
+                Picasso.get()
+                        .load(uri)
+                        .fit()
+                        .transform(new CropCircleTransformation())
+                        .into(avatar);
+            }
+        }
+    }
 
     private class CardTypeSpinnerListener implements AdapterView.OnItemSelectedListener {
         @Override

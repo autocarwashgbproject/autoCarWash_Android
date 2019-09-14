@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/background"
         android:gravity="center_horizontal"
         android:orientation="vertical">
@@ -28,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Заполнить профиль"
+                android:text="@string/fill_profile"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
 
@@ -41,16 +42,18 @@
 
             <ImageView
                 android:id="@+id/profile_avatar_img_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/custom_user" />
+                android:layout_width="109dp"
+                android:layout_height="109dp"
+                app:srcCompat="@drawable/custom_user"
+                android:contentDescription="@string/profile_image" />
 
             <ImageView
                 android:id="@+id/add_photo_btn_img_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:src="@drawable/ic_add_button" />
+                android:src="@drawable/ic_add_button"
+                android:contentDescription="@string/add_profile_image" />
         </FrameLayout>
 
 
@@ -63,7 +66,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="Данные пользователя"
+            android:text="@string/user_data"
             android:textColor="@color/colorGreyText"
             android:textSize="12sp" />
 
@@ -77,9 +80,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:inputType="textPersonName"
-            android:hint="Имя *"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:hint="@string/hint_name"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
 
         <EditText
             android:id="@+id/last_name_etxt_id"
@@ -91,9 +95,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:inputType="textPersonName"
-            android:hint="Фамилия *"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:hint="@string/hint_surname"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
 
         <EditText
             android:id="@+id/father_name_etxt_id"
@@ -105,9 +110,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:inputType="textPersonName"
-            android:hint="Отчество"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:hint="@string/father_name"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"  />
 
         <EditText
             android:id="@+id/birth_date_etxt_id"
@@ -119,9 +125,11 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:inputType="date"
-            android:hint="Дата рождения"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:focusable="false"
+            android:hint="@string/hint_birthday"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o" />
 
         <EditText
             android:id="@+id/email_etxt_id"
@@ -133,9 +141,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:inputType="textEmailAddress"
-            android:hint="E-mail"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:hint="@string/hint_email"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"  />
 
         <EditText
             android:id="@+id/phone_etxt_id"
@@ -147,9 +156,10 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:inputType="phone"
-            android:hint="Телефон"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp" />
+            android:hint="@string/hint_phone"
+            android:textSize="14sp"
+            android:importantForAutofill="no"
+            tools:targetApi="o"  />
 
         <TextView
             android:id="@+id/required_txt_id"
@@ -160,7 +170,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:text="* - обязательные поля для заполнения"
+            android:text="@string/fields_needed"
             android:textColor="@color/colorGreyText"
             android:textSize="12sp" />
 
@@ -170,7 +180,7 @@
             android:layout_width="156dp"
             android:layout_height="40dp"
             android:layout_margin="16dp"
-            android:text="Сохранить данные"
+            android:text="@string/save_data"
             android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
             android:textColor="#F3FAFB"
             android:textSize="14sp" />
@@ -179,9 +189,10 @@
             android:id="@+id/delete_profile_txt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:text="Удалить профиль"
+            android:text="@string/delete_profile"
             android:textColor="@color/colorDefaultText"
             android:textSize="12sp" />
 
