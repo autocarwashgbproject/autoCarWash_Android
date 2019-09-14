@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -20,6 +21,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.WashPresenter;
+import com.example.myapplication.utils.OnBackPressedListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.Map;
@@ -29,7 +31,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import static com.example.myapplication.Const.PICTURE_PREFS;
 import static com.example.myapplication.Const.PROFILE_PIC;
 
-public class WashFragment extends MvpAppCompatFragment implements WashIF {
+public class WashFragment extends MvpAppCompatFragment implements WashIF, OnBackPressedListener {
 
     @InjectPresenter
     public WashPresenter presenter;
@@ -40,6 +42,7 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
     private TextView address;
     private TextView paidToDate;
     private TextView registrationNr;
+    private AlertDialog.Builder ad;
 
     @ProvidePresenter
     public WashPresenter providePresenter() {
@@ -56,6 +59,12 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
     }
 
     @Override
+    public boolean onBackPressed() {
+        ad.show();
+        return true;
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
@@ -69,6 +78,15 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF {
         if (activity != null) {
             activity.getBottomNavigationView().setVisibility(View.VISIBLE);
         }
+
+        ad = new AlertDialog.Builder(getContext());
+        ad.setTitle(getString(R.string.title_exit));  // заголовок
+        ad.setMessage(getString(R.string.exit_text)); // сообщение
+        ad.setPositiveButton(getString(R.string.exit_yes), (dialog, arg1) -> {
+            getActivity().finish();
+        });
+        ad.setNegativeButton(getString(R.string.exit_no), (dialog, arg1) -> {
+        });
 
         initViews(view);
         loadCurrentProfilePicture();

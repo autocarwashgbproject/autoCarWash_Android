@@ -27,7 +27,6 @@ import com.squareup.picasso.Picasso;
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
-import static com.example.myapplication.Const.IMG_URI;
 import static com.example.myapplication.Const.LOAD_PROFILE_PICTURE_CODE;
 import static com.example.myapplication.Const.PICTURE_PREFS;
 import static com.example.myapplication.Const.PROFILE_PIC;
@@ -56,14 +55,8 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     public FillProfileFragment() {
     }
 
-    public static FillProfileFragment newInstance(String uri) {
-        FillProfileFragment pf = new FillProfileFragment();
-        if (uri != null) {
-            Bundle args = new Bundle();
-            args.putString(IMG_URI, uri);
-            pf.setArguments(args);
-        }
-        return pf;
+    public static FillProfileFragment newInstance() {
+        return new FillProfileFragment();
     }
 
     public static FillProfileFragment newInstance(Boolean newReg) {
@@ -144,7 +137,6 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         profileFatherName = view.findViewById(R.id.father_name_etxt_id);
         profileBirthDate = view.findViewById(R.id.birth_date_etxt_id);
         profileEmail = view.findViewById(R.id.email_etxt_id);
-        //profilePhone = view.findViewById(R.id.phone_etxt_id);
         initPhoneField(view);
     }
 
@@ -192,20 +184,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
     private void loadCurrentAvatarImg() {
         MainActivity activity = (MainActivity) getActivity();
-        String uri = null;
-        if (getArguments() != null && getArguments().containsKey(IMG_URI)) {
-            uri = getArguments().getString(IMG_URI);
-            if (activity != null) {
-                activity.savePicture(PICTURE_PREFS, PROFILE_PIC, uri);
-            }
-            Picasso.get()
-                    .load(uri)
-                    .fit()
-                    .transform(new CropCircleTransformation())
-                    .into(avatar);
-        } else if (activity != null) {
-            uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
-        }
+        String uri = activity.loadPicture(PICTURE_PREFS, PROFILE_PIC);
         if (uri != null) {
             Picasso.get()
                     .load(uri)

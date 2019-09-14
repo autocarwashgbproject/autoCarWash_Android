@@ -104,8 +104,8 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
         if (!(fragment instanceof OnBackPressedListener)
                 || !((OnBackPressedListener) fragment).onBackPressed()) {
             super.onBackPressed();
-        } else {
-            ((OnBackPressedListener) fragment).onBackPressed();
+        /*} else {
+            ((OnBackPressedListener) fragment).onBackPressed();*/
         }
     }
 
@@ -141,7 +141,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
                     if (currentFragment != null) {
                         loadFragment(currentFragment);
                     } else {
-                        loadFragment(FillProfileFragment.newInstance(String.valueOf(uri)));
+                        loadFragment(FillProfileFragment.newInstance());
                     }
                     break;
                 case LOAD_CAR_PICTURE_CODE:
@@ -150,7 +150,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
                     if (currentFragment != null) {
                         loadFragment(currentFragment);
                     } else {
-                        loadFragment(CarProfileFragment.newInstance(String.valueOf(uri)));
+                        loadFragment(CarProfileFragment.newInstance());
                     }
                     break;
             }

@@ -30,7 +30,6 @@ import java.util.Map;
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 import static com.example.myapplication.Const.CAR_PIC;
-import static com.example.myapplication.Const.IMG_URI;
 import static com.example.myapplication.Const.LOAD_CAR_PICTURE_CODE;
 import static com.example.myapplication.Const.PICTURE_PREFS;
 
@@ -62,14 +61,8 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     public CarProfileFragment() {
     }
 
-    public static CarProfileFragment newInstance(String uri) {
-        CarProfileFragment pf = new CarProfileFragment();
-        if (uri != null) {
-            Bundle args = new Bundle();
-            args.putString(IMG_URI, uri);
-            pf.setArguments(args);
-        }
-        return pf;
+    public static CarProfileFragment newInstance() {
+        return new CarProfileFragment();
     }
 
     public static CarProfileFragment newInstance(Boolean newReg) {
@@ -199,20 +192,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
 
     private void loadCurrentCarImg() {
         MainActivity activity = (MainActivity) getActivity();
-        String uri = null;
-        if (getArguments() != null && getArguments().containsKey(IMG_URI)) {
-            uri = getArguments().getString(IMG_URI);
-            if (activity != null) {
-                activity.savePicture(PICTURE_PREFS, CAR_PIC, uri);
-            }
-            Picasso.get()
-                    .load(uri)
-                    .fit()
-                    .transform(new CropCircleTransformation())
-                    .into(autoImg);
-        } else if (activity != null) {
-            uri = activity.loadPicture(PICTURE_PREFS, CAR_PIC);
-        }
+        String uri = activity.loadPicture(PICTURE_PREFS, CAR_PIC);
         if (uri != null) {
             Picasso.get()
                     .load(uri)

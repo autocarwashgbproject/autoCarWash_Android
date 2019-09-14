@@ -108,4 +108,8 @@
     <string name="x">Х</string>
     <string name="_0">0</string>
     <string name="_00">00</string>
+    <string name="title_exit">"Выход"</string>
+    <string name="exit_yes">"Да"</string>
+    <string name="exit_no">"Нет"</string>
+    <string name="exit_text">"Вы действительно хотите выйти?"</string>
 </resources>
