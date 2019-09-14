@@ -104,8 +104,6 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
         if (!(fragment instanceof OnBackPressedListener)
                 || !((OnBackPressedListener) fragment).onBackPressed()) {
             super.onBackPressed();
-        /*} else {
-            ((OnBackPressedListener) fragment).onBackPressed();*/
         }
     }
 

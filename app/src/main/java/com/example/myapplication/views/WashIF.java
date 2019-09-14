@@ -11,5 +11,5 @@ public interface WashIF extends MvpView {
 
     void updateClientData(ApiClient client);
 
-    void updateCarsData(Map<String, ApiCar> cars);
+    void updateCarsData(Map<Integer, ApiCar> cars);
 }

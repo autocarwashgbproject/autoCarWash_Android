@@ -10,5 +10,5 @@ import java.util.Map;
 public interface ProfileIF extends MvpView {
     void updateData(ApiClient client);
 
-    void updateCarsData(Map<String, ApiCar> cars);
+    void updateCarsData(Map<Integer, ApiCar> cars);
 }

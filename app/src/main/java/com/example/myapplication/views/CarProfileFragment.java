@@ -145,7 +145,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         carChar7 = view.findViewById(R.id.car_number_7);
         addCar = view.findViewById(R.id.add_auto_btn_id);
         addCar.setOnClickListener(v -> {
-            presenter.createCar(getCarNumber());
+            presenter.updateCar(getCarNumber());
             if (activity != null) {
                 if (checkNew()) {
                     activity.loadFragment(WashFragment.newInstance());
@@ -204,9 +204,10 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
 
 
     @Override
-    public void updateCarsData(Map<String, ApiCar> cars) {
-        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+    public void updateCarsData(Map<Integer, ApiCar> cars) {
+        for (Map.Entry<Integer, ApiCar> entry : cars.entrySet()) {
             String mCarNumber = entry.getValue().getRegNum();
+            presenter.setCurrentCarNumber(mCarNumber);
             setCharsOnView(mCarNumber);
             break;
         }

@@ -28,7 +28,7 @@ public class DataGetter {
     private String clientId;
     private String sms;
     private ApiClient currentClient;
-    private Map<String, ApiCar> cars = new HashMap<>();
+    private Map<Integer, ApiCar> cars = new HashMap<>();
 
     public DataGetter(ApiRequests api, RoomCache cache) {
 
@@ -81,7 +81,7 @@ public class DataGetter {
             api.getCar(id, TOKEN_PREF + sessionToken)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(res -> {
-                        cars.put(res.getRegNum(), res);
+                        cars.put(res.getId(), res);
                         Toast.makeText(App.getInstance().getBaseContext(), res.getRegNum(), Toast.LENGTH_SHORT).show();
                     });
         }
@@ -137,21 +137,27 @@ public class DataGetter {
         return api.createCar(carNumber, TOKEN_PREF + sessionToken)
                 .subscribeOn(Schedulers.newThread())
                 .map(result -> {
-                    cars.put(result.getRegNum(), result);
+                    cars.put(result.getId(), result);
                     return result;
                 });
     }
 
     public Single<ApiCar> updateCar(String oldCarNumber, String carNumber) {
-        ApiCar currentCar = cars.get(oldCarNumber.toUpperCase());
-        currentCar.setRegNum(carNumber);
-        return api.updateCar(currentCar.getId(), TOKEN_PREF + sessionToken, currentCar)
-                .subscribeOn(Schedulers.newThread())
-                .map(result -> {
-                    cars.remove(oldCarNumber);
-                    cars.put(result.getRegNum(), result);
-                    return result;
-                });
+        for (Map.Entry<Integer, ApiCar> entry : cars.entrySet()) {
+            if (entry.getValue().getRegNum().equals(oldCarNumber)) {
+                ApiCar currentCar = entry.getValue();
+                currentCar.setRegNum(carNumber);
+                return api.updateCar(currentCar.getId(), TOKEN_PREF + sessionToken, currentCar)
+                        .subscribeOn(Schedulers.newThread())
+                        .map(result -> {
+                            cars.remove(oldCarNumber);
+                            cars.put(result.getId(), result);
+                            return result;
+                        });
+            }
+        }
+        return null;
+
     }
 
     public Single<ApiCar> deleteCar(String carNumber) {
@@ -172,13 +178,13 @@ public class DataGetter {
                 });
     }
 
-    public Map<String, ApiCar> getCars() {
+    public Map<Integer, ApiCar> getCars() {
         return cars;
     }
 
     public void addWash() {
         String mCarNumber = "";
-        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+        for (Map.Entry<Integer, ApiCar> entry : cars.entrySet()) {
             mCarNumber = entry.getValue().getRegNum();
         }
         api.addWash(TOKEN_PREF + sessionToken, mCarNumber, true)

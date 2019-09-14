@@ -34,10 +34,7 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
     public void getClientFromApi() {
         disposable.add(dataGetter.getProfile()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                            getViewState().updateData(result);
-                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
-                        },
+                .subscribe(result -> getViewState().updateData(result),
                         err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show()));
     }
 

@@ -72,12 +72,20 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
 
         initViews(view);
 
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initValues();
+    }
+
+    private void initValues() {
         loadCurrentImgs();
 
         profilePresenter.getClientFromApi();
         profilePresenter.getCarData();
-
-        return view;
     }
 
     private void initViews(View view) {
@@ -152,9 +160,9 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
     }
 
     @Override
-    public void updateCarsData(Map<String, ApiCar> cars) {
+    public void updateCarsData(Map<Integer, ApiCar> cars) {
         // Пока одна машина, если больше нужно передалать View что бы показывал список.
-        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+        for (Map.Entry<Integer, ApiCar> entry : cars.entrySet()) {
             String carNumber = entry.getValue().getRegNum();
             profileCarNumber.setText(carNumber == null ? "Номер авто" : carNumber);
             profileCarDescription.setText("");
