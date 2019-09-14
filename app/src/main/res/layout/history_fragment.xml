@@ -32,6 +32,7 @@
         android:id="@+id/history_button_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="Button" />
 
     <androidx.recyclerview.widget.RecyclerView

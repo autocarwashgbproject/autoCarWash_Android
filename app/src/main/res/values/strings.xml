@@ -4,9 +4,9 @@
     <string name="economy">Экономия времени</string>
     <string name="auto_payments">Автоматическая безналичная оплата</string>
     <string name="full_text_about_app">Приложение позволяет...</string>
-    <string name="register">Зарегистрироваться</string>
-    <string name="registerLink"><u>Зарегистрироваться</u></string>
-    <string name="registration">Регистрация</string>
+    <string name="register">Зарегистрироваться/Авторизироваться</string>
+    <string name="registerLink"><u>Зарегистрироваться/войти</u></string>
+    <string name="registration">Регистрация/Авторизация</string>
     <string name="bonus">Бонусы</string>
     <string name="car_wash">Car Wash</string>
     <string name="user_agreement_checkbox_txt">Я согласен(-на) с условиями пользования</string>
@@ -88,7 +88,7 @@
     <string name="title_profile">Профиль</string>
     <string name="edit_data">Редактировать данные</string>
     <string name="car_no_data_found">Вы не добавили информацию об автомобиле. Хотите ввести данные?</string>
-    <string name="add_auto">Добавить машину</string>
+    <string name="add_auto">Редактировать машину</string>
     <string name="no_data">Нет данных</string>
     <string name="example_full_name">Иван Иванов</string>
     <string name="example_phone_nr">+7 (999) 999-99-99</string>

@@ -39,7 +39,6 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                             getViewState().updateData(result);
-                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
                         },
                         err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show()));
     }
@@ -56,13 +55,8 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
 
         disposable.add(dataGetter.updateProfile()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result ->
-                        {
-                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
-                        },
-                        err -> {
-                            Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
-                        }
+                .subscribe(result -> System.out.println(),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show()
                 )
         );
     }
@@ -70,11 +64,8 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
     public void deleteProfile() {
         disposable.add(dataGetter.deleteProfile()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(client -> {
-                    Toast.makeText(App.getInstance(), client.toString(), Toast.LENGTH_SHORT).show();
-                }, throwable -> {
-                    Toast.makeText(App.getInstance(), throwable.toString(), Toast.LENGTH_SHORT).show();
-                })
+                .subscribe(client -> System.out.println(),
+                        throwable -> Toast.makeText(App.getInstance(), throwable.toString(), Toast.LENGTH_SHORT).show())
         );
     }
 }

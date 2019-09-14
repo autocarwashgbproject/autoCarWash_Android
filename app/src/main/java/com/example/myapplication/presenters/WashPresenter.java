@@ -31,7 +31,6 @@ public class WashPresenter extends MvpPresenter<WashIF> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                             getViewState().updateClientData(result);
-                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
                         },
                         err -> {
                             Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();

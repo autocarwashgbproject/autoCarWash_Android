@@ -89,12 +89,21 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF, OnBack
         });
 
         initViews(view);
+
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initValues();
+    }
+
+    private void initValues() {
         loadCurrentProfilePicture();
 
         presenter.getClientFromApi();
         presenter.getCarData();
-
-        return view;
     }
 
     private void initViews(View view) {
@@ -143,11 +152,12 @@ public class WashFragment extends MvpAppCompatFragment implements WashIF, OnBack
     }
 
     @Override
-    public void updateCarsData(Map<String, ApiCar> cars) {
+    public void updateCarsData(Map<Integer, ApiCar> cars) {
         // Пока одна машина, если больше нужно передалать View что бы показывал список.
-        for (Map.Entry<String, ApiCar> entry : cars.entrySet()) {
+        for (Map.Entry<Integer, ApiCar> entry : cars.entrySet()) {
             String carNumber = entry.getValue().getRegNum();
             registrationNr.setText(carNumber == null ? "Номер авто" : carNumber);
+            break;
         }
     }
 

@@ -29,13 +29,8 @@ public class MenuPresenter extends MvpPresenter<MenuIF> {
     public void updateProfile() {
         disposable.add(dataGetter.getProfile()
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                            getViewState().updateProfile(result);
-                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
-                        },
-                        err -> {
-                            Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
-                        }
+                .subscribe(result -> getViewState().updateProfile(result),
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show()
                 )
         );
     }

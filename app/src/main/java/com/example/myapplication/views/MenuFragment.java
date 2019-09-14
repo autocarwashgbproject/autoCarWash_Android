@@ -95,7 +95,7 @@ public class MenuFragment extends MvpAppCompatFragment implements MenuIF, View.O
                 )
         );
         String phone = client.getPhone();
-        profilePhone.setText(String.format("+ %s", phone == null ? "Телефон" : phone));
+        profilePhone.setText(String.format("+7%s", phone == null ? "Телефон" : phone));
     }
 
     @Override
