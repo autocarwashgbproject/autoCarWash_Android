@@ -35,7 +35,6 @@ public class FillProfilePresenter extends MvpPresenter<FillProfileIF> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
                             getViewState().updateData(result);
-                            Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
                         },
                         err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show()));
     }

@@ -1,8 +1,5 @@
 package com.example.myapplication.model;
 
-import android.widget.Toast;
-
-import com.example.myapplication.App;
 import com.example.myapplication.model.api.ApiRequests;
 import com.example.myapplication.model.api.parsingJson.ApiCar;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
@@ -62,8 +59,6 @@ public class DataGetter {
     }
 
     public Single<Registration> getToken(String phone) {
-        Toast.makeText(App.getInstance(), "start request", Toast.LENGTH_SHORT).show();
-        System.out.println("start request");
 
         return api.regUser(phone, sms)
                 .subscribeOn(Schedulers.newThread())
@@ -82,7 +77,7 @@ public class DataGetter {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(res -> {
                         cars.put(res.getId(), res);
-                        Toast.makeText(App.getInstance().getBaseContext(), res.getRegNum(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(App.getInstance().getBaseContext(), res.getRegNum(), Toast.LENGTH_SHORT).show();
                     });
         }
     }
