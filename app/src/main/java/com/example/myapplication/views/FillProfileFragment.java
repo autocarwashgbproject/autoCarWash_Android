@@ -56,11 +56,19 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
     public static FillProfileFragment newInstance(String uri) {
         FillProfileFragment pf = new FillProfileFragment();
-        if (uri != null) {
+        if (!uri.isEmpty()) {
             Bundle args = new Bundle();
             args.putString(IMG_URI, uri);
             pf.setArguments(args);
         }
+        return pf;
+    }
+
+    public static FillProfileFragment newInstance(Boolean newReg) {
+        FillProfileFragment pf = new FillProfileFragment();
+            Bundle args = new Bundle();
+        args.putBoolean("NewRegistration", newReg);
+            pf.setArguments(args);
         return pf;
     }
 
@@ -145,7 +153,11 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         save.setOnClickListener(v -> {
             getDataFromFields();
             if (activity != null) {
-                activity.loadFragment(ProfileFragment.newInstance());
+                if (checkNew()) {
+                    activity.loadFragment(CarProfileFragment.newInstance(true));
+                } else {
+                    activity.loadFragment(ProfileFragment.newInstance());
+                }
             }
         });
 
@@ -159,10 +171,20 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         });
     }
 
+    private Boolean checkNew() {
+        if (getArguments() == null) {
+            return false;
+        }
+        if (!getArguments().containsKey("NewRegistration")) {
+            return false;
+        }
+        return getArguments().getBoolean("NewRegistration");
+    }
+
     private void loadCurrentAvatarImg() {
         MainActivity activity = (MainActivity) getActivity();
         String uri = null;
-        if (getArguments() != null) {
+        if (getArguments() != null && getArguments().containsKey(IMG_URI)) {
             uri = getArguments().getString(IMG_URI);
             if (activity != null) {
                 activity.savePicture(PICTURE_PREFS, PROFILE_PIC, uri);
@@ -196,7 +218,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         profileName.setText(mName);
         profileLastName.setText(mSurname);
         profileFatherName.setText(mFatherName);
-        profileBirthDate.setText(String.valueOf(mBirthDate));
+        if (mBirthDate != 0) profileBirthDate.setText(String.valueOf(mBirthDate));
         profileEmail.setText(mEmail);
         profilePhone.setText("+");
         profilePhone.append(mPhone == null ? "Телефон" : mPhone);

@@ -202,6 +202,14 @@ public class RegisterFragment extends MvpAppCompatFragment implements RegisterIF
         }
     }
 
+    @Override
+    public void loadProfile() {
+        MainActivity activity = ((MainActivity) getActivity());
+        if (activity != null) {
+            activity.loadFragment(FillProfileFragment.newInstance(true));
+        }
+    }
+
     // Заполнение полей для кода из смс, только для тестов.
     @Override
     public void fillCodeFields(String smsForTests) {

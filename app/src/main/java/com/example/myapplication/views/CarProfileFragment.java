@@ -64,11 +64,19 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
 
     public static CarProfileFragment newInstance(String uri) {
         CarProfileFragment pf = new CarProfileFragment();
-        if (uri != null) {
+        if (!uri.isEmpty()) {
             Bundle args = new Bundle();
             args.putString(IMG_URI, uri);
             pf.setArguments(args);
         }
+        return pf;
+    }
+
+    public static CarProfileFragment newInstance(Boolean newReg) {
+        CarProfileFragment pf = new CarProfileFragment();
+        Bundle args = new Bundle();
+        args.putBoolean("NewRegistration", newReg);
+        pf.setArguments(args);
         return pf;
     }
 
@@ -140,7 +148,11 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         addCar.setOnClickListener(v -> {
             presenter.createCar(getCarNumber());
             if (activity != null) {
-                activity.loadFragment(ProfileFragment.newInstance());
+                if (checkNew()) {
+                    activity.loadFragment(WashFragment.newInstance());
+                } else {
+                    activity.loadFragment(ProfileFragment.newInstance());
+                }
             }
         });
         deleteData = view.findViewById(R.id.delete_data_txt_id);
@@ -159,6 +171,16 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
         });
     }
 
+    private Boolean checkNew() {
+        if (getArguments() == null) {
+            return false;
+        }
+        if (!getArguments().containsKey("NewRegistration")) {
+            return false;
+        }
+        return getArguments().getBoolean("NewRegistration");
+    }
+
     private String getCarNumber() {
         return carChar1.getText().toString()
                 + carChar2.getText().toString()
@@ -172,7 +194,7 @@ public class CarProfileFragment extends MvpAppCompatFragment implements CarProfi
     private void loadCurrentCarImg() {
         MainActivity activity = (MainActivity) getActivity();
         String uri = null;
-        if (getArguments() != null) {
+        if (getArguments() != null && getArguments().containsKey(IMG_URI)) {
             uri = getArguments().getString(IMG_URI);
             if (activity != null) {
                 activity.savePicture(PICTURE_PREFS, CAR_PIC, uri);

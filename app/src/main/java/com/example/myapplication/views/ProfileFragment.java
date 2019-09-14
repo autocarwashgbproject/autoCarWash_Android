@@ -98,14 +98,14 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileIF {
         Button editProfile = view.findViewById(R.id.edit_profile_btn_id);
         editProfile.setOnClickListener(v -> {
             if (activity != null) {
-                activity.loadFragment(FillProfileFragment.newInstance(null));
+                activity.loadFragment(FillProfileFragment.newInstance(""));
             }
         });
 
         Button addCar = view.findViewById(R.id.add_car_btn_id);
         addCar.setOnClickListener(v -> {
             if (activity != null) {
-                activity.loadFragment(CarProfileFragment.newInstance(null));
+                activity.loadFragment(CarProfileFragment.newInstance(""));
             }
         });
     }

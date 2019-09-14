@@ -6,6 +6,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.myapplication.App;
 import com.example.myapplication.model.DataGetter;
+import com.example.myapplication.model.api.parsingJson.Registration;
 import com.example.myapplication.views.RegisterIF;
 
 import javax.inject.Inject;
@@ -42,7 +43,7 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(regClient -> {
                                 System.out.println("response " + regClient.toString());
-                                getViewState().loadMain();
+                                selectScreen(regClient);
                             },
                             err -> {
                                 Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show();
@@ -51,8 +52,17 @@ public class RegisterPresenter extends MvpPresenter<RegisterIF> {
 
     }
 
+    private void selectScreen(Registration regClient) {
+        if (regClient.isRegistered()) {
+            getViewState().loadMain();
+        } else {
+            getViewState().loadProfile();
+        }
+    }
+
+
     public void getSmsCode(String phone) {
-        phoneNr = phone;
+        phoneNr = phone.substring(2);
         /*if (!Utils.isValidMobile(phone)) {
             getViewState().showErrorMessage("Проверьте номер телефона");
             return;

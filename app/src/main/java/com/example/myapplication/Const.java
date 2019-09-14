@@ -12,4 +12,5 @@ public class Const {
     public static final String PICTURE_PREFS = "pictures";
     public static final String CAR_PIC = "carPic";
     public static final String IMG_URI = "imgURI";
+
 }

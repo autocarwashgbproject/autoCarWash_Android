@@ -8,6 +8,8 @@ public interface RegisterIF extends MvpView {
 
     void loadMain();
 
+    void loadProfile();
+
     void fillCodeFields(String smsForTests);
 
     void saveRegistrationStatus();
