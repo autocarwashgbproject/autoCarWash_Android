@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 public class ApiClient {
     @Expose
-    private int birthday;
+    private long birthday;
 
     @Expose
     private String patronymic;
@@ -53,12 +53,12 @@ public class ApiClient {
         return detail;
     }
 
-    public int getBirthday() {
+    public long getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Boolean birthday) {
-        isBirthday = birthday;
+    public void setBirthday(long birthday) {
+        this.birthday = birthday;
     }
 
     public String getSurname() {
@@ -69,8 +69,8 @@ public class ApiClient {
         this.surname = surname;
     }
 
-    public void setBirthday(int birthday) {
-        this.birthday = birthday;
+    public void setIsBirthday(Boolean isBirthday) {
+        this.isBirthday = isBirthday;
     }
 
     public String getPhone() {

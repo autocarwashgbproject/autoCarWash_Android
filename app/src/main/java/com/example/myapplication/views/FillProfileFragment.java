@@ -26,11 +26,10 @@ import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.FillProfilePresenter;
 import com.squareup.picasso.Picasso;
 
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
 
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
@@ -48,6 +47,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     private EditText profileBirthDate;
     private EditText profileEmail;
     private EditText profilePhone;
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
 
 
     @InjectPresenter
@@ -128,7 +128,11 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
             client.setPatronymic(fathersName);
         }
         if (!birthDate.isEmpty()) {
-            client.setBirthday(Integer.valueOf(birthDate.replaceAll("\\.", "")));
+            try {
+                client.setBirthday(sdf.parse(birthDate).getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
 
         if (!mail.isEmpty()) {
@@ -238,8 +242,6 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "dd.MM.yy";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 profileBirthDate.setText(sdf.format(myCalendar.getTime()));
             };
             new DatePickerDialog(context, date,
@@ -255,14 +257,14 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         String mName = client.getName();
         String mSurname = client.getSurname();
         String mFatherName = client.getPatronymic();
-        int mBirthDate = client.getBirthday();
+        long mBirthDate = client.getBirthday();
         String mEmail = client.getEmail();
         String mPhone = client.getPhone();
 
         profileName.setText(mName);
         profileLastName.setText(mSurname);
         profileFatherName.setText(mFatherName);
-        if (mBirthDate != 0) profileBirthDate.setText(String.valueOf(mBirthDate));
+        if (mBirthDate != 0) profileBirthDate.setText(sdf.format(mBirthDate));
         profileEmail.setText(mEmail);
         profilePhone.setText("+7");
         profilePhone.append(mPhone == null ? "Телефон" : mPhone);
