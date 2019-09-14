@@ -55,10 +55,14 @@ public class CarProfilePresenter extends MvpPresenter<CarProfileIF> {
     }
 
     public void updateCar(String carNumber) {
-        dataGetter.updateCar(currentCarNumber, carNumber.toUpperCase())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> System.out.println(),//Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
-                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
+        if (currentCarNumber == null || currentCarNumber.isEmpty()) {
+            createCar(carNumber);
+        } else {
+            dataGetter.updateCar(currentCarNumber, carNumber.toUpperCase())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(result -> System.out.println(),//Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
+                            err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
+        }
     }
 
     public void setCurrentCarNumber(String currentCarNumber) {
