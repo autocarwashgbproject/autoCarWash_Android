@@ -1,6 +1,7 @@
 package com.example.myapplication.views;
 
-
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,12 @@ import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.FillProfilePresenter;
 import com.squareup.picasso.Picasso;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+
 import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 import static com.example.myapplication.Const.LOAD_PROFILE_PICTURE_CODE;
@@ -41,6 +48,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
     private EditText profileBirthDate;
     private EditText profileEmail;
     private EditText profilePhone;
+
 
     @InjectPresenter
     FillProfilePresenter presenter;
@@ -61,9 +69,9 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
     public static FillProfileFragment newInstance(Boolean newReg) {
         FillProfileFragment pf = new FillProfileFragment();
-            Bundle args = new Bundle();
+        Bundle args = new Bundle();
         args.putBoolean("NewRegistration", newReg);
-            pf.setArguments(args);
+        pf.setArguments(args);
         return pf;
     }
 
@@ -87,6 +95,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         initButtons(view);
         loadCurrentAvatarImg();
+        pickDate();
         presenter.getClientFromApi();
 
         return view;
@@ -102,7 +111,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         String firstName = profileName.getText().toString().trim();
         String lastName = profileLastName.getText().toString().trim();
         String fathersName = profileFatherName.getText().toString().trim();
-        // int birthdate... формат даты?
+        String birthDate = profileBirthDate.getText().toString().trim();
         String mail = profileEmail.getText().toString().trim();
         String phoneNr = profilePhone.getText().toString().trim().substring(2);
 
@@ -117,6 +126,9 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         if (!fathersName.isEmpty()) {
             client.setPatronymic(fathersName);
+        }
+        if (!birthDate.isEmpty()) {
+            client.setBirthday(Integer.valueOf(birthDate.replaceAll("\\.", "")));
         }
 
         if (!mail.isEmpty()) {
@@ -218,6 +230,26 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         });
     }
 
+    private void pickDate() {
+        final Calendar myCalendar = Calendar.getInstance();
+        Context context = getContext();
+        profileBirthDate.setOnClickListener(v -> {
+            DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "dd.MM.yy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                profileBirthDate.setText(sdf.format(myCalendar.getTime()));
+            };
+            new DatePickerDialog(context, date,
+                    myCalendar.get(Calendar.YEAR),
+                    myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH))
+                    .show();
+        });
+    }
+
     @Override
     public void updateData(ApiClient client) {
         String mName = client.getName();
@@ -235,4 +267,5 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
         profilePhone.setText("+7");
         profilePhone.append(mPhone == null ? "Телефон" : mPhone);
     }
+
 }

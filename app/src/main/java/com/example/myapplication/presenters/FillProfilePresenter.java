@@ -1,5 +1,7 @@
 package com.example.myapplication.presenters;
 
+import android.app.DatePickerDialog;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.InjectViewState;
@@ -9,6 +11,8 @@ import com.example.myapplication.model.DataGetter;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.model.cache.RoomCache;
 import com.example.myapplication.views.FillProfileIF;
+
+import java.util.Calendar;
 
 import javax.inject.Inject;
 
