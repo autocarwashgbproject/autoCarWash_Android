@@ -59,7 +59,7 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     // возвращяем true, если нет false.
     public boolean isLoggedIn() {
         return getSharedPreferences(LOGIN_DATA_PREFS, MODE_PRIVATE)
-                .getBoolean(AUTHORIZATION_STATUS, true); // izmenit' na false
+                .getBoolean(AUTHORIZATION_STATUS, false);
     }
 
     public boolean loadFragment(Fragment fragment) {
@@ -98,11 +98,19 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_container_id);
-        if (!(fragment instanceof OnBackPressedListener)
-                || !((OnBackPressedListener) fragment).onBackPressed()) {
-            super.onBackPressed();
-        } else {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (fragment instanceof OnBackPressedListener
+                && ((OnBackPressedListener) fragment).onBackPressed()) {
             ((OnBackPressedListener) fragment).onBackPressed();
+        }
+        if (count == 1) {
+            finish();
+        } else if (count > 1) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
         }
     }
 
@@ -175,5 +183,12 @@ public class MainActivity extends MvpAppCompatActivity /*implements MainView*/ {
 
     public BottomNavigationView getBottomNavigationView() {
         return bottomNavigationView;
+    }
+
+    public void changeAuthorizationStatus(boolean status) {
+        SharedPreferences pref = getSharedPreferences(LOGIN_DATA_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putBoolean(AUTHORIZATION_STATUS, status);
+        editor.apply();
     }
 }

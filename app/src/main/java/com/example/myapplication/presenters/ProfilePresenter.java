@@ -1,15 +1,17 @@
 package com.example.myapplication.presenters;
 
-import android.widget.Toast;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.example.myapplication.views.ProfileIF;
+
+import android.util.Log;
+import android.widget.Toast;
+
 import com.example.myapplication.App;
 import com.example.myapplication.model.DataGetter;
 import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.model.cache.RoomCache;
 import com.example.myapplication.model.cache.Wash;
-import com.example.myapplication.views.ProfileIF;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import java.util.Date;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 
 @InjectViewState
 public class ProfilePresenter extends MvpPresenter<ProfileIF> {
@@ -28,15 +31,24 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
     @Inject
     public RoomCache roomCache;
 
+    private CompositeDisposable disposable;
+
+    public ProfilePresenter() {
+        disposable = new CompositeDisposable();
+    }
 
     public void getClientFromApi() {
-
-        dataGetter.getProfile()
+        disposable.add(dataGetter.getProfile()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> {
+                            getViewState().updateData(result);
                             Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show();
                         },
-                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
+                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show()));
+    }
+
+    public void getCarData() {
+        getViewState().updateCarsData(dataGetter.getCars());
     }
 
     public void updateClient() {
@@ -75,13 +87,6 @@ public class ProfilePresenter extends MvpPresenter<ProfileIF> {
 
     public void updateCar(String carNumber) {
         dataGetter.updateCar(carNumber.toUpperCase(), carNumber.toUpperCase())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
-                        err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());
-    }
-
-    public void deleteCar(String carNumber) {
-        dataGetter.deleteCar(carNumber)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(result -> Toast.makeText(App.getInstance(), result.toString(), Toast.LENGTH_SHORT).show(),
                         err -> Toast.makeText(App.getInstance(), err.toString(), Toast.LENGTH_SHORT).show());

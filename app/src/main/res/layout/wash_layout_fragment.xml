@@ -163,14 +163,6 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/reg_nr_txt2_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/registration_number_part2"
-                        android:textColor="@color/colorDefaultText"
-                        android:textSize="16sp" />
-
-                    <TextView
                         android:id="@+id/reg_nr_txt3_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

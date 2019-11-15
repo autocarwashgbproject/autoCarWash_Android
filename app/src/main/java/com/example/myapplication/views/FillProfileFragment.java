@@ -6,15 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.myapplication.App;
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.model.api.parsingJson.ApiClient;
 import com.example.myapplication.presenters.FillProfilePresenter;
 import com.squareup.picasso.Picasso;
 
@@ -29,9 +34,22 @@ import static com.example.myapplication.Const.PROFILE_PIC;
 public class FillProfileFragment extends MvpAppCompatFragment implements FillProfileIF {
 
     private ImageView avatar;
+    private EditText profileName;
+    private EditText profileLastName;
+    private EditText profileFatherName;
+    private EditText profileBirthDate;
+    private EditText profileEmail;
+    private EditText profilePhone;
 
     @InjectPresenter
     FillProfilePresenter presenter;
+
+    @ProvidePresenter
+    public FillProfilePresenter providePresenter() {
+        final FillProfilePresenter presenter = new FillProfilePresenter();
+        App.getInstance().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public FillProfileFragment() {
     }
@@ -56,7 +74,7 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fill_profile_fragment, container, false);
 
-        avatar = view.findViewById(R.id.profile_avatar_img_id);
+        initViews(view);
 
         final MainActivity activity = (MainActivity) getActivity();
         if (activity != null) {
@@ -66,8 +84,51 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         initButtons(view);
         loadCurrentAvatarImg();
+        presenter.getClientFromApi();
 
         return view;
+    }
+
+    private void getDataFromFields() {
+        String firstName = profileName.getText().toString().trim();
+        String lastName = profileLastName.getText().toString().trim();
+        String fathersName = profileFatherName.getText().toString().trim();
+        // int birthdate... формат даты?
+        String mail = profileEmail.getText().toString().trim();
+        String phoneNr = profilePhone.getText().toString().trim();
+
+        ApiClient client = new ApiClient();
+        if (!firstName.isEmpty()) {
+            client.setName(firstName);
+        }
+
+        if (!lastName.isEmpty()) {
+            client.setSurname(lastName);
+        }
+
+        if (!fathersName.isEmpty()) {
+            client.setPatronymic(fathersName);
+        }
+
+        if (!mail.isEmpty()) {
+            client.setEmail(mail);
+        }
+
+        if (!phoneNr.isEmpty()) {
+            client.setPhone(phoneNr);
+        }
+
+        presenter.fillProfileData(client);
+    }
+
+    private void initViews(View view) {
+        avatar = view.findViewById(R.id.profile_avatar_img_id);
+        profileName = view.findViewById(R.id.name_etxt_id);
+        profileLastName = view.findViewById(R.id.last_name_etxt_id);
+        profileFatherName = view.findViewById(R.id.father_name_etxt_id);
+        profileBirthDate = view.findViewById(R.id.birth_date_etxt_id);
+        profileEmail = view.findViewById(R.id.email_etxt_id);
+        profilePhone = view.findViewById(R.id.phone_etxt_id);
     }
 
     private void initButtons(View view) {
@@ -82,8 +143,18 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
 
         Button save = view.findViewById(R.id.save_profile_btn_id);
         save.setOnClickListener(v -> {
+            getDataFromFields();
             if (activity != null) {
                 activity.loadFragment(ProfileFragment.newInstance());
+            }
+        });
+
+        TextView deleteProfile = view.findViewById(R.id.delete_profile_txt_id);
+        deleteProfile.setOnClickListener(v -> {
+            presenter.deleteProfile();
+            if (activity != null) {
+                activity.changeAuthorizationStatus(false);
+                activity.loadFragment(RegisterFragment.newInstance());
             }
         });
     }
@@ -111,5 +182,23 @@ public class FillProfileFragment extends MvpAppCompatFragment implements FillPro
                     .transform(new CropCircleTransformation())
                     .into(avatar);
         }
+    }
+
+    @Override
+    public void updateData(ApiClient client) {
+        String mName = client.getName();
+        String mSurname = client.getSurname();
+        String mFatherName = client.getPatronymic();
+        int mBirthDate = client.getBirthday();
+        String mEmail = client.getEmail();
+        String mPhone = client.getPhone();
+
+        profileName.setText(mName);
+        profileLastName.setText(mSurname);
+        profileFatherName.setText(mFatherName);
+        profileBirthDate.setText(String.valueOf(mBirthDate));
+        profileEmail.setText(mEmail);
+        profilePhone.setText("+");
+        profilePhone.append(mPhone == null ? "Телефон" : mPhone);
     }
 }
